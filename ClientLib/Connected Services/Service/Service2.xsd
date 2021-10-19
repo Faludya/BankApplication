@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:54420/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Database" />
+  <xs:element name="IsClientLoginValid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cnp" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsClientLoginValidResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsClientLoginValidResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsOperatorLoginValid">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cnp" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="password" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsOperatorLoginValidResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsOperatorLoginValidResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClientAccounts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="clientId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetClientAccountsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetClientAccountsResult" nillable="true" type="q1:ArrayOfAccount" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

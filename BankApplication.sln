@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface", "Interface\Interface.csproj", "{FB9C6E97-F13A-4BC1-9C52-BEF9EC2742DC}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WCFService", "WCFService\", "{8CBCB386-85FA-42F8-9CAF-428AE6F5B997}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
+		ProjectReferences = "{37d6d0c6-d1ed-4caf-a2fc-fb6e27da202b}|Database.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_54420"
+		Debug.AspNetCompiler.PhysicalPath = "WCFService\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_54420\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_54420"
+		Release.AspNetCompiler.PhysicalPath = "WCFService\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_54420\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "54420"
+		SlnRelativePath = "WCFService\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{37D6D0C6-D1ED-4CAF-A2FC-FB6E27DA202B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientLib", "ClientLib\ClientLib.csproj", "{78DDBAC2-3FDD-4301-A431-F2AD557EFE73}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8CBCB386-85FA-42F8-9CAF-428AE6F5B997} = {8CBCB386-85FA-42F8-9CAF-428AE6F5B997}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB9C6E97-F13A-4BC1-9C52-BEF9EC2742DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9C6E97-F13A-4BC1-9C52-BEF9EC2742DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9C6E97-F13A-4BC1-9C52-BEF9EC2742DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9C6E97-F13A-4BC1-9C52-BEF9EC2742DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CBCB386-85FA-42F8-9CAF-428AE6F5B997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CBCB386-85FA-42F8-9CAF-428AE6F5B997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CBCB386-85FA-42F8-9CAF-428AE6F5B997}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CBCB386-85FA-42F8-9CAF-428AE6F5B997}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{37D6D0C6-D1ED-4CAF-A2FC-FB6E27DA202B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37D6D0C6-D1ED-4CAF-A2FC-FB6E27DA202B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37D6D0C6-D1ED-4CAF-A2FC-FB6E27DA202B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37D6D0C6-D1ED-4CAF-A2FC-FB6E27DA202B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78DDBAC2-3FDD-4301-A431-F2AD557EFE73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78DDBAC2-3FDD-4301-A431-F2AD557EFE73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78DDBAC2-3FDD-4301-A431-F2AD557EFE73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78DDBAC2-3FDD-4301-A431-F2AD557EFE73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {93E202D8-45D4-40E7-BE7A-6D4942F4DDB1}
+	EndGlobalSection
+EndGlobal

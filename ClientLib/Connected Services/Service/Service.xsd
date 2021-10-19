@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Database" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Database" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Account" nillable="true" type="tns:Account" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAccount" nillable="true" type="tns:ArrayOfAccount" />
+  <xs:complexType name="Account">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountOffer" nillable="true" type="tns:AccountOffer" />
+      <xs:element minOccurs="0" name="Client" nillable="true" type="tns:Client" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IBAN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID_Client" type="xs:int" />
+      <xs:element minOccurs="0" name="ID_Offer" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Total" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Tranzactions" nillable="true" type="tns:ArrayOfTranzaction" />
+      <xs:element minOccurs="0" name="Tranzactions1" nillable="true" type="tns:ArrayOfTranzaction" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Account" nillable="true" type="tns:Account" />
+  <xs:complexType name="AccountOffer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Accounts" nillable="true" type="tns:ArrayOfAccount" />
+      <xs:element minOccurs="0" name="DepositCommission" type="xs:double" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WithdrawCommission" type="xs:double" />
+      <xs:element minOccurs="0" name="WithdrawFixTax" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AccountOffer" nillable="true" type="tns:AccountOffer" />
+  <xs:complexType name="Client">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Accounts" nillable="true" type="tns:ArrayOfAccount" />
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CNP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PIN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Client" nillable="true" type="tns:Client" />
+  <xs:complexType name="ArrayOfTranzaction">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Tranzaction" nillable="true" type="tns:Tranzaction" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTranzaction" nillable="true" type="tns:ArrayOfTranzaction" />
+  <xs:complexType name="Tranzaction">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Account" nillable="true" type="tns:Account" />
+      <xs:element minOccurs="0" name="Account1" nillable="true" type="tns:Account" />
+      <xs:element minOccurs="0" name="Ammount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Destination_Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID_DestinationAccount" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Id_SourceAccount" type="xs:int" />
+      <xs:element minOccurs="0" name="Source_Currency" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Tranzaction" nillable="true" type="tns:Tranzaction" />
+</xs:schema>

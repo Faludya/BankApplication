@@ -1,0 +1,461 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IBAN" Type="varchar" MaxLength="24" Nullable="false" />
+          <Property Name="ID_Client" Type="int" Nullable="false" />
+          <Property Name="ID_Offer" Type="int" Nullable="false" />
+          <Property Name="Currency" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountOffer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="DepositCommission" Type="float" Nullable="false" />
+          <Property Name="WithdrawCommission" Type="float" Nullable="false" />
+          <Property Name="WithdrawFixTax" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="CNP" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="Address" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="PIN" Type="varchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Machine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ip" Type="nvarchar" MaxLength="50" />
+          <Property Name="active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScanProfile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_batch_schema" Type="bigint" Nullable="false" />
+          <Property Name="id_workflow" Type="bigint" Nullable="false" />
+          <Property Name="scanner_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="resolution" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="color_depth" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="scan_source" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="paper_size" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cropping" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="brightness" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contrast" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bit_settings" Type="bigint" Nullable="false" />
+          <Property Name="scanner_settings" Type="nvarchar(max)" />
+          <Property Name="DRIVER_ID" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="name_rescan" Type="nvarchar" MaxLength="50" />
+          <Property Name="for_scan" Type="bit" />
+          <Property Name="for_rescan" Type="bit" />
+          <Property Name="auto_crop" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tranzaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_SourceAccount" Type="int" Nullable="false" />
+          <Property Name="ID_DestinationAccount" Type="int" Nullable="false" />
+          <Property Name="Source_Currency" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Destination_Currency" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Ammount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Account_AccountOffer_Id_Offer">
+          <End Role="AccountOffer" Type="Self.AccountOffer" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountOffer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ID_Offer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_Client_Id_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ID_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tranzaction_Account_Id_DestinationAccount">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Tranzaction" Type="Self.Tranzaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tranzaction">
+              <PropertyRef Name="ID_DestinationAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tranzaction_Account_Id_SourceAccount">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Tranzaction" Type="Self.Tranzaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tranzaction">
+              <PropertyRef Name="Id_SourceAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BankModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountOffer" EntityType="Self.AccountOffer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Machine" EntityType="Self.Machine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScanProfile" EntityType="Self.ScanProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tranzaction" EntityType="Self.Tranzaction" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_AccountOffer_Id_Offer" Association="Self.FK_Account_AccountOffer_Id_Offer">
+            <End Role="AccountOffer" EntitySet="AccountOffer" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_Client_Id_Client" Association="Self.FK_Account_Client_Id_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tranzaction_Account_Id_DestinationAccount" Association="Self.FK_Tranzaction_Account_Id_DestinationAccount">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Tranzaction" EntitySet="Tranzaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tranzaction_Account_Id_SourceAccount" Association="Self.FK_Tranzaction_Account_Id_SourceAccount">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Tranzaction" EntitySet="Tranzaction" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IBAN" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Client" Type="Int32" Nullable="false" />
+          <Property Name="ID_Offer" Type="Int32" Nullable="false" />
+          <Property Name="Currency" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="AccountOffer" Relationship="Self.FK_Account_AccountOffer_Id_Offer" FromRole="Account" ToRole="AccountOffer" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Account_Client_Id_Client" FromRole="Account" ToRole="Client" />
+          <NavigationProperty Name="Tranzactions" Relationship="Self.FK_Tranzaction_Account_Id_DestinationAccount" FromRole="Account" ToRole="Tranzaction" />
+          <NavigationProperty Name="Tranzactions1" Relationship="Self.FK_Tranzaction_Account_Id_SourceAccount" FromRole="Account" ToRole="Tranzaction" />
+        </EntityType>
+        <EntityType Name="AccountOffer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DepositCommission" Type="Double" Nullable="false" />
+          <Property Name="WithdrawCommission" Type="Double" Nullable="false" />
+          <Property Name="WithdrawFixTax" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_AccountOffer_Id_Offer" FromRole="AccountOffer" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CNP" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PIN" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Client_Id_Client" FromRole="Client" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Machine">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScanProfile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_batch_schema" Type="Int64" Nullable="false" />
+          <Property Name="id_workflow" Type="Int64" Nullable="false" />
+          <Property Name="scanner_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="resolution" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="color_depth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="scan_source" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="paper_size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cropping" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="brightness" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contrast" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bit_settings" Type="Int64" Nullable="false" />
+          <Property Name="scanner_settings" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DRIVER_ID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name_rescan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="for_scan" Type="Boolean" />
+          <Property Name="for_rescan" Type="Boolean" />
+          <Property Name="auto_crop" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Tranzaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_SourceAccount" Type="Int32" Nullable="false" />
+          <Property Name="ID_DestinationAccount" Type="Int32" Nullable="false" />
+          <Property Name="Source_Currency" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Destination_Currency" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Ammount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Account" Relationship="Self.FK_Tranzaction_Account_Id_DestinationAccount" FromRole="Tranzaction" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="Self.FK_Tranzaction_Account_Id_SourceAccount" FromRole="Tranzaction" ToRole="Account" />
+        </EntityType>
+        <Association Name="FK_Account_AccountOffer_Id_Offer">
+          <End Role="AccountOffer" Type="Self.AccountOffer" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountOffer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ID_Offer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Account_Client_Id_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="ID_Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tranzaction_Account_Id_DestinationAccount">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Tranzaction" Type="Self.Tranzaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tranzaction">
+              <PropertyRef Name="ID_DestinationAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tranzaction_Account_Id_SourceAccount">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Tranzaction" Type="Self.Tranzaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tranzaction">
+              <PropertyRef Name="Id_SourceAccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BankEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="AccountOffers" EntityType="Self.AccountOffer" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Machines" EntityType="Self.Machine" />
+          <EntitySet Name="ScanProfiles" EntityType="Self.ScanProfile" />
+          <EntitySet Name="Tranzactions" EntityType="Self.Tranzaction" />
+          <AssociationSet Name="FK_Account_AccountOffer_Id_Offer" Association="Self.FK_Account_AccountOffer_Id_Offer">
+            <End Role="AccountOffer" EntitySet="AccountOffers" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Account_Client_Id_Client" Association="Self.FK_Account_Client_Id_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tranzaction_Account_Id_DestinationAccount" Association="Self.FK_Tranzaction_Account_Id_DestinationAccount">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Tranzaction" EntitySet="Tranzactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tranzaction_Account_Id_SourceAccount" Association="Self.FK_Tranzaction_Account_Id_SourceAccount">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Tranzaction" EntitySet="Tranzactions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BankModelStoreContainer" CdmEntityContainer="BankEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="BankModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+                <ScalarProperty Name="ID_Client" ColumnName="ID_Client" />
+                <ScalarProperty Name="ID_Offer" ColumnName="ID_Offer" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountOffers">
+            <EntityTypeMapping TypeName="BankModel.AccountOffer">
+              <MappingFragment StoreEntitySet="AccountOffer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepositCommission" ColumnName="DepositCommission" />
+                <ScalarProperty Name="WithdrawCommission" ColumnName="WithdrawCommission" />
+                <ScalarProperty Name="WithdrawFixTax" ColumnName="WithdrawFixTax" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="BankModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="CNP" ColumnName="CNP" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="BankModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Machines">
+            <EntityTypeMapping TypeName="BankModel.Machine">
+              <MappingFragment StoreEntitySet="Machine">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScanProfiles">
+            <EntityTypeMapping TypeName="BankModel.ScanProfile">
+              <MappingFragment StoreEntitySet="ScanProfile">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id_batch_schema" ColumnName="id_batch_schema" />
+                <ScalarProperty Name="id_workflow" ColumnName="id_workflow" />
+                <ScalarProperty Name="scanner_name" ColumnName="scanner_name" />
+                <ScalarProperty Name="resolution" ColumnName="resolution" />
+                <ScalarProperty Name="color_depth" ColumnName="color_depth" />
+                <ScalarProperty Name="scan_source" ColumnName="scan_source" />
+                <ScalarProperty Name="paper_size" ColumnName="paper_size" />
+                <ScalarProperty Name="cropping" ColumnName="cropping" />
+                <ScalarProperty Name="brightness" ColumnName="brightness" />
+                <ScalarProperty Name="contrast" ColumnName="contrast" />
+                <ScalarProperty Name="bit_settings" ColumnName="bit_settings" />
+                <ScalarProperty Name="scanner_settings" ColumnName="scanner_settings" />
+                <ScalarProperty Name="DRIVER_ID" ColumnName="DRIVER_ID" />
+                <ScalarProperty Name="name_rescan" ColumnName="name_rescan" />
+                <ScalarProperty Name="for_scan" ColumnName="for_scan" />
+                <ScalarProperty Name="for_rescan" ColumnName="for_rescan" />
+                <ScalarProperty Name="auto_crop" ColumnName="auto_crop" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tranzactions">
+            <EntityTypeMapping TypeName="BankModel.Tranzaction">
+              <MappingFragment StoreEntitySet="Tranzaction">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_SourceAccount" ColumnName="Id_SourceAccount" />
+                <ScalarProperty Name="ID_DestinationAccount" ColumnName="ID_DestinationAccount" />
+                <ScalarProperty Name="Source_Currency" ColumnName="Source_Currency" />
+                <ScalarProperty Name="Destination_Currency" ColumnName="Destination_Currency" />
+                <ScalarProperty Name="Ammount" ColumnName="Ammount" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

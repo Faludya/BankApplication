@@ -61,5 +61,59 @@ public class Service : IService
             return null;
         }
     }
+
+    public bool ChangeClientPin(int clientId,string oldPin, string newPin)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                Client client = database.Clients.Single(c => c.Id == clientId && c.PIN == oldPin);
+                
+                if(client != null)
+                {
+                    client.PIN = newPin;
+                    database.SaveChanges();
+
+                    return true;
+                }
+
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
+    public bool UpdateAccountTotal(string iban, decimal newTotal, Int16 factor)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                Account account= database.Accounts.Single(c => c.IBAN == iban);
+
+                if (account != null)
+                {
+                    if(account.Total + factor * newTotal >= 0)
+                    {
+                        account.Total = account.Total + factor * newTotal;
+                        database.SaveChanges();
+
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
     #endregion
 }

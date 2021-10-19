@@ -15,7 +15,14 @@
         <DataTemplate DataType="{x:Type clientViewModel:DepositViewModel}">
             <clientViews:DepositView/>
         </DataTemplate>
-        
-        
+
+        <DataTemplate DataType="{x:Type clientViewModel:WithdrawViewModel}">
+            <clientViews:WithdrawView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type clientViewModel:ChangePinViewModel}">
+            <clientViews:ChangePinView/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

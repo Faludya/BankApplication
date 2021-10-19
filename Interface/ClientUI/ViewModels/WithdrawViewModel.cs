@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace Interface.ClientUI.ViewModels
 {
-    public class DepositViewModel
+    public class WithdrawViewModel
     {
         private ObservableCollection<Account> _accounts;
         public ObservableCollection<Account> Accounts
@@ -13,7 +13,7 @@ namespace Interface.ClientUI.ViewModels
             set => _accounts = value;
         }
 
-        public DepositViewModel(int clientId)
+        public WithdrawViewModel(int clientId)
         {
             Accounts = AccountsController.GetClientAccounts(clientId);
         }

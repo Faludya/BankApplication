@@ -24,6 +24,12 @@ public interface IService
     #region Client
     [OperationContract]
     ObservableCollection<Account> GetClientAccounts(int clientId);
+
+    [OperationContract]
+    bool ChangeClientPin(int clientId,string oldPin, string newPin);
+
+    [OperationContract]
+    bool UpdateAccountTotal(string iban, decimal newTotal, Int16 factor);
     #endregion
 }
 

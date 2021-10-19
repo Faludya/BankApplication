@@ -97,7 +97,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ClientUI\Views\ChangePinView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ClientUI\Views\DepositView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ClientUI\Views\WithdrawView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -115,12 +123,20 @@
       <DependentUpon>MainClient.xaml</DependentUpon>
     </Compile>
     <Compile Include="ClientUI\ViewModels\AccountsViewModel.cs" />
+    <Compile Include="ClientUI\ViewModels\ChangePinViewModel.cs" />
     <Compile Include="ClientUI\ViewModels\DepositViewModel.cs" />
+    <Compile Include="ClientUI\ViewModels\WithdrawViewModel.cs" />
     <Compile Include="ClientUI\Views\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ClientUI\Views\ChangePinView.xaml.cs">
+      <DependentUpon>ChangePinView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ClientUI\Views\DepositView.xaml.cs">
       <DependentUpon>DepositView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClientUI\Views\WithdrawView.xaml.cs">
+      <DependentUpon>WithdrawView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">

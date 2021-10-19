@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="Interface.ClientUI.Views.ChangePinView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Interface.ClientUI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             FontSize="28">
+    
+    
+    <ScrollViewer VerticalScrollBarVisibility="Disabled"  HorizontalScrollBarVisibility="Auto">
+        
+        <StackPanel  HorizontalAlignment="Left" VerticalAlignment="Top"  
+                    TextBlock.TextAlignment="Center" Width="800">
+
+            <TextBlock x:Name="error_text" Foreground="Red" HorizontalAlignment="Left" Margin="20 10"/>
+
+            <Grid Margin="10 10">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                
+                <!-- Old PIN - Text -->
+                <TextBlock Text="Enter your current PIN" Foreground="#FF144242" FontWeight="Bold"  
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Margin="0 15"/>
+
+                <!-- Old PIN- Box -->
+                <PasswordBox x:Name="old_pin_box" Background="Transparent" 
+                         Margin="10 15" Grid.Column="1"
+                         BorderBrush="#FF103B5F"
+                         BorderThickness="1" SelectionBrush="Black"
+                         />
+
+            </Grid>
+
+            <Grid Margin="10 10">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- New PIN - Text -->
+                <TextBlock Text="Choose your new  PIN" Foreground="#FF144242" FontWeight="Bold"  
+                               VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Margin="0 15"/>
+
+                <!-- New PIN- Box -->
+                <PasswordBox x:Name="new_pin_box" Background="Transparent" 
+                         Margin="10 15" Grid.Column="1"
+                         BorderBrush="#FF103B5F"
+                         BorderThickness="1" SelectionBrush="Black"
+                         />
+            </Grid>
+
+            <Grid Margin="10 10">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Re-enter new PIN - Text -->
+                <TextBlock Text="Confirm your new PIN" Grid.Row="3" 
+                               Background="Transparent" Foreground="#FF144242" 
+                               FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Right"
+                               Margin="0 15"/>
+
+                <!-- Re-enter new PIN - Box -->
+                <PasswordBox x:Name="confirm_pin_box" Background="Transparent"
+                         BorderBrush="#FF103B5F" Grid.Column="1"
+                         BorderThickness=" 1" Margin="10 15"/>
+
+            </Grid>
+
+            <Grid Margin="10 10">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Change PIN - Button-->
+                <Button x:Name="change_pin_button" Content="Change PIN" 
+                            Margin="20 15 20 15"  Background="#FF96F0F0" FontWeight="Bold" 
+                            Click="Change_pin_button_Click"
+                            DataContext="{Binding ClientId}"/>
+
+                <!-- Clear - Button-->
+                <Button x:Name="clear_button" Content="Clear" Grid.Column="1"
+                            Margin="20 15 200 15"  Background="#FF96F0F0" FontWeight="Bold" 
+                            Click="Clear_button_Click"/>
+
+            </Grid>
+
+
+        </StackPanel>
+
+    </ScrollViewer>
+    
+</UserControl>

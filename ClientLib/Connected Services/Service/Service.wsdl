@@ -25,6 +25,18 @@
   <wsdl:message name="IService_GetClientAccounts_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetClientAccountsResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_ChangeClientPin_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeClientPin" />
+  </wsdl:message>
+  <wsdl:message name="IService_ChangeClientPin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeClientPinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_UpdateAccountTotal_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccountTotal" />
+  </wsdl:message>
+  <wsdl:message name="IService_UpdateAccountTotal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccountTotalResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="IsClientLoginValid">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/IsClientLoginValid" message="tns:IService_IsClientLoginValid_InputMessage" />
@@ -37,6 +49,14 @@
     <wsdl:operation name="GetClientAccounts">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetClientAccounts" message="tns:IService_GetClientAccounts_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetClientAccountsResponse" message="tns:IService_GetClientAccounts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeClientPin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/ChangeClientPin" message="tns:IService_ChangeClientPin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/ChangeClientPinResponse" message="tns:IService_ChangeClientPin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccountTotal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/UpdateAccountTotal" message="tns:IService_UpdateAccountTotal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/UpdateAccountTotalResponse" message="tns:IService_UpdateAccountTotal_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -61,6 +81,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetClientAccounts">
       <soap:operation soapAction="http://tempuri.org/IService/GetClientAccounts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeClientPin">
+      <soap:operation soapAction="http://tempuri.org/IService/ChangeClientPin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccountTotal">
+      <soap:operation soapAction="http://tempuri.org/IService/UpdateAccountTotal" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

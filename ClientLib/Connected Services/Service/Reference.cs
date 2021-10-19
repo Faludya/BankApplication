@@ -32,6 +32,18 @@ namespace ClientLib.Service {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetClientAccounts", ReplyAction="http://tempuri.org/IService/GetClientAccountsResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.Account>> GetClientAccountsAsync(int clientId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ChangeClientPin", ReplyAction="http://tempuri.org/IService/ChangeClientPinResponse")]
+        bool ChangeClientPin(int clientId, string oldPin, string newPin);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ChangeClientPin", ReplyAction="http://tempuri.org/IService/ChangeClientPinResponse")]
+        System.Threading.Tasks.Task<bool> ChangeClientPinAsync(int clientId, string oldPin, string newPin);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateAccountTotal", ReplyAction="http://tempuri.org/IService/UpdateAccountTotalResponse")]
+        bool UpdateAccountTotal(string iban, decimal newTotal, short factor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateAccountTotal", ReplyAction="http://tempuri.org/IService/UpdateAccountTotalResponse")]
+        System.Threading.Tasks.Task<bool> UpdateAccountTotalAsync(string iban, decimal newTotal, short factor);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -83,6 +95,22 @@ namespace ClientLib.Service {
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.Account>> GetClientAccountsAsync(int clientId) {
             return base.Channel.GetClientAccountsAsync(clientId);
+        }
+        
+        public bool ChangeClientPin(int clientId, string oldPin, string newPin) {
+            return base.Channel.ChangeClientPin(clientId, oldPin, newPin);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ChangeClientPinAsync(int clientId, string oldPin, string newPin) {
+            return base.Channel.ChangeClientPinAsync(clientId, oldPin, newPin);
+        }
+        
+        public bool UpdateAccountTotal(string iban, decimal newTotal, short factor) {
+            return base.Channel.UpdateAccountTotal(iban, newTotal, factor);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateAccountTotalAsync(string iban, decimal newTotal, short factor) {
+            return base.Channel.UpdateAccountTotalAsync(iban, newTotal, factor);
         }
     }
 }

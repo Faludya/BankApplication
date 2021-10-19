@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Interface.ClientUI.Views.DepositView"
+﻿<UserControl x:Class="Interface.ClientUI.Views.WithdrawView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -15,7 +15,8 @@
 
             <TextBlock x:Name="error_text" Foreground="Red" HorizontalAlignment="Left" Margin="20 10"/>
 
-            
+
+
             <Grid Margin="10 25">
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition Width="3*" />
@@ -35,7 +36,7 @@
                             SelectedValuePath="IBAN" 
                             SelectedValue="{Binding IBAN}" />
                 </StackPanel>
-                
+
                 <StackPanel Grid.Column="1" >
                     <!-- Account Currency- Text -->
                     <TextBlock Text="Account Currency" Background="Transparent" Foreground="#FF144242" 
@@ -49,7 +50,7 @@
                            DataContext="{Binding ElementName=iban_combobox, Path=SelectedItem}"
                            Text="{Binding Path=Currency}"/>
                 </StackPanel>
-                
+
             </Grid>
 
             <Grid Margin="10 25">
@@ -59,42 +60,41 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" >
-                    <!-- Amount to deposit - Text -->
-                    <TextBlock Text="Amount to deposit" Background="Transparent" 
+                    <!-- Amount to witdraw - Text -->
+                    <TextBlock Text="Amount to withdraw" Background="Transparent" 
                                Foreground="#FF144242" FontWeight="Bold"  VerticalAlignment="Center" 
                                Margin="0 10"/>
 
-                    <!-- Amount to deposit- Box -->
+                    <!-- Amount to withdraw- Box -->
                     <TextBox x:Name="amount_box" Margin="5 10" 
                              Background="Transparent" FontWeight="Bold"  />
 
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" >
-                    <!-- Depoist Currency- Text -->
-                    <TextBlock Text="Deposit Currency" Background="Transparent" 
+                    <!-- Withdraw Currency- Text -->
+                    <TextBlock Text="Withdraw Currency" Background="Transparent" 
                                Foreground="#FF144242" FontWeight="Bold"  
                                VerticalAlignment="Center" HorizontalAlignment="Center"
                                Margin="0 10"/>
 
-                    <!-- Deposit Currency - Combobox -->
+                    <!-- Withdraw Currency - Combobox -->
                     <ComboBox Name="currency_combobox" Margin="70 10"  >
                         <ComboBoxItem Content="RON" VerticalAlignment="Center" />
                         <ComboBoxItem Content="EURO" VerticalAlignment="Center"/>
                     </ComboBox>
                 </StackPanel>
-                
+
             </Grid>
-            
-            <!-- Depozitare - Button-->
-            <Button x:Name="deposit_button" Content="Deposit" 
+
+            <!-- Withdraw - Button-->
+            <Button x:Name="withdraw_button" Content="Withdraw" 
                     Margin="40 15" Background="#FF96F0F0" FontWeight="Bold"
                     Width="200" HorizontalAlignment="Left"
-                    Click="Deposit_button_Click"/>
+                    Click="Withdraw_button_Click"/>
 
 
         </StackPanel>
     </ScrollViewer>
-
 
 </UserControl>

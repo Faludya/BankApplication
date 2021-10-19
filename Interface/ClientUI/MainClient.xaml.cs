@@ -71,18 +71,19 @@ namespace Interface.ClientUI
                     break;
 
                 case "Deposit":
-                    var res = LoginController.IsLoginDataValid("", "");
                     DepositViewModel depositViewModel = new DepositViewModel(clientId);
                     contentPresenter.Content = depositViewModel;
 
                     break;
 
                 case "Withdraw":
-
+                    WithdrawViewModel withdrawViewModel = new WithdrawViewModel(clientId);
+                    contentPresenter.Content = withdrawViewModel;
                     break;
 
                 case "Change PIN":
-
+                    ChangePinViewModel changePinViewModel = new ChangePinViewModel(clientId);
+                    contentPresenter.Content = changePinViewModel;
                     break;
 
                 default:

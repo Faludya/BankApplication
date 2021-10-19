@@ -10,7 +10,8 @@
         <telerik:RadGridView x:Name="gridView" 
                              AutoGenerateColumns="False" 
                              ItemsSource="{Binding Accounts}"
-                             ShowGroupPanel="False">
+                             ShowGroupPanel="False"
+                             FontSize="20">
             
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn DataMemberBinding="{Binding IBAN}" Header="IBAN" />

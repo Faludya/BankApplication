@@ -1,6 +1,7 @@
 ﻿using ClientLib;
 using ClientLib.Controllers;
 using Interface.ClientUI;
+using Interface.OperatorUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,14 @@ namespace Interface
             {
                 MessageBox.Show("Login failed");
             }
+        }
+
+        private void Operator_button_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: finish implementing the proper login check
+            Hide();
+            MainOperator mainOperator = new MainOperator();
+            mainOperator.Show();
         }
     }
 }

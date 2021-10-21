@@ -21,7 +21,7 @@ public class Service : IService
                 Client client = database.Clients.
                                 Where(c => c.CNP == cnp).
                                 FirstOrDefault();
-                if (client != null)
+                if (client != null && client.Id != 1)
                     return client.Id;
             }
 
@@ -35,8 +35,24 @@ public class Service : IService
 
     public int IsOperatorLoginValid(string cnp, string password)
     {
-        //TODO: finish implementing operator validation
-        return -1;
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                Client client = database.Clients.
+                                Where(c => c.CNP == cnp).
+                                FirstOrDefault();
+
+                if (client.Id == 1)
+                    return client.Id;
+            }
+
+            return -1;
+        }
+        catch (Exception ex)
+        {
+            return -1;
+        }
     }
     #endregion
 

@@ -63,7 +63,8 @@
 
                 <!--Operator-->
                 <Button Background="Transparent" BorderBrush="Transparent"
-                        Width="300">
+                        Width="300" x:Name="operator_button"
+                        Click="Operator_button_Click">
 
                     <!--<Button.Style>
                         <Style TargetType="{x:Type Button}">

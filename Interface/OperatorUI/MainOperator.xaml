@@ -1,0 +1,35 @@
+﻿<Window x:Class="Interface.OperatorUI.MainOperator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Interface.OperatorUI" 
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        mc:Ignorable="d"
+        Title="MainOperator"  Height="700" Width="1400"
+        WindowStartupLocation="CenterScreen" 
+        FontSize="30">
+
+    <Grid ShowGridLines="True">
+        <Grid.Background >
+            <ImageBrush  ImageSource="../Resources/background.png" Stretch="Fill" />
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions >
+            <RowDefinition Height="*" />
+            <RowDefinition Height="6*" />
+        </Grid.RowDefinitions>
+
+        <telerik:RadTreeView x:Name="tree" Grid.Row="1" 
+                             Margin="5 20 5 20"
+                             ItemDoubleClick="Tree_ItemDoubleClick"/>
+
+        <ContentPresenter x:Name="contentPresenter" Grid.Row="1" Grid.Column="1"/>
+
+    </Grid>
+</Window>

@@ -3,6 +3,9 @@ using Database;
 using Interface.OperatorUI.ViewModels;
 using System.Windows;
 using Telerik.Windows.Controls;
+using System.Drawing;
+using System.Windows.Media;
+//using System.Windows.Media;
 
 namespace Interface.OperatorUI
 {
@@ -18,11 +21,15 @@ namespace Interface.OperatorUI
 
             DataContext = new MainViewModel(); 
             InitializeTree();
+
+            StyleManager.ApplicationTheme = new Office_BlueTheme();
+            System.Windows.Media.Brush myBrush = new SolidColorBrush(Colors.Transparent);
+
             gridView = new RadGridView
             {
                 ShowGroupPanel = false,
                 FontSize = 24,
-                
+                Background = myBrush
             };
         }
 
@@ -45,8 +52,8 @@ namespace Interface.OperatorUI
             tranzactions.Tag = "Tranzactions";
 
             RadTreeViewItem security = new RadTreeViewItem();
-            security.Header = "Security";
-            security.Tag = "Security";
+            security.Header = "Customer Service";
+            security.Tag = "Customer Service";
 
             security.Items.Add(viewClients);
             security.Items.Add(viewAccounts);
@@ -119,6 +126,11 @@ namespace Interface.OperatorUI
                
 
             }
+        }
+
+        private void Check_Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

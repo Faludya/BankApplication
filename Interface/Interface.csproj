@@ -44,6 +44,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -147,11 +149,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OperatorUI\Views\EditAccountOfferView.xaml">
+    <Page Include="OperatorUI\Views\Edit\EditAccountOfferView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OperatorUI\Views\EditClientView.xaml">
+    <Page Include="OperatorUI\Views\Edit\EditClientView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,12 +162,12 @@
     <Compile Include="OperatorUI\MainOperator.xaml.cs">
       <DependentUpon>MainOperator.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OperatorUI\ViewModels\EditAccountOfferViewModel.cs" />
-    <Compile Include="OperatorUI\ViewModels\EditClientViewModel.cs" />
-    <Compile Include="OperatorUI\Views\EditAccountOfferView.xaml.cs">
+    <Compile Include="OperatorUI\ViewModels\Edit\EditAccountOfferViewModel.cs" />
+    <Compile Include="OperatorUI\ViewModels\Edit\EditClientViewModel.cs" />
+    <Compile Include="OperatorUI\Views\Edit\EditAccountOfferView.xaml.cs">
       <DependentUpon>EditAccountOfferView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OperatorUI\Views\EditClientView.xaml.cs">
+    <Compile Include="OperatorUI\Views\Edit\EditClientView.xaml.cs">
       <DependentUpon>EditClientView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -208,6 +210,51 @@
     <Resource Include="Resources\background.png" />
     <Resource Include="Resources\loginbackground.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\client.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\account.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\accountoffer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\create.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\transaction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="OperatorUI\ViewModels\Create\" />
+    <Folder Include="OperatorUI\Views\Create\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\azurelogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\waveline.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

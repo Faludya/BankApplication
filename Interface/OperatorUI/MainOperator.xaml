@@ -10,10 +10,16 @@
         WindowStartupLocation="CenterScreen" 
         FontSize="24">
 
-    <Grid ShowGridLines="True">
-        <Grid.Background >
-            <ImageBrush  ImageSource="../Resources/background.png" Stretch="Fill" />
+    <Grid ShowGridLines="False">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="AliceBlue" Offset="0"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
         </Grid.Background>
+        <!--<Grid.Background >
+            <ImageBrush  ImageSource="../Resources/background.png" Stretch="Fill" />
+        </Grid.Background>-->
 
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="*"/>
@@ -22,20 +28,35 @@
 
         <Grid.RowDefinitions >
             <RowDefinition Height="*" />
-            <RowDefinition Height="6*" />
+            <RowDefinition Height="4*" />
         </Grid.RowDefinitions>
 
-        <!--<telerik:RadGridView  />-->
+        <Border BorderThickness="1"  Grid.Row="1" Grid.Column="0">
+            <Rectangle Stroke="#FF0089D6" Fill="Transparent"/>
+        </Border>
+
+        <Border BorderThickness="1"  Grid.Row="1" Grid.Column="1">
+            <Rectangle Stroke="#FF0089D6" Fill="Transparent"/>
+        </Border>
+        
+        <Image Grid.Column="0" Source="../Resources/azurelogo.png" />
+        <Image Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+               VerticalAlignment="Bottom" Stretch="Fill"
+               Height="100"
+               Source="../Resources/waveline.png" />
 
         <telerik:RadTreeView x:Name="tree" Grid.Row="1" 
-                             Margin="5 20 5 20"
-                             ItemDoubleClick="Tree_ItemDoubleClick"/>
+                             ItemDoubleClick="Tree_ItemDoubleClick"
+                             Margin="5 10"/>
 
-        <ContentPresenter x:Name="contentPresenter" Grid.Row="1" Grid.Column="1"/>
+        <ContentPresenter x:Name="contentPresenter" Grid.Row="1" Grid.Column="1"
+                          Margin="2 3 0 0"/>
 
 
-        <StackPanel Orientation="Horizontal" Grid.Column="1">
-            <!-- Withdraw - Button-->
+        <!--<StackPanel Orientation="Horizontal" Grid.Column="1">
+            -->
+        <!-- Withdraw - Button-->
+        <!--
             <Button x:Name="edit_button" Content="Edit" Grid.Column="1"
                     Margin="40 15" Background="#FF96F0F0" FontWeight="Bold"
                     Width="200" HorizontalAlignment="Left"
@@ -45,7 +66,59 @@
                     Margin="40 15" Background="#FF96F0F0" FontWeight="Bold"
                     Width="200" HorizontalAlignment="Left"
                     Click="Save_button_Click"/>
-        </StackPanel>
-        
+        </StackPanel>-->
+
+        <Ribbon x:Name="RibbonWin"  SelectedIndex="0" Grid.Column="1">
+            <RibbonTab Header="Home" >
+                <RibbonGroup x:Name="Modify" Header="Modify">
+                    <RibbonButton LargeImageSource="../Resources/edit.png" 
+                                      Label="Edit" Click="Edit_button_Click"/>
+                    <RibbonButton  Label="Save" SmallImageSource="../Resources/save.png"
+                                   Click="Save_button_Click"/>
+                    <RibbonButton  Label="Check" SmallImageSource="../Resources/check.png"
+                                   Click="Check_Button_Click"/>
+                </RibbonGroup>
+
+                <RibbonGroup x:Name="Erase" Header="Erase">
+                    <RibbonButton LargeImageSource="../Resources/clear.png" 
+                                      Label="Clear"/>
+                    <RibbonButton  Label="Go Back" SmallImageSource="../Resources/back.png"/>
+                    <RibbonButton  Label="Delete" SmallImageSource="../Resources/delete.png"/>
+                </RibbonGroup>
+
+            </RibbonTab>
+
+            <RibbonTab Header="Manage" >
+                <RibbonGroup Name="Client" Header="Client">
+                    <RibbonMenuButton LargeImageSource="../Resources/client.png"  Label="Client">
+                        <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png" />
+                        <RibbonMenuItem Header="Delete" ImageSource="../Resources/delete.png"/>
+                    </RibbonMenuButton>
+                </RibbonGroup>
+
+                <RibbonGroup Name="Account" Header="Account">
+                    <RibbonMenuButton LargeImageSource="../Resources/account.png"  Label="Account" >
+                        <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png" />
+                        <RibbonMenuItem Header="Delete" ImageSource="../Resources/delete.png"/>
+                    </RibbonMenuButton>
+                </RibbonGroup>
+
+                <RibbonGroup Name="AccountOffer" Header="Account Offer">
+                    <RibbonMenuButton LargeImageSource="../Resources/accountoffer.png"  Label="Account Offer">
+                        <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png" />
+                        <RibbonMenuItem Header="Delete" ImageSource="../Resources/delete.png" />
+                    </RibbonMenuButton>
+                </RibbonGroup>
+
+                <RibbonGroup Name="Transaction" Header="Transaction">
+                    <RibbonMenuButton LargeImageSource="../Resources/transaction.png"  Label="Transaction">
+                        <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png"/>
+                        <RibbonMenuItem Header="Delete" ImageSource="../Resources/delete.png" />
+                    </RibbonMenuButton>
+                </RibbonGroup>
+
+            </RibbonTab>
+        </Ribbon>
+
     </Grid>
 </Window>

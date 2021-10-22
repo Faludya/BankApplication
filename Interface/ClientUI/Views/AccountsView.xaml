@@ -11,7 +11,10 @@
                              AutoGenerateColumns="False" 
                              ItemsSource="{Binding Accounts}"
                              ShowGroupPanel="False"
-                             FontSize="20">
+                             FontSize="20" 
+                             Background="Transparent"
+                             telerik:StyleManager.Theme="Office_Blue"
+                             >
             
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn DataMemberBinding="{Binding IBAN}" Header="IBAN" />

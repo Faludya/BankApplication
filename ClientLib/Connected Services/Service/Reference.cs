@@ -44,6 +44,36 @@ namespace ClientLib.Service {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateAccountTotal", ReplyAction="http://tempuri.org/IService/UpdateAccountTotalResponse")]
         System.Threading.Tasks.Task<bool> UpdateAccountTotalAsync(string iban, decimal newTotal, short factor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetClients", ReplyAction="http://tempuri.org/IService/GetClientsResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Database.Client> GetClients();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetClients", ReplyAction="http://tempuri.org/IService/GetClientsResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.Client>> GetClientsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAccounts", ReplyAction="http://tempuri.org/IService/GetAccountsResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Database.Account> GetAccounts();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAccounts", ReplyAction="http://tempuri.org/IService/GetAccountsResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.Account>> GetAccountsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAccountOffers", ReplyAction="http://tempuri.org/IService/GetAccountOffersResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Database.AccountOffer> GetAccountOffers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAccountOffers", ReplyAction="http://tempuri.org/IService/GetAccountOffersResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.AccountOffer>> GetAccountOffersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetTranzactions", ReplyAction="http://tempuri.org/IService/GetTranzactionsResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Database.Tranzaction> GetTranzactions();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetTranzactions", ReplyAction="http://tempuri.org/IService/GetTranzactionsResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.Tranzaction>> GetTranzactionsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateClient", ReplyAction="http://tempuri.org/IService/UpdateClientResponse")]
+        bool UpdateClient(Database.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateClient", ReplyAction="http://tempuri.org/IService/UpdateClientResponse")]
+        System.Threading.Tasks.Task<bool> UpdateClientAsync(Database.Client client);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +141,46 @@ namespace ClientLib.Service {
         
         public System.Threading.Tasks.Task<bool> UpdateAccountTotalAsync(string iban, decimal newTotal, short factor) {
             return base.Channel.UpdateAccountTotalAsync(iban, newTotal, factor);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Database.Client> GetClients() {
+            return base.Channel.GetClients();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.Client>> GetClientsAsync() {
+            return base.Channel.GetClientsAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Database.Account> GetAccounts() {
+            return base.Channel.GetAccounts();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.Account>> GetAccountsAsync() {
+            return base.Channel.GetAccountsAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Database.AccountOffer> GetAccountOffers() {
+            return base.Channel.GetAccountOffers();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.AccountOffer>> GetAccountOffersAsync() {
+            return base.Channel.GetAccountOffersAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Database.Tranzaction> GetTranzactions() {
+            return base.Channel.GetTranzactions();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.Tranzaction>> GetTranzactionsAsync() {
+            return base.Channel.GetTranzactionsAsync();
+        }
+        
+        public bool UpdateClient(Database.Client client) {
+            return base.Channel.UpdateClient(client);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateClientAsync(Database.Client client) {
+            return base.Channel.UpdateClientAsync(client);
         }
     }
 }

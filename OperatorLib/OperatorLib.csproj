@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{78DDBAC2-3FDD-4301-A431-F2AD557EFE73}</ProjectGuid>
+    <ProjectGuid>{01C71CF4-B9E5-4860-9194-62D1F2AC470D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClientLib</RootNamespace>
-    <AssemblyName>ClientLib</AssemblyName>
+    <RootNamespace>OperatorLib</RootNamespace>
+    <AssemblyName>OperatorLib</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,14 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -50,58 +43,56 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connected Services\Service\Reference.cs">
+    <Compile Include="Connected Services\OperatorService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\AccountsController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Operator\Controllers\EditSecurityController.cs" />
-    <Compile Include="Operator\Controllers\GridController.cs" />
+    <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Database\Database.csproj">
-      <Project>{37D6D0C6-D1ED-4CAF-A2FC-FB6E27DA202B}</Project>
-      <Name>Database</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Connected Services\Service\Service.wsdl" />
-    <None Include="Connected Services\Service\Service.xsd">
+    <None Include="Connected Services\OperatorService\OperatorLib.OperatorService.Account.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\OperatorService\OperatorLib.OperatorService.AccountOffer.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\OperatorService\OperatorLib.OperatorService.Client.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\OperatorService\OperatorLib.OperatorService.Tranzaction.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\OperatorService\Service.wsdl" />
+    <None Include="Connected Services\OperatorService\Service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Service\Service1.xsd">
+    <None Include="Connected Services\OperatorService\Service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\Service\Service2.xsd">
+    <None Include="Connected Services\OperatorService\Service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
-    <None Include="Properties\DataSources\Database.Account.datasource" />
-    <None Include="Properties\DataSources\Database.AccountOffer.datasource" />
-    <None Include="Properties\DataSources\Database.Client.datasource" />
-    <None Include="Properties\DataSources\Database.Tranzaction.datasource" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\Service\" />
+    <WCFMetadataStorage Include="Connected Services\OperatorService\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\Service\Service.disco" />
+    <None Include="Connected Services\OperatorService\Service.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\Service\configuration91.svcinfo" />
+    <None Include="Connected Services\OperatorService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\Service\configuration.svcinfo" />
+    <None Include="Connected Services\OperatorService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\Service\Reference.svcmap">
+    <None Include="Connected Services\OperatorService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

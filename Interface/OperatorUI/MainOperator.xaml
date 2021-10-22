@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="MainOperator"  Height="700" Width="1400"
         WindowStartupLocation="CenterScreen" 
-        FontSize="30">
+        FontSize="24">
 
     <Grid ShowGridLines="True">
         <Grid.Background >
@@ -25,11 +25,27 @@
             <RowDefinition Height="6*" />
         </Grid.RowDefinitions>
 
+        <!--<telerik:RadGridView  />-->
+
         <telerik:RadTreeView x:Name="tree" Grid.Row="1" 
                              Margin="5 20 5 20"
                              ItemDoubleClick="Tree_ItemDoubleClick"/>
 
         <ContentPresenter x:Name="contentPresenter" Grid.Row="1" Grid.Column="1"/>
 
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1">
+            <!-- Withdraw - Button-->
+            <Button x:Name="edit_button" Content="Edit" Grid.Column="1"
+                    Margin="40 15" Background="#FF96F0F0" FontWeight="Bold"
+                    Width="200" HorizontalAlignment="Left"
+                    Click="Edit_button_Click"/>
+
+            <Button x:Name="save_button" Content="Save" Grid.Column="1"
+                    Margin="40 15" Background="#FF96F0F0" FontWeight="Bold"
+                    Width="200" HorizontalAlignment="Left"
+                    Click="Save_button_Click"/>
+        </StackPanel>
+        
     </Grid>
 </Window>

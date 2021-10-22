@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ClientLib.Operator.Controllers;
+using Database;
+using Interface.OperatorUI.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Telerik.Windows.Controls;
 
 namespace Interface.OperatorUI
@@ -20,10 +11,19 @@ namespace Interface.OperatorUI
     /// </summary>
     public partial class MainOperator : Window
     {
+        private RadGridView gridView;
         public MainOperator()
         {
             InitializeComponent();
-            DataContext = new MainViewModel(); InitializeTree();
+
+            DataContext = new MainViewModel(); 
+            InitializeTree();
+            gridView = new RadGridView
+            {
+                ShowGroupPanel = false,
+                FontSize = 24,
+                
+            };
         }
 
         private void InitializeTree()
@@ -59,7 +59,66 @@ namespace Interface.OperatorUI
 
         private void Tree_ItemDoubleClick(object sender, Telerik.Windows.RadRoutedEventArgs e)
         {
+            string selectedItem = ((RadTreeViewItem)tree.SelectedItem).Tag.ToString();
 
+            switch (selectedItem)
+            {
+                case "Clients":
+                    gridView.ItemsSource = GridController.GetAllClients();
+                    gridView.Columns["PIN"].IsVisible = false;
+                    gridView.Columns["Accounts"].IsVisible = false;
+                    break;
+
+                case "Accounts":
+                    gridView.ItemsSource = GridController.GetAllAccounts();
+                    gridView.Columns["AccountOffer"].IsVisible = false;
+                    gridView.Columns["Client"].IsVisible = false;
+                    gridView.Columns["Tranzactions"].IsVisible = false;
+                    gridView.Columns["Tranzactions1"].IsVisible = false;
+                    break;
+
+                case "Account Offers":
+                    gridView.ItemsSource = GridController.GetAllAccountOffers();
+                    gridView.Columns["Accounts"].IsVisible = false;
+                    break;
+
+                case "Tranzactions":
+                    gridView.ItemsSource = GridController.GetAllTranzactions();
+                    gridView.Columns["Account"].IsVisible = false;
+                    gridView.Columns["Account1"].IsVisible = false;
+                    break;
+
+                default:
+                    break;
+            }
+
+            contentPresenter.Content = gridView;
+        }
+
+        private void Edit_button_Click(object sender, RoutedEventArgs e)
+        {
+            if (gridView.SelectedItem is Client)
+                contentPresenter.Content = new EditClientViewModel(gridView.SelectedItem as Client);
+            else
+            if (gridView.SelectedItem is AccountOffer)
+                contentPresenter.Content = new EditAccountOfferViewModel(gridView.SelectedItem as AccountOffer);
+        }
+
+        private void Save_button_Click(object sender, RoutedEventArgs e)
+        {
+
+            if(contentPresenter.Content is EditClientViewModel)
+            {
+                var viewModel = contentPresenter.DataContext as EditClientViewModel;
+                if (EditSecurityController.UpdateClient(viewModel.Client))
+                {
+                    MessageBox.Show("Client Updated!");
+                    gridView.ItemsSource = GridController.GetAllClients();
+                    contentPresenter.Content = gridView;
+                }
+               
+
+            }
         }
     }
 }

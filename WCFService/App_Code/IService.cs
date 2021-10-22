@@ -31,5 +31,23 @@ public interface IService
     [OperationContract]
     bool UpdateAccountTotal(string iban, decimal newTotal, Int16 factor);
     #endregion
+
+    #region Operator - Getters
+    [OperationContract]
+    ObservableCollection<Client> GetClients();
+
+    [OperationContract]
+    ObservableCollection<Account> GetAccounts();
+
+    [OperationContract]
+    ObservableCollection<AccountOffer> GetAccountOffers();
+    [OperationContract]
+    ObservableCollection<Tranzaction> GetTranzactions();
+    #endregion
+
+    #region Operator - Saves 
+    [OperationContract]
+    bool UpdateClient(Client client);
+    #endregion
 }
 

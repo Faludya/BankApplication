@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -19,7 +20,7 @@ public class Service : IService
             using (BankEntities database = new BankEntities())
             {
                 Client client = database.Clients.
-                                Where(c => c.CNP == cnp).
+                                Where(c => c.CNP == cnp && c.PIN == password).
                                 FirstOrDefault();
                 if (client != null && client.Id != 1)
                     return client.Id;
@@ -40,7 +41,7 @@ public class Service : IService
             using (BankEntities database = new BankEntities())
             {
                 Client client = database.Clients.
-                                Where(c => c.CNP == cnp).
+                                Where(c => c.CNP == cnp && c.PIN == password).
                                 FirstOrDefault();
 
                 if (client.Id == 1)
@@ -132,4 +133,107 @@ public class Service : IService
     }
 
     #endregion
+
+    #region Operator 
+
+    public ObservableCollection<Client> GetClients()
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                ObservableCollection<Client> clientsList = new ObservableCollection<Client>();
+
+                foreach (Client client in database.Clients)
+                    if(client.Id != 1)
+                        clientsList.Add(client);
+
+                return clientsList;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+    public ObservableCollection<Account> GetAccounts()
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                ObservableCollection<Account> accountsList = new ObservableCollection<Account>();
+
+                foreach (Account account in database.Accounts)
+                    accountsList.Add(account);
+
+                return accountsList;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+    public ObservableCollection<AccountOffer> GetAccountOffers()
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                ObservableCollection<AccountOffer> accountOffersList = new ObservableCollection<AccountOffer>();
+
+                foreach (AccountOffer accountOffer in database.AccountOffers)
+                    accountOffersList.Add(accountOffer);
+
+                return accountOffersList;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+    public ObservableCollection<Tranzaction> GetTranzactions()
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                ObservableCollection<Tranzaction> tranzactionsList = new ObservableCollection<Tranzaction>();
+
+                foreach (Tranzaction tranzaction in database.Tranzactions)
+                    tranzactionsList.Add(tranzaction);
+
+                return tranzactionsList;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+    #endregion
+
+    public bool UpdateClient(Client newClient)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                database.Clients.AddOrUpdate(newClient);
+                database.SaveChanges();
+
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
 }

@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="Interface.OperatorUI.Views.EditClientView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Interface.OperatorUI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Column="0" 
+                    VerticalAlignment="Center">
+            <!-- First Name - Text -->
+            <TextBlock Text="First Name" Background="Transparent"
+                       Foreground="#FF144242" FontWeight="Bold"  
+                       VerticalAlignment="Center" Margin="10 10"
+                       HorizontalAlignment="Right"/>
+
+            <!-- Last Name - Text -->
+            <TextBlock Text="Last Name" Background="Transparent"
+                       Foreground="#FF144242" FontWeight="Bold"  
+                       VerticalAlignment="Center" Margin="10 10"
+                       HorizontalAlignment="Right"/>
+
+            <!-- CNP - Text -->
+            <TextBlock Text="CNP" Background="Transparent"
+                       Foreground="#FF144242" FontWeight="Bold"  
+                       VerticalAlignment="Center" Margin="10 10"
+                       HorizontalAlignment="Right"/>
+            
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Column="1" 
+                    VerticalAlignment="Center">
+            
+            <!-- First Name - Box -->
+            <TextBox x:Name="first_name_box" Margin="5 10" 
+                     Background="Transparent" FontWeight="Bold" 
+                     Text="{Binding FirstName}"/>
+
+            <!-- Last Name - Box -->
+            <TextBox x:Name="last_name_box" Margin="5 10" 
+                     Background="Transparent" FontWeight="Bold" 
+                     Text="{Binding LastName}"/>
+
+            <!-- CNP - Box -->
+            <TextBox x:Name="cnp_box" Margin="5 10" 
+                     Background="Transparent" FontWeight="Bold" 
+                     Text="{Binding CNP}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Column="2" 
+                    VerticalAlignment="Center">
+            <!-- Address - Text -->
+            <TextBlock Text="Address" Background="Transparent"
+                       Foreground="#FF144242" FontWeight="Bold"  
+                       VerticalAlignment="Center" Margin="10 10"
+                       HorizontalAlignment="Right"/>
+
+            <!-- Phone - Text -->
+            <TextBlock Text="Phone" Background="Transparent"
+                       Foreground="#FF144242" FontWeight="Bold"  
+                       VerticalAlignment="Center" Margin="10 10"
+                       HorizontalAlignment="Right"/>
+
+            <!-- PIN - Text -->
+            <!--<TextBlock Text="PIN" Background="Transparent"
+                       Foreground="#FF144242" FontWeight="Bold"  
+                       VerticalAlignment="Center" Margin="10 10"
+                       HorizontalAlignment="Right"/>-->
+            
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Column="3"
+                    VerticalAlignment="Center">
+
+            <!-- Address - Box -->
+            <TextBox x:Name="address_box" Margin="5 10" 
+                     Background="Transparent" FontWeight="Bold" 
+                     Text="{Binding Address}"/>
+
+            <!-- Phone - Box -->
+            <TextBox x:Name="phone_box" Margin="5 10" 
+                     Background="Transparent" FontWeight="Bold" 
+                     Text="{Binding Phone}"/>
+
+            <!-- PIN - Box -->
+            <!--<TextBox  x:Name="pin_box" Margin="5 10" 
+                     Background="Transparent" FontWeight="Bold" 
+                     Text="{Binding PIN}"/>-->
+            
+        </StackPanel>
+
+
+    </Grid>
+</UserControl>

@@ -147,10 +147,26 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="OperatorUI\Views\EditAccountOfferView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OperatorUI\Views\EditClientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OperatorUI\MainOperator.xaml.cs">
       <DependentUpon>MainOperator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorUI\ViewModels\EditAccountOfferViewModel.cs" />
+    <Compile Include="OperatorUI\ViewModels\EditClientViewModel.cs" />
+    <Compile Include="OperatorUI\Views\EditAccountOfferView.xaml.cs">
+      <DependentUpon>EditAccountOfferView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorUI\Views\EditClientView.xaml.cs">
+      <DependentUpon>EditClientView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -192,9 +208,6 @@
     <Resource Include="Resources\background.png" />
     <Resource Include="Resources\loginbackground.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="OperatorUI\ViewModels\" />
-    <Folder Include="OperatorUI\Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

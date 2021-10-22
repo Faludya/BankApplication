@@ -6,6 +6,9 @@
               xmlns:clientViewModel="clr-namespace:Interface.ClientUI.ViewModels"
               xmlns:clientViews="clr-namespace:Interface.ClientUI.Views"
              
+              xmlns:operatorViewModel ="clr-namespace:Interface.OperatorUI.ViewModels"
+              xmlns:operatorViews ="clr-namespace:Interface.OperatorUI.Views"
+             
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <DataTemplate DataType="{x:Type clientViewModel:AccountsViewModel}">
@@ -17,11 +20,19 @@
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type clientViewModel:WithdrawViewModel}">
-            <clientViews:WithdrawView/>
+            <clientViews:WithdrawView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type clientViewModel:ChangePinViewModel}">
             <clientViews:ChangePinView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type operatorViewModel:EditClientViewModel}">
+            <operatorViews:EditClientView DataContext="{Binding Client}"/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type operatorViewModel:EditAccountOfferViewModel}">
+            <operatorViews:EditAccountOfferView DataContext="{Binding AccountOffer}"/>
         </DataTemplate>
 
     </Application.Resources>

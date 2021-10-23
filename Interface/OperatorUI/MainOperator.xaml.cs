@@ -3,8 +3,10 @@ using Database;
 using Interface.OperatorUI.ViewModels;
 using System.Windows;
 using Telerik.Windows.Controls;
-using System.Drawing;
 using System.Windows.Media;
+using Interface.OperatorUI.ViewModels.Edit;
+using System.Windows.Controls.Ribbon;
+using Interface.OperatorUI.ViewModels.Create;
 //using System.Windows.Media;
 
 namespace Interface.OperatorUI
@@ -109,6 +111,11 @@ namespace Interface.OperatorUI
             else
             if (gridView.SelectedItem is AccountOffer)
                 contentPresenter.Content = new EditAccountOfferViewModel(gridView.SelectedItem as AccountOffer);
+            else
+            if (gridView.SelectedItem is Account)
+                contentPresenter.Content = new EditAccountViewModel(gridView.SelectedItem as Account);
+
+            gridView.SelectedItem = null;
         }
 
         private void Save_button_Click(object sender, RoutedEventArgs e)
@@ -117,20 +124,113 @@ namespace Interface.OperatorUI
             if(contentPresenter.Content is EditClientViewModel)
             {
                 var viewModel = contentPresenter.DataContext as EditClientViewModel;
+                viewModel.Trim();
                 if (EditSecurityController.UpdateClient(viewModel.Client))
                 {
                     MessageBox.Show("Client Updated!");
                     gridView.ItemsSource = GridController.GetAllClients();
                     contentPresenter.Content = gridView;
                 }
-               
-
             }
         }
 
         private void Check_Button_Click(object sender, RoutedEventArgs e)
         {
+            if(contentPresenter.Content is EditClientViewModel)
+            {
+                var viewModel = contentPresenter.Content as EditClientViewModel;
+                if (EditSecurityController.CanUpdateClient(viewModel.Client))
+                {
+                    
+                }
 
+            }
+        }
+
+        private void Create_Button_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as RibbonMenuItem;
+
+            switch (button.Tag.ToString())
+            {
+                case "Client":
+                    contentPresenter.Content = new EditClientViewModel(new Client());
+                    break;
+
+                case "Account":
+                    contentPresenter.Content = new CreateAccountViewModel();
+                    break;
+
+                case "AccountOffer":
+                    contentPresenter.Content = new EditAccountOfferViewModel(new AccountOffer());
+                    break;
+
+                case "Transaction":
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void Go_Back_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (contentPresenter.Content is BaseViewModel)
+                contentPresenter.Content = gridView;
+            else
+            if (contentPresenter.Content == gridView)
+                contentPresenter.Content = null;
+        }
+
+        private void Clear_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            switch (contentPresenter.Content)
+            {
+                case EditClientViewModel _:
+                    contentPresenter.Content = new EditClientViewModel(new Client());
+                    break;
+
+                case EditAccountViewModel _:
+                    contentPresenter.Content = new EditAccountViewModel(new Account());
+                    break;
+
+                case EditAccountOfferViewModel _:
+                    contentPresenter.Content = new EditAccountOfferViewModel(new AccountOffer());
+                    break;
+
+                case CreateAccountViewModel _:
+                    contentPresenter.Content = new CreateAccountViewModel();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void Delete_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this instance?","Remove", MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.No)
+                return;
+
+            if (gridView.SelectedItem is Client)
+            {
+                if (EditSecurityController.RemoveClient(gridView.SelectedItem as Client))
+                    MessageBox.Show("Client Removed.");
+                else
+                    MessageBox.Show("Failed to remove the client.");
+
+                gridView.ItemsSource = GridController.GetAllClients();
+                contentPresenter.Content = gridView;
+            }
+            else
+            if (gridView.SelectedItem is Account)
+                EditSecurityController.RemoveAccount(gridView.SelectedItem as Account);
+            else
+            if (gridView.SelectedItem is AccountOffer)
+                EditSecurityController.RemoveAccountOffer(gridView.SelectedItem as AccountOffer);
         }
     }
 }

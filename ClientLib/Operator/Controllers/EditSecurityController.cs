@@ -21,7 +21,43 @@ namespace ClientLib.Operator.Controllers
             return false;
         }
 
-        private static bool CanUpdateClient(Client client)
+        public static bool UpdateAccount(Account account)
+        {
+            using (Service.ServiceClient service = new Service.ServiceClient())
+            {
+                if (CanUpdateAccount(account))
+                {
+                    return service.UpdateAccount(account);
+                }
+            }
+            return false;
+        }
+
+        public static bool RemoveClient(Client client)
+        {
+            using (Service.ServiceClient service = new Service.ServiceClient())
+            {
+                return service.RemoveClient(client);
+            }
+        }
+
+        public static bool RemoveAccount(Account account)
+        {
+            using (Service.ServiceClient service = new Service.ServiceClient())
+            {
+                return service.RemoveAccount(account);
+            }
+        }
+
+        public static bool RemoveAccountOffer(AccountOffer accountOffer)
+        {
+            using (Service.ServiceClient service = new Service.ServiceClient())
+            {
+                return service.RemoveAccountOffer(accountOffer);
+            }
+        }
+
+        public static bool CanUpdateClient(Client client)
         {
             //TODO: Check First Name
             int countFirstName= client.FirstName.Count(x => Char.IsDigit(x));
@@ -43,6 +79,19 @@ namespace ClientLib.Operator.Controllers
             if (countPhone != 10)
                 return false;
 
+            return true;
+        }
+
+        public static bool CanUpdateAccount(Account account)
+        {
+            if (account.Currency != "RON" || account.Currency != "EURO")
+                return false;
+
+
+            decimal resultTotal;
+            if (!(decimal.TryParse(account.Total.ToString(), out resultTotal)))
+                return false;
+            
             return true;
         }
     }

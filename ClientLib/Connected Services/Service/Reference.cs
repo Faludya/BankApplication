@@ -74,6 +74,36 @@ namespace ClientLib.Service {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateClient", ReplyAction="http://tempuri.org/IService/UpdateClientResponse")]
         System.Threading.Tasks.Task<bool> UpdateClientAsync(Database.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateAccount", ReplyAction="http://tempuri.org/IService/UpdateAccountResponse")]
+        bool UpdateAccount(Database.Account account);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateAccount", ReplyAction="http://tempuri.org/IService/UpdateAccountResponse")]
+        System.Threading.Tasks.Task<bool> UpdateAccountAsync(Database.Account account);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateAccountOffer", ReplyAction="http://tempuri.org/IService/UpdateAccountOfferResponse")]
+        bool UpdateAccountOffer(Database.AccountOffer accountOffer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateAccountOffer", ReplyAction="http://tempuri.org/IService/UpdateAccountOfferResponse")]
+        System.Threading.Tasks.Task<bool> UpdateAccountOfferAsync(Database.AccountOffer accountOffer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveClient", ReplyAction="http://tempuri.org/IService/RemoveClientResponse")]
+        bool RemoveClient(Database.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveClient", ReplyAction="http://tempuri.org/IService/RemoveClientResponse")]
+        System.Threading.Tasks.Task<bool> RemoveClientAsync(Database.Client client);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAccount", ReplyAction="http://tempuri.org/IService/RemoveAccountResponse")]
+        bool RemoveAccount(Database.Account account);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAccount", ReplyAction="http://tempuri.org/IService/RemoveAccountResponse")]
+        System.Threading.Tasks.Task<bool> RemoveAccountAsync(Database.Account account);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAccountOffer", ReplyAction="http://tempuri.org/IService/RemoveAccountOfferResponse")]
+        bool RemoveAccountOffer(Database.AccountOffer accountOffer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAccountOffer", ReplyAction="http://tempuri.org/IService/RemoveAccountOfferResponse")]
+        System.Threading.Tasks.Task<bool> RemoveAccountOfferAsync(Database.AccountOffer accountOffer);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -181,6 +211,46 @@ namespace ClientLib.Service {
         
         public System.Threading.Tasks.Task<bool> UpdateClientAsync(Database.Client client) {
             return base.Channel.UpdateClientAsync(client);
+        }
+        
+        public bool UpdateAccount(Database.Account account) {
+            return base.Channel.UpdateAccount(account);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateAccountAsync(Database.Account account) {
+            return base.Channel.UpdateAccountAsync(account);
+        }
+        
+        public bool UpdateAccountOffer(Database.AccountOffer accountOffer) {
+            return base.Channel.UpdateAccountOffer(accountOffer);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateAccountOfferAsync(Database.AccountOffer accountOffer) {
+            return base.Channel.UpdateAccountOfferAsync(accountOffer);
+        }
+        
+        public bool RemoveClient(Database.Client client) {
+            return base.Channel.RemoveClient(client);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RemoveClientAsync(Database.Client client) {
+            return base.Channel.RemoveClientAsync(client);
+        }
+        
+        public bool RemoveAccount(Database.Account account) {
+            return base.Channel.RemoveAccount(account);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RemoveAccountAsync(Database.Account account) {
+            return base.Channel.RemoveAccountAsync(account);
+        }
+        
+        public bool RemoveAccountOffer(Database.AccountOffer accountOffer) {
+            return base.Channel.RemoveAccountOffer(accountOffer);
+        }
+        
+        public System.Threading.Tasks.Task<bool> RemoveAccountOfferAsync(Database.AccountOffer accountOffer) {
+            return base.Channel.RemoveAccountOfferAsync(accountOffer);
         }
     }
 }

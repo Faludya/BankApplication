@@ -7,10 +7,16 @@
               xmlns:clientViews="clr-namespace:Interface.ClientUI.Views"
              
               xmlns:operatorViewModel ="clr-namespace:Interface.OperatorUI.ViewModels"
+              xmlns:operatorViewModelEdit ="clr-namespace:Interface.OperatorUI.ViewModels.Edit"
+              xmlns:operatorViewModelcreate ="clr-namespace:Interface.OperatorUI.ViewModels.Create"
               xmlns:operatorViews ="clr-namespace:Interface.OperatorUI.Views"
+              xmlns:operatorViewsEdit ="clr-namespace:Interface.OperatorUI.Views.Edit"
+              xmlns:operatorViewsCreate="clr-namespace:Interface.OperatorUI.Views.Create"
              
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        
+        <!--Grid Views-->
         <DataTemplate DataType="{x:Type clientViewModel:AccountsViewModel}">
             <clientViews:AccountsView/>
         </DataTemplate>
@@ -26,7 +32,9 @@
         <DataTemplate DataType="{x:Type clientViewModel:ChangePinViewModel}">
             <clientViews:ChangePinView/>
         </DataTemplate>
-
+        
+        
+        <!--Edit Views-->
         <DataTemplate DataType="{x:Type operatorViewModel:EditClientViewModel}">
             <operatorViews:EditClientView DataContext="{Binding Client}"/>
         </DataTemplate>
@@ -35,5 +43,14 @@
             <operatorViews:EditAccountOfferView DataContext="{Binding AccountOffer}"/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type operatorViewModelEdit:EditAccountViewModel}">
+            <operatorViewsEdit:EditAccountView DataContext="{Binding Account}"/>
+        </DataTemplate>
+
+        <!--Create Views-->
+        <DataTemplate DataType="{x:Type operatorViewModelcreate:CreateAccountViewModel}">
+            <operatorViewsCreate:CreateAccountView DataContext="{Binding Account}"/>
+        </DataTemplate>
+        
     </Application.Resources>
 </Application>

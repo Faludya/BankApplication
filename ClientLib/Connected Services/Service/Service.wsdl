@@ -67,6 +67,36 @@
   <wsdl:message name="IService_UpdateClient_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateClientResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_UpdateAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccount" />
+  </wsdl:message>
+  <wsdl:message name="IService_UpdateAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_UpdateAccountOffer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccountOffer" />
+  </wsdl:message>
+  <wsdl:message name="IService_UpdateAccountOffer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAccountOfferResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_RemoveClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveClient" />
+  </wsdl:message>
+  <wsdl:message name="IService_RemoveClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_RemoveAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveAccount" />
+  </wsdl:message>
+  <wsdl:message name="IService_RemoveAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_RemoveAccountOffer_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveAccountOffer" />
+  </wsdl:message>
+  <wsdl:message name="IService_RemoveAccountOffer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveAccountOfferResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="IsClientLoginValid">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/IsClientLoginValid" message="tns:IService_IsClientLoginValid_InputMessage" />
@@ -107,6 +137,26 @@
     <wsdl:operation name="UpdateClient">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/UpdateClient" message="tns:IService_UpdateClient_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/UpdateClientResponse" message="tns:IService_UpdateClient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/UpdateAccount" message="tns:IService_UpdateAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/UpdateAccountResponse" message="tns:IService_UpdateAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccountOffer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/UpdateAccountOffer" message="tns:IService_UpdateAccountOffer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/UpdateAccountOfferResponse" message="tns:IService_UpdateAccountOffer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveClient">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/RemoveClient" message="tns:IService_RemoveClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/RemoveClientResponse" message="tns:IService_RemoveClient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/RemoveAccount" message="tns:IService_RemoveAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/RemoveAccountResponse" message="tns:IService_RemoveAccount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAccountOffer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/RemoveAccountOffer" message="tns:IService_RemoveAccountOffer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/RemoveAccountOfferResponse" message="tns:IService_RemoveAccountOffer_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -194,6 +244,51 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateClient">
       <soap:operation soapAction="http://tempuri.org/IService/UpdateClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccount">
+      <soap:operation soapAction="http://tempuri.org/IService/UpdateAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAccountOffer">
+      <soap:operation soapAction="http://tempuri.org/IService/UpdateAccountOffer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveClient">
+      <soap:operation soapAction="http://tempuri.org/IService/RemoveClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAccount">
+      <soap:operation soapAction="http://tempuri.org/IService/RemoveAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAccountOffer">
+      <soap:operation soapAction="http://tempuri.org/IService/RemoveAccountOffer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

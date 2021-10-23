@@ -50,23 +50,8 @@
                              Margin="5 10"/>
 
         <ContentPresenter x:Name="contentPresenter" Grid.Row="1" Grid.Column="1"
-                          Margin="2 3 0 0"/>
+                          Margin="2 3 0 0" />
 
-
-        <!--<StackPanel Orientation="Horizontal" Grid.Column="1">
-            -->
-        <!-- Withdraw - Button-->
-        <!--
-            <Button x:Name="edit_button" Content="Edit" Grid.Column="1"
-                    Margin="40 15" Background="#FF96F0F0" FontWeight="Bold"
-                    Width="200" HorizontalAlignment="Left"
-                    Click="Edit_button_Click"/>
-
-            <Button x:Name="save_button" Content="Save" Grid.Column="1"
-                    Margin="40 15" Background="#FF96F0F0" FontWeight="Bold"
-                    Width="200" HorizontalAlignment="Left"
-                    Click="Save_button_Click"/>
-        </StackPanel>-->
 
         <Ribbon x:Name="RibbonWin"  SelectedIndex="0" Grid.Column="1">
             <RibbonTab Header="Home" >
@@ -80,39 +65,52 @@
                 </RibbonGroup>
 
                 <RibbonGroup x:Name="Erase" Header="Erase">
+                    <!--Clear - Button-->
                     <RibbonButton LargeImageSource="../Resources/clear.png" 
-                                      Label="Clear"/>
-                    <RibbonButton  Label="Go Back" SmallImageSource="../Resources/back.png"/>
-                    <RibbonButton  Label="Delete" SmallImageSource="../Resources/delete.png"/>
+                                  Click="Clear_Button_Click"    Label="Clear"/>
+                    <!--Go Back - Button-->
+                    <RibbonButton  Label="Go Back" SmallImageSource="../Resources/back.png"
+                                   Click="Go_Back_Button_Click"/>
+                    <!--Delete - Button-->
+                    <RibbonButton  Label="Delete" SmallImageSource="../Resources/delete.png"
+                                   Click="Delete_Button_Click"/>
                 </RibbonGroup>
 
             </RibbonTab>
 
             <RibbonTab Header="Manage" >
+                <!--Client - Button-->
                 <RibbonGroup Name="Client" Header="Client">
                     <RibbonMenuButton LargeImageSource="../Resources/client.png"  Label="Client">
-                        <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png" />
+                        <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png"
+                                        Click="Create_Button_Click" Tag="Client"/>
                         <RibbonMenuItem Header="Delete" ImageSource="../Resources/delete.png"/>
                     </RibbonMenuButton>
                 </RibbonGroup>
 
+                <!--Account - Button-->
                 <RibbonGroup Name="Account" Header="Account">
                     <RibbonMenuButton LargeImageSource="../Resources/account.png"  Label="Account" >
-                        <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png" />
+                        <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png"
+                                        Click="Create_Button_Click" Tag="Account"/>
                         <RibbonMenuItem Header="Delete" ImageSource="../Resources/delete.png"/>
                     </RibbonMenuButton>
                 </RibbonGroup>
 
+                <!--Account Offer - Button-->
                 <RibbonGroup Name="AccountOffer" Header="Account Offer">
                     <RibbonMenuButton LargeImageSource="../Resources/accountoffer.png"  Label="Account Offer">
-                        <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png" />
+                        <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png" 
+                                        Click="Create_Button_Click" Tag="AccountOffer"/>
                         <RibbonMenuItem Header="Delete" ImageSource="../Resources/delete.png" />
                     </RibbonMenuButton>
                 </RibbonGroup>
 
+                <!--Transactions - Button-->
                 <RibbonGroup Name="Transaction" Header="Transaction">
                     <RibbonMenuButton LargeImageSource="../Resources/transaction.png"  Label="Transaction">
-                        <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png"/>
+                        <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png"
+                                        Click="Check_Button_Click" Tag="Transaction"/>
                         <RibbonMenuItem Header="Delete" ImageSource="../Resources/delete.png" />
                     </RibbonMenuButton>
                 </RibbonGroup>

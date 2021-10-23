@@ -149,7 +149,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="OperatorUI\Views\Create\CreateAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="OperatorUI\Views\Edit\EditAccountOfferView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OperatorUI\Views\Edit\EditAccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,10 +170,18 @@
     <Compile Include="OperatorUI\MainOperator.xaml.cs">
       <DependentUpon>MainOperator.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OperatorUI\ViewModels\Create\CreateAccountViewModel.cs" />
     <Compile Include="OperatorUI\ViewModels\Edit\EditAccountOfferViewModel.cs" />
+    <Compile Include="OperatorUI\ViewModels\Edit\EditAccountViewModel.cs" />
     <Compile Include="OperatorUI\ViewModels\Edit\EditClientViewModel.cs" />
+    <Compile Include="OperatorUI\Views\Create\CreateAccountView.xaml.cs">
+      <DependentUpon>CreateAccountView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OperatorUI\Views\Edit\EditAccountOfferView.xaml.cs">
       <DependentUpon>EditAccountOfferView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OperatorUI\Views\Edit\EditAccountView.xaml.cs">
+      <DependentUpon>EditAccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="OperatorUI\Views\Edit\EditClientView.xaml.cs">
       <DependentUpon>EditClientView.xaml</DependentUpon>
@@ -234,10 +250,7 @@
   <ItemGroup>
     <Resource Include="Resources\transaction.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="OperatorUI\ViewModels\Create\" />
-    <Folder Include="OperatorUI\Views\Create\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\edit.png" />
   </ItemGroup>

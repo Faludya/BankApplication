@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -219,12 +220,26 @@ public class Service : IService
 
     #endregion
 
+    #region Operators Update 
     public bool UpdateClient(Client newClient)
     {
         try
         {
             using (BankEntities database = new BankEntities())
             {
+                if (newClient.Id == 1)
+                    return false;
+
+                if (newClient.Id == 0)
+                {
+                    newClient.PIN = "0000";
+                    database.Clients.Add(newClient);
+                    database.SaveChanges();
+
+                    return true;
+                }
+
+
                 database.Clients.AddOrUpdate(newClient);
                 database.SaveChanges();
 
@@ -236,4 +251,112 @@ public class Service : IService
             return false;
         }
     }
+
+    public bool UpdateAccount(Account account)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                if (account.ID_Client == 1)
+                    return false;
+
+                database.Accounts.AddOrUpdate(account);
+                database.SaveChanges();
+
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
+    public bool UpdateAccountOffer(AccountOffer accountOffer)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                database.AccountOffers.AddOrUpdate(accountOffer);
+                database.SaveChanges();
+
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
+    #endregion
+
+    #region Operator Remove
+    public bool RemoveClient(Client client)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                if (client.Id == 1)
+                    return false;
+
+
+                //database.Clients.Remove(client);
+                database.Entry(client).State = EntityState.Deleted;
+                database.SaveChanges();
+
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
+    public bool RemoveAccount(Account account)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                if (account.ID_Client == 1)
+                    return false;
+
+                //database.Accounts.Remove(account);
+                database.Entry(account).State = EntityState.Deleted;
+                database.SaveChanges();
+
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
+    public bool RemoveAccountOffer(AccountOffer accountOffer)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                //database.Accounts.Remove(account);
+                database.Entry(accountOffer).State = EntityState.Deleted;
+                database.SaveChanges();
+
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
+    #endregion
 }

@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Interface.OperatorUI.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" FontSize="24">
+    
     <Grid Margin="10 10">
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="Auto"/>
@@ -24,11 +25,11 @@
 
 
         <!-- Error - Text -->
-        <TextBlock Text="" Background="Transparent"
+        <TextBlock Background="Transparent"
                    Foreground="Red" Margin="10 10" 
                    VerticalAlignment="Center" 
                    HorizontalAlignment="Right"
-                   Grid.Row="0" />
+                   Grid.Row="0" Text="" />
 
         <!-- First Name - Text -->
         <TextBlock Text="First Name: " Background="Transparent"
@@ -69,31 +70,31 @@
         <!-- First Name- Box -->
         <TextBox x:Name="first_name_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding FirstName}" 
+                 Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                  Grid.Column="1" Grid.Row="1"/>
 
         <!-- Last Name- Box -->
         <TextBox x:Name="last_name_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding LastName}" 
+                 Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="1" Grid.Row="2"/>
 
         <!-- CNP- Box -->
         <TextBox x:Name="cnp_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding CNP}" 
+                 Text="{Binding CNP, UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="1" Grid.Row="3"/>
 
         <!-- Address- Box -->
         <TextBox x:Name="address_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding Address}" 
+                 Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="1" Grid.Row="4"/>
 
         <!-- Phone- Box -->
         <TextBox x:Name="phone_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding Phone}" 
+                 Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="1" Grid.Row="5"/>
 
     </Grid>

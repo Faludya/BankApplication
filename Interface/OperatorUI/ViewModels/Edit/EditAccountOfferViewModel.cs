@@ -2,7 +2,7 @@
 
 namespace Interface.OperatorUI.ViewModels
 {
-    public class EditAccountOfferViewModel
+    public class EditAccountOfferViewModel : BaseViewModel
     {
         private AccountOffer _accountOffer;
         public AccountOffer AccountOffer

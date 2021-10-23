@@ -48,6 +48,23 @@ public interface IService
     #region Operator - Saves 
     [OperationContract]
     bool UpdateClient(Client client);
+
+    [OperationContract]
+    bool UpdateAccount(Account account);
+
+    [OperationContract]
+    bool UpdateAccountOffer(AccountOffer accountOffer);
+    #endregion
+
+    #region Operator - Removes 
+    [OperationContract]
+    bool RemoveClient(Client client);
+
+    [OperationContract]
+    bool RemoveAccount(Account account);
+
+    [OperationContract]
+    bool RemoveAccountOffer(AccountOffer accountOffer);
     #endregion
 }
 

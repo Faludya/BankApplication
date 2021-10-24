@@ -359,4 +359,24 @@ public class Service : IService
     }
 
     #endregion
+
+    public bool VerifyIBAN(string iban)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                Account account = database.Accounts.Where(i => i.IBAN == iban).FirstOrDefault();
+                
+                if (account == null)
+                    return true;
+            }
+
+            return false;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
 }

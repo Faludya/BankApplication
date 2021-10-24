@@ -97,6 +97,12 @@
   <wsdl:message name="IService_RemoveAccountOffer_OutputMessage">
     <wsdl:part name="parameters" element="tns:RemoveAccountOfferResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_VerifyIBAN_InputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyIBAN" />
+  </wsdl:message>
+  <wsdl:message name="IService_VerifyIBAN_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VerifyIBANResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="IsClientLoginValid">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/IsClientLoginValid" message="tns:IService_IsClientLoginValid_InputMessage" />
@@ -157,6 +163,10 @@
     <wsdl:operation name="RemoveAccountOffer">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/RemoveAccountOffer" message="tns:IService_RemoveAccountOffer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/RemoveAccountOfferResponse" message="tns:IService_RemoveAccountOffer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VerifyIBAN">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/VerifyIBAN" message="tns:IService_VerifyIBAN_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/VerifyIBANResponse" message="tns:IService_VerifyIBAN_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -289,6 +299,15 @@
     </wsdl:operation>
     <wsdl:operation name="RemoveAccountOffer">
       <soap:operation soapAction="http://tempuri.org/IService/RemoveAccountOffer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VerifyIBAN">
+      <soap:operation soapAction="http://tempuri.org/IService/VerifyIBAN" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

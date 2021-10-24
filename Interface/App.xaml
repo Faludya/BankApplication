@@ -49,7 +49,7 @@
 
         <!--Create Views-->
         <DataTemplate DataType="{x:Type operatorViewModelcreate:CreateAccountViewModel}">
-            <operatorViewsCreate:CreateAccountView DataContext="{Binding Account}"/>
+            <operatorViewsCreate:CreateAccountView />
         </DataTemplate>
         
     </Application.Resources>

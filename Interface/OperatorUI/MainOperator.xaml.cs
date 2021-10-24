@@ -132,6 +132,31 @@ namespace Interface.OperatorUI
                     contentPresenter.Content = gridView;
                 }
             }
+            else
+            if(contentPresenter.Content is EditAccountOfferViewModel)
+            {
+                var viewModel = contentPresenter.Content as EditAccountOfferViewModel;
+                if (EditSecurityController.UpdateAccountOffer(viewModel.AccountOffer))
+                {
+                    MessageBox.Show("Account Offer Updated!");
+                    gridView.ItemsSource = GridController.GetAllAccountOffers();
+                    contentPresenter.Content = gridView;
+                }
+            }
+            else
+            if (contentPresenter.Content is CreateAccountViewModel)
+            {
+                var viewModel = contentPresenter.Content as CreateAccountViewModel;
+                if (EditSecurityController.UpdateAccount(viewModel.Account))
+                {
+                    MessageBox.Show("Account Created!");
+                    gridView.ItemsSource = GridController.GetAllAccounts();
+                    contentPresenter.Content = gridView;
+                }
+                else
+                    MessageBox.Show("Failed to create the account!");
+            }
+
         }
 
         private void Check_Button_Click(object sender, RoutedEventArgs e)
@@ -227,10 +252,27 @@ namespace Interface.OperatorUI
             }
             else
             if (gridView.SelectedItem is Account)
-                EditSecurityController.RemoveAccount(gridView.SelectedItem as Account);
+            {
+                if(EditSecurityController.RemoveAccount(gridView.SelectedItem as Account))
+                    MessageBox.Show("Account Removed.");
+                else
+                    MessageBox.Show("Failed to remove the account.");
+
+                gridView.ItemsSource = GridController.GetAllAccounts();
+                contentPresenter.Content = gridView;
+            }
+                
             else
             if (gridView.SelectedItem is AccountOffer)
-                EditSecurityController.RemoveAccountOffer(gridView.SelectedItem as AccountOffer);
+            {
+                if (EditSecurityController.RemoveAccountOffer(gridView.SelectedItem as AccountOffer))
+                    MessageBox.Show("Account Offer Removed.");
+                else
+                    MessageBox.Show("Failed to remove the account offer.");
+
+                gridView.ItemsSource = GridController.GetAllAccountOffers();
+                contentPresenter.Content = gridView;
+            }
         }
     }
 }

@@ -1,5 +1,9 @@
-﻿using System;
+﻿using ClientLib.Operator.Controllers;
+using Database;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,5 +28,16 @@ namespace Interface.OperatorUI.Views.Create
         {
             InitializeComponent();
         }
+
+        private void Client_combobox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            client_combobox.IsDropDownOpen = true;
+        }
+
+        private void Generate_iban_button_Click(object sender, RoutedEventArgs e)
+        {
+            iban_box.Text = EditSecurityController.CreateIBAN();
+        }
+
     }
 }

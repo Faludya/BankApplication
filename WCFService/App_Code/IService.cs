@@ -66,5 +66,10 @@ public interface IService
     [OperationContract]
     bool RemoveAccountOffer(AccountOffer accountOffer);
     #endregion
+
+    #region Check
+    [OperationContract]
+    bool VerifyIBAN(string iban);
+    #endregion
 }
 

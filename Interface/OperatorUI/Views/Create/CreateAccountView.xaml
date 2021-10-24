@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Interface.OperatorUI.Views.Create"
+             xmlns:local="clr-namespace:Interface.OperatorUI.Views.Create" xmlns:create="clr-namespace:Interface.OperatorUI.ViewModels.Create" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" d:DataContext="{d:DesignInstance Type=create:CreateAccountViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" FontSize="24">
+
     <Grid Margin="10 10">
         <Grid.ColumnDefinitions >
             <ColumnDefinition Width="Auto"/>
@@ -14,6 +15,8 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions >
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -40,7 +43,7 @@
                    Grid.Column="0" Grid.Row="1"/>
 
         <!-- Client ID - Text -->
-        <TextBlock Text="Client Id: " Background="Transparent"
+        <TextBlock Text="Client: " Background="Transparent"
                    Foreground="Black" Margin="0 10 10 10" 
                    VerticalAlignment="Center" 
                    HorizontalAlignment="Left"
@@ -65,30 +68,64 @@
         <!-- IBAN - Box -->
         <TextBox x:Name="iban_box" Margin="5 10" 
                  Background="WhiteSmoke"
+                 DataContext="{Binding Account}"
                  Text="{Binding IBAN, 
                  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                 Grid.Column="1" Grid.Row="1"/>
+                 Grid.Column="1" Grid.Row="1"
+                 IsReadOnly="True"/>
 
         <!-- Client Id- Box -->
-        <TextBox x:Name="client_box" Margin="5 10" 
-                 Background="WhiteSmoke"
-                 Text="{Binding ID_Client, 
-                 UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                 Grid.Column="1" Grid.Row="2"/>
+        <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+            <ComboBox IsEditable="True" MinWidth="{Binding ElementName=iban_box, Path=ActualWidth}"
+                  IsTextSearchEnabled="True" Margin="5 10"
+                  IsTextSearchCaseSensitive="False"
+                  TextSearch.TextPath="FullName"
+                  x:Name="client_combobox" Background="WhiteSmoke"
+                  PreviewTextInput="Client_combobox_PreviewTextInput"
+                  ItemsSource="{Binding Clients}"
+                  DisplayMemberPath="FullName"
+                  SelectedItem="{Binding SelectedClient}">
+
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel />
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+                
+            </ComboBox>
+        </WrapPanel>
+        
 
         <!-- Account Offer- Box -->
         <TextBox x:Name="offer_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding ID_Offer, 
-                 UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                 Grid.Column="1" Grid.Row="3"/>
+                 DataContext="{Binding ElementName=offer_combobox, 
+                 Path=SelectedItem}"
+                 Text="{Binding Id,
+                 UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  
+                 Grid.Column="1" Grid.Row="3"
+                 IsReadOnly="True"/>
 
         <!-- Total - Box -->
         <TextBox x:Name="total_box" Margin="5 10" 
                  Background="WhiteSmoke"
+                 DataContext="{Binding Account}"
                  Text="{Binding Total,
                  UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                 Grid.Column="1" Grid.Row="4"/>
+                 Grid.Column="1" Grid.Row="4" />
+
+        <Button x:Name="generate_iban_button" Grid.Column="2" Grid.Row="1"
+                Background="Transparent"
+                HorizontalAlignment="Left" Margin="20 5"
+                VerticalAlignment="Center"
+                Click="Generate_iban_button_Click">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="generate.png" 
+                       MaxHeight="25" Stretch="Fill"
+                       MinWidth="40"/>
+                    
+            </StackPanel>
+        </Button>
 
         <Grid Grid.Row="6" Grid.ColumnSpan="3" >
             <Grid.ColumnDefinitions >
@@ -108,10 +145,14 @@
             <!-- Account Offer - ComboBox -->
             <ComboBox Name="offer_combobox" Grid.Column="1"
                       MinWidth="80" Margin="10 10"
-                      Background="WhiteSmoke">
-                <ComboBoxItem Content="Basic" />
-                <ComboBoxItem Content="Silver" />
-                <ComboBoxItem Content="Gold" />
+                      Background="WhiteSmoke"
+                      IsTextSearchEnabled="True"
+                      IsTextSearchCaseSensitive="False"
+                      ItemsSource="{Binding AccountOffers}"  
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Name" 
+                      SelectedItem="{Binding SelectedAccountOffer}"
+                      >
             </ComboBox>
 
             <!-- Currency- Text -->
@@ -124,13 +165,102 @@
             <!-- Currency - ComboBox -->
             <ComboBox Name="currency_combobox" Grid.Column="3"
                       MinWidth="80" Margin="10 10"
-                      Background="WhiteSmoke">
+                      Background="WhiteSmoke"
+                      SelectedIndex="{Binding SelectedCurrency}" >
+              
                 <ComboBoxItem Content="RON" />
                 <ComboBoxItem Content="EURO" />
             </ComboBox>
 
 
         </Grid>
+
+        
+        <Grid Grid.Row="7" Grid.ColumnSpan="4" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions >
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Withdraw Commission - Text -->
+            <TextBlock Background="Transparent" FontSize="18"
+                   Foreground="Black" Margin="0 10 10 10" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left"
+                   Grid.Column="0" Grid.Row="0" >
+                <Run Text="Withdraw" />
+                <LineBreak />
+                <Run Text="Commission" />
+            </TextBlock>
+
+            <!-- Withdraw Commission - Box -->
+            <TextBox x:Name="withdraw_box" Margin="5 10" 
+                 Background="WhiteSmoke" MinWidth="50"
+                 Grid.Column="1" Grid.Row="0" 
+                 VerticalAlignment="Center" IsReadOnly="True"
+                 DataContext="{Binding ElementName=offer_combobox, 
+                 Path=SelectedItem}"
+                 Text="{Binding WithdrawCommission,
+                 UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+            <!-- Deposit Commission - Text -->
+            <TextBlock Background="Transparent" FontSize="18"
+                   Foreground="Black" Margin="0 10 10 10" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left"
+                   Grid.Column="2" Grid.Row="0" >
+                <Run Text="Deposit" />
+                <LineBreak />
+                <Run Text="Commission" />
+            </TextBlock>
+
+            <!-- Deposit Commission - Box -->
+            <TextBox x:Name="deposit_box" Margin="5 10" 
+                 Background="WhiteSmoke" MinWidth="50"
+                 Grid.Column="3" Grid.Row="0"
+                 VerticalAlignment="Center" IsReadOnly="True"
+                 DataContext="{Binding ElementName=offer_combobox, 
+                 Path=SelectedItem}"
+                 Text="{Binding DepositCommission,
+                 UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+            <!-- Withdraw Commission - Text -->
+            <TextBlock Background="Transparent" FontSize="18"
+                   Foreground="Black" Margin="0 10 10 10" 
+                   VerticalAlignment="Center" 
+                   HorizontalAlignment="Left"
+                   Grid.Column="0" Grid.Row="1" >
+                <Run Text="Withdraw" />
+                <LineBreak/>
+                <Run Text="Fix Tax" />
+            </TextBlock>
+
+            <!-- Withdraw Commission - Box -->         <TextBox x:Name="withdraw_tax_box" Margin="5 10" 
+                 Background="WhiteSmoke" MinWidth="50"
+                 Grid.Column="1" Grid.Row="1"
+                 VerticalAlignment="Center" IsReadOnly="True"
+                 DataContext="{Binding ElementName=offer_combobox, 
+                 Path=SelectedItem}"
+                 Text="{Binding WithdrawCommission,
+                 UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+
+        </Grid>
+
+        <!--Back Bindings-->
+
+        <TextBlock DataContext="{Binding ElementName=offer_combobox, 
+                   Path=SelectedItem}"
+                   />
+
 
     </Grid>
 </UserControl>

@@ -250,7 +250,9 @@
   <ItemGroup>
     <Resource Include="Resources\transaction.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\generate.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\edit.png" />
   </ItemGroup>
@@ -268,6 +270,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\waveline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="OperatorUI\Views\Create\generate.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

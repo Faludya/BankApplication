@@ -104,6 +104,12 @@ namespace ClientLib.Service {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveAccountOffer", ReplyAction="http://tempuri.org/IService/RemoveAccountOfferResponse")]
         System.Threading.Tasks.Task<bool> RemoveAccountOfferAsync(Database.AccountOffer accountOffer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/VerifyIBAN", ReplyAction="http://tempuri.org/IService/VerifyIBANResponse")]
+        bool VerifyIBAN(string iban);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/VerifyIBAN", ReplyAction="http://tempuri.org/IService/VerifyIBANResponse")]
+        System.Threading.Tasks.Task<bool> VerifyIBANAsync(string iban);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -251,6 +257,14 @@ namespace ClientLib.Service {
         
         public System.Threading.Tasks.Task<bool> RemoveAccountOfferAsync(Database.AccountOffer accountOffer) {
             return base.Channel.RemoveAccountOfferAsync(accountOffer);
+        }
+        
+        public bool VerifyIBAN(string iban) {
+            return base.Channel.VerifyIBAN(iban);
+        }
+        
+        public System.Threading.Tasks.Task<bool> VerifyIBANAsync(string iban) {
+            return base.Channel.VerifyIBANAsync(iban);
         }
     }
 }

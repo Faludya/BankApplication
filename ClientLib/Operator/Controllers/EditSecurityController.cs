@@ -33,6 +33,18 @@ namespace ClientLib.Operator.Controllers
             return false;
         }
 
+        public static bool UpdateAccountOffer(AccountOffer accountOffer)
+        {
+            using (Service.ServiceClient service = new Service.ServiceClient())
+            {
+                if (CanUpdateAccountOffer(accountOffer))
+                {
+                    return service.UpdateAccountOffer(accountOffer);
+                }
+            }
+            return false;
+        }
+
         public static bool RemoveClient(Client client)
         {
             using (Service.ServiceClient service = new Service.ServiceClient())
@@ -84,8 +96,8 @@ namespace ClientLib.Operator.Controllers
 
         public static bool CanUpdateAccount(Account account)
         {
-            if (account.Currency != "RON" || account.Currency != "EURO")
-                return false;
+            //if (account.Currency != "RON" || account.Currency != "EURO")
+            //    return false;
 
 
             decimal resultTotal;
@@ -93,6 +105,67 @@ namespace ClientLib.Operator.Controllers
                 return false;
             
             return true;
+        }
+
+        public static bool CanUpdateAccountOffer(AccountOffer accountOffer)
+        {
+            int countName = accountOffer.Name.Count(x => Char.IsDigit(x));
+            if (countName != 0)
+                return false;
+
+            decimal resultDeposit;
+            decimal resultWithdraw;
+            decimal resultTax;
+
+            if (!decimal.TryParse(accountOffer.DepositCommission.ToString(), out resultDeposit))
+                return false;
+
+            if (!decimal.TryParse(accountOffer.WithdrawCommission.ToString(), out resultWithdraw))
+                return false;
+
+            if (!decimal.TryParse(accountOffer.WithdrawFixTax.ToString(), out resultTax))
+                return false;
+
+            return true;
+        }
+
+        public static string CreateIBAN()
+        {
+            using (Service.ServiceClient service = new Service.ServiceClient())
+            {
+                string iban = GenerateIBAN();
+                if (service.VerifyIBAN(iban))
+                    return iban;
+                else
+                    CreateIBAN();
+            }
+
+            return null;
+        }
+
+        private static string GenerateIBAN()
+        {
+            Random random = new Random();
+            var ibanGenerator = new StringBuilder();
+            string iban= "";
+
+            ibanGenerator.Append("RO");
+            for (int i = 1; i <= 22; i++)
+            {
+                if (i >= 3 && i <= 6)
+                {
+                    int temp = random.Next(65, 91);
+                    string letter = Char.ConvertFromUtf32(temp);
+                    ibanGenerator.Append(letter);
+                    continue;
+                }
+
+                ibanGenerator.Append(random.Next(1, 10).ToString());
+            }
+
+            iban += ibanGenerator.ToString();
+
+            return iban;
         }
     }
 }

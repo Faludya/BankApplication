@@ -9,9 +9,26 @@
         Height="700" Width="1400"
         >
 
-    <Grid>
+    <Window.Resources>
+        <RoutedUICommand x:Key="LoginCommand" Text="Text" />
+        <RoutedUICommand x:Key="OperatorCommand" Text="Text" />
+    </Window.Resources>
+
+    <Window.CommandBindings>
+        <CommandBinding Command="{StaticResource LoginCommand}" 
+                    Executed="LoginButton_Click" />
+        <CommandBinding Command="{StaticResource OperatorCommand}" 
+                    Executed="Operator_button_Click" /> 
+    </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding Key="Return"  Command="{StaticResource LoginCommand}" />
+        <KeyBinding Key="Return" Modifiers="Shift" Command="{StaticResource OperatorCommand}" />
+    </Window.InputBindings>
+
+    <Grid >
         <Grid.Background >
-            <ImageBrush  ImageSource="Resources/loginbackground.jpg" Stretch="Fill" />
+            <ImageBrush  ImageSource="Resources/aliceblue.png" Stretch="Fill" />
         </Grid.Background>
 
         <!--Main Content Scroll-->
@@ -19,7 +36,7 @@
             <StackPanel  VerticalAlignment="Center"
                          HorizontalAlignment="Center"
                          TextBlock.TextAlignment="Center">
-                <Border Background="AliceBlue"
+                <Border Background="White"
                         CornerRadius="10"
                         Padding="15 50 15 15"
                         Width="800"
@@ -49,8 +66,12 @@
 
                         <Button x:Name="loginButton" Content="Next" 
                                 FontSize="38" Width="250"
-                                Margin="0 25 0 25" Background="#FF5BC2E0"
-                                Click="LoginButton_Click">
+                                Margin="0 25 0 25" Background="WhiteSmoke"
+                                Click="LoginButton_Click"
+                                Command="{StaticResource LoginCommand}"
+                                >
+                            <!--TODO: Call the function when pressing
+                            Enter on the keyboard-->
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>
@@ -63,29 +84,8 @@
 
                 <!--Operator-->
                 <Button Background="Transparent" BorderBrush="Transparent"
-                        Width="300" x:Name="operator_button"
-                        Click="Operator_button_Click">
-
-                    <!--<Button.Style>
-                        <Style TargetType="{x:Type Button}">
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type Button}">
-                                        <Border Background="{TemplateBinding Background}">
-                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="BorderBrush" Value="Black" />
-                                    <Setter Property="BorderThickness" Value="10 10 10 3" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>-->
+                        Width="300" x:Name="operator_button" 
+                        Command="{StaticResource OperatorCommand}">
 
                     <TextBlock Text="I am an operator" FontSize="30"
                                Foreground="AliceBlue"

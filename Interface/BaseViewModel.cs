@@ -20,5 +20,10 @@ namespace Interface
         {
             return;
         }
+
+        public virtual bool CheckData()
+        {
+            return false;
+        }
     }
 }

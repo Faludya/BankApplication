@@ -6,17 +6,53 @@ using System.Threading.Tasks;
 
 namespace Interface.ClientUI.ViewModels
 {
-    public class ChangePinViewModel
+    public class ChangePinViewModel : BaseViewModel
     {
-        private int _clientId;
-        public int ClientId
+        public ChangePinViewModel()
         {
-            get => _clientId;
-            set => _clientId = value;
         }
-        public ChangePinViewModel(int id)
+
+        public override bool CheckData()
         {
-            ClientId = id;
+            int pinLength = 4;
+
+            if (OldPin == null || NewPin == null || ConfirmPin == null)
+                return false;
+
+            int countOldPin = OldPin.Count(x => Char.IsDigit(x));
+            if (countOldPin != pinLength)
+                return false;
+
+            int countNewPin = NewPin.Count(x => Char.IsDigit(x));
+            if (countNewPin != pinLength)
+                return false;
+
+            int countConfirmPin = ConfirmPin.Count(x => Char.IsDigit(x));
+            if (countConfirmPin != pinLength)
+                return false;
+
+            return true;
+        }
+
+        private string _oldPin;
+        public string OldPin
+        {
+            get => _oldPin;
+            set => _oldPin = value;
+        }
+
+        private string _newPin;
+        public string NewPin
+        {
+            get => _newPin;
+            set => _newPin = value;
+        }
+
+        private string _confirmPin;
+        public string ConfirmPin
+        {
+            get => _confirmPin;
+            set => _confirmPin = value;
         }
     }
 }

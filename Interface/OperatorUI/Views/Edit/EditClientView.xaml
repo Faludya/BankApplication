@@ -70,31 +70,36 @@
         <!-- First Name- Box -->
         <TextBox x:Name="first_name_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                 Text="{Binding FirstName, Mode=TwoWay,
+                 UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="1" Grid.Row="1"/>
 
         <!-- Last Name- Box -->
         <TextBox x:Name="last_name_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" 
+                 Text="{Binding LastName,Mode=TwoWay, 
+                 UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="1" Grid.Row="2"/>
 
         <!-- CNP- Box -->
         <TextBox x:Name="cnp_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding CNP, UpdateSourceTrigger=PropertyChanged}" 
+                 Text="{Binding CNP, Mode=TwoWay,
+                 UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="1" Grid.Row="3"/>
 
         <!-- Address- Box -->
         <TextBox x:Name="address_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" 
+                 Text="{Binding Address, Mode=TwoWay,
+                 UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="1" Grid.Row="4"/>
 
         <!-- Phone- Box -->
         <TextBox x:Name="phone_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}" 
+                 Text="{Binding Phone, Mode=TwoWay,
+                 UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="1" Grid.Row="5"/>
 
     </Grid>

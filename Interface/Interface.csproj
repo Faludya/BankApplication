@@ -274,5 +274,23 @@
   <ItemGroup>
     <Resource Include="OperatorUI\Views\Create\generate.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\login.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\aliceblue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\deposit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\changepin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\withdraw.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

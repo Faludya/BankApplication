@@ -116,6 +116,17 @@
                 </RibbonGroup>
 
             </RibbonTab>
+
+            <!--Exit Button-->
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu KeyTip="F">
+                    <RibbonApplicationMenuItem Header="Logout" 
+                                               ImageSource="../Resources/logout.png"
+                                               HorizontalAlignment="Center"
+                                               Click="Logout_Button_Click"/>
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+
         </Ribbon>
 
     </Grid>

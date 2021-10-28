@@ -1,4 +1,7 @@
-﻿using Database;
+﻿using ClientLib.Operator.Controllers;
+using Database;
+using System;
+using System.Linq;
 
 namespace Interface.OperatorUI.ViewModels
 {
@@ -15,5 +18,11 @@ namespace Interface.OperatorUI.ViewModels
         {
             AccountOffer = accountOffer;
         }
+
+        public override bool CheckData()
+        {
+            return EditSecurityController.CanUpdateAccountOffer(this.AccountOffer);
+        }
+
     }
 }

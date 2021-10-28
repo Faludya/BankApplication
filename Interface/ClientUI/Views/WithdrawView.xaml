@@ -25,8 +25,8 @@
 
                 <StackPanel Grid.Column="0" >
                     <!-- IBAN - Text -->
-                    <TextBlock Text="Account's IBAN" Background="Transparent" Foreground="#FF144242" 
-                               FontWeight="Bold"  VerticalAlignment="Center" 
+                    <TextBlock Text="Account's IBAN" Background="Transparent"
+                               VerticalAlignment="Center" 
                                Margin="0 10"/>
 
                     <!-- IBAN- Box -->
@@ -34,21 +34,36 @@
                             ItemsSource="{Binding Accounts}" 
                             DisplayMemberPath="IBAN" 
                             SelectedValuePath="IBAN" 
-                            SelectedValue="{Binding IBAN}" />
+                            SelectedItem="{Binding SelectedAccount}" 
+                            Background="WhiteSmoke"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" >
                     <!-- Account Currency- Text -->
-                    <TextBlock Text="Account Currency" Background="Transparent" Foreground="#FF144242" 
-                               FontWeight="Bold"  VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <TextBlock Text="Account Total" Background="Transparent" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
                                Margin="0 10"/>
 
-                    <!-- Account Currency - Bind -->
-                    <TextBlock Name="account_currency" Margin="70 10 0 10" 
-                           FontFamily="Arial"  FontWeight="Bold" Background="Transparent" 
-                           VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                           DataContext="{Binding ElementName=iban_combobox, Path=SelectedItem}"
-                           Text="{Binding Path=Currency}"/>
+                    <StackPanel Orientation="Horizontal" Margin="50 15 30 15" >
+
+
+                        <!-- Account Total - Bind -->
+                        <TextBlock Name="account_total" Grid.Column="0"
+                               Background="WhiteSmoke" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               DataContext="{Binding ElementName=iban_combobox, Path=SelectedItem}"
+                               Text="{Binding Path=Total}" 
+                                MinWidth="135"/>
+
+                        <!-- Account Currency - Bind -->
+                        <TextBlock Name="account_currency" Grid.Column="1"
+                                   Background="WhiteSmoke" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Left"
+                                   DataContext="{Binding ElementName=iban_combobox, Path=SelectedItem}"
+                                   Text="{Binding Path=Currency}" 
+                                   MinWidth="100"/>
+
+                    </StackPanel>
                 </StackPanel>
 
             </Grid>
@@ -61,38 +76,35 @@
 
                 <StackPanel Grid.Column="0" >
                     <!-- Amount to witdraw - Text -->
-                    <TextBlock Text="Amount to withdraw" Background="Transparent" 
-                               Foreground="#FF144242" FontWeight="Bold"  VerticalAlignment="Center" 
+                    <TextBlock Text="Amount to withdraw" 
+                               Background="Transparent" 
+                               VerticalAlignment="Center" 
                                Margin="0 10"/>
 
                     <!-- Amount to withdraw- Box -->
                     <TextBox x:Name="amount_box" Margin="5 10" 
-                             Background="Transparent" FontWeight="Bold"  />
+                             Background="WhiteSmoke"
+                             Text="{Binding WithdrawAmount, Mode=TwoWay,
+                             UpdateSourceTrigger=PropertyChanged}"/>
 
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" >
                     <!-- Withdraw Currency- Text -->
                     <TextBlock Text="Withdraw Currency" Background="Transparent" 
-                               Foreground="#FF144242" FontWeight="Bold"  
                                VerticalAlignment="Center" HorizontalAlignment="Center"
                                Margin="0 10"/>
 
                     <!-- Withdraw Currency - Combobox -->
-                    <ComboBox Name="currency_combobox" Margin="70 10"  >
-                        <ComboBoxItem Content="RON" VerticalAlignment="Center" />
-                        <ComboBoxItem Content="EURO" VerticalAlignment="Center"/>
+                    <ComboBox Name="currency_combobox" Margin="70 10" 
+                              Background="WhiteSmoke" 
+                              SelectedIndex="{Binding SelectedCurrency}" >
+                        <ComboBoxItem Content="RON"  />
+                        <ComboBoxItem Content="EURO"/>
                     </ComboBox>
                 </StackPanel>
 
             </Grid>
-
-            <!-- Withdraw - Button-->
-            <Button x:Name="withdraw_button" Content="Withdraw" 
-                    Margin="40 15" Background="#FF96F0F0" FontWeight="Bold"
-                    Width="200" HorizontalAlignment="Left"
-                    Click="Withdraw_button_Click"/>
-
 
         </StackPanel>
     </ScrollViewer>

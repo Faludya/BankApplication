@@ -61,25 +61,29 @@
         <!-- Account Offer Name - Box -->
         <TextBox x:Name="account_name_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding Name}" 
+                 Text="{Binding Name, Mode=TwoWay,
+                 UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="1" Grid.Row="1"/>
 
         <!-- Deposit Commission- Box -->
         <TextBox x:Name="deposit_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding DepositCommission}" 
+                 Text="{Binding DepositCommission, Mode=TwoWay,
+                 UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="1" Grid.Row="2"/>
 
         <!-- Withdraw Commission- Box -->
         <TextBox x:Name="withdraw_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding WithdrawCommission}" 
+                 Text="{Binding WithdrawCommission, Mode=TwoWay,
+                 UpdateSourceTrigger=PropertyChanged}"  
                  Grid.Column="1" Grid.Row="3"/>
 
         <!-- Withdraw Fix Tax - Box -->
         <TextBox x:Name="withdraw_tax_box" Margin="5 10" 
                  Background="WhiteSmoke"
-                 Text="{Binding WithdrawFixTax}" 
+                 Text="{Binding WithdrawFixTax, Mode=TwoWay,
+                 UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Column="1" Grid.Row="4"/>
 
     </Grid>

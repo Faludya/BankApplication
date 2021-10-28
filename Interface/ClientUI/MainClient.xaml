@@ -9,9 +9,13 @@
         WindowStartupLocation="CenterScreen" 
         FontSize="30">
 
-    <Grid ShowGridLines="True">
-        <Grid.Background >
-            <ImageBrush  ImageSource="../Resources/background.png" Stretch="Fill" />
+    <Grid >
+
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="AliceBlue" Offset="0"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
         </Grid.Background>
 
         <Grid.ColumnDefinitions >
@@ -21,14 +25,78 @@
 
         <Grid.RowDefinitions >
             <RowDefinition Height="*" />
-            <RowDefinition Height="6*" />
+            <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
+
+        <Border BorderThickness="1"  Grid.Row="1" Grid.Column="0">
+            <Rectangle Stroke="#FF0089D6" Fill="Transparent"/>
+        </Border>
+
+        <Border BorderThickness="1"  Grid.Row="1" Grid.Column="1">
+            <Rectangle Stroke="#FF0089D6" Fill="Transparent"/>
+        </Border>
+
+        <Image Grid.Column="0" Source="../Resources/azurelogo.png" />
+        <Image Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+               VerticalAlignment="Bottom" Stretch="Fill"
+               Height="100"
+               Source="../Resources/waveline.png" />
+
 
         <telerik:RadTreeView x:Name="tree" Grid.Row="1" 
                              Margin="5 20 5 20"
                              ItemDoubleClick="Tree_ItemDoubleClick"/>
 
         <ContentPresenter x:Name="contentPresenter" Grid.Row="1" Grid.Column="1"/>
+
+
+        <Ribbon x:Name="RibbonWin"  SelectedIndex="0" Grid.Column="1">
+            <RibbonTab Header="Home" >
+                
+                <!--Check Button + Clear and Go Back-->
+                <RibbonGroup x:Name="Check">
+                    <RibbonButton  Label="Check" LargeImageSource="../Resources/check.png"
+                                   Click="Check_Button_Click"/>
+
+                    <RibbonButton SmallImageSource="../Resources/clear.png" 
+                                  Click="Clear_Button_Click"    Label="Clear"/>
+
+                    <RibbonButton  Label="Go Back" SmallImageSource="../Resources/back.png"
+                                   Click="Go_Back_Button_Click"/>
+
+                </RibbonGroup>
+
+                <!--Deposit Button-->
+                <RibbonGroup Name="Deposit" >
+                    <RibbonButton  Label="Deposit" LargeImageSource="../Resources/deposit.png"
+                                   Click="Deposit_Button_Click"/>
+                </RibbonGroup>
+
+                <!--Withdraw Button-->
+                <RibbonGroup Name="Withdraw" >
+                    <RibbonButton  Label="Withdraw" LargeImageSource="../Resources/withdraw.png"
+                                   Click="Withdraw_Button_Click"/>
+                </RibbonGroup>
+                
+                <!--Change PIN Button-->
+                <RibbonGroup Name="ChangePIN" >
+                    <RibbonButton  Label="ChangePIN" LargeImageSource="../Resources/changepin.png"
+                                   Click="Change_PIN_Button_Click"/>
+                </RibbonGroup>
+
+            </RibbonTab>
+
+            <!-- Application Menu, located at the left-hand side (down arrow) -->
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu KeyTip="F">
+                    <RibbonApplicationMenuItem Header="Logout" 
+                                               ImageSource="../Resources/logout.png"
+                                               HorizontalAlignment="Center"
+                                               Click="Logout_Button_Click"/>
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+
+        </Ribbon>
 
     </Grid>
 </Window>

@@ -18,19 +18,23 @@ namespace ClientLib.Controllers
             }
         }
 
-        public static bool UpdateClientPin(int clientId,string oldPin, string newPin)
+        public static bool UpdateClientPin(int clientId,string oldPin, string newPin, string confirmPin)
         {
             using (Service.ServiceClient service = new Service.ServiceClient())
             {
-                return service.ChangeClientPin(clientId,oldPin, newPin);
+                return CanUpdatePin(oldPin, newPin, confirmPin) ? service.ChangeClientPin(clientId, oldPin, newPin) : false;
             }
         }
 
         public static bool Withdraw(string iban, decimal withdrawAmount, string accountCurrency, string withdrawCurrency)
         {
-            if(accountCurrency != withdrawCurrency)
+            if (accountCurrency != withdrawCurrency)
             {
-                withdrawAmount = ConvertCurrency(withdrawAmount, accountCurrency, withdrawCurrency);
+                decimal conversionResult = ConvertCurrency(withdrawAmount, accountCurrency, withdrawCurrency);
+                if (conversionResult == -1)
+                    return false;
+
+                withdrawAmount = conversionResult;
             }
 
             using (Service.ServiceClient service = new Service.ServiceClient())
@@ -43,8 +47,14 @@ namespace ClientLib.Controllers
         {
             if (accountCurrency != withdrawCurrency)
             {
-                withdrawAmount = ConvertCurrency(withdrawAmount, accountCurrency, withdrawCurrency);
+                decimal conversionResult = ConvertCurrency(withdrawAmount, accountCurrency, withdrawCurrency);
+                if (conversionResult == -1)
+                    return false;
+
+                withdrawAmount = conversionResult;
             }
+
+
 
             using (Service.ServiceClient service = new Service.ServiceClient())
             {
@@ -65,6 +75,17 @@ namespace ClientLib.Controllers
             }
   
             return -1;
+        }
+
+        private static bool CanUpdatePin(string oldPin, string newPin, string confirmPin)
+        {
+            if (oldPin == "" || newPin == "" || confirmPin == "")
+                return false;
+
+            if (newPin != confirmPin)
+                return false;
+
+            return true;
         }
     }
 }

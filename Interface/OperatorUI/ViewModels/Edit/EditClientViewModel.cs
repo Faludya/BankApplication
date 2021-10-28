@@ -1,4 +1,5 @@
-﻿using Database;
+﻿using ClientLib.Operator.Controllers;
+using Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,11 @@ namespace Interface.OperatorUI.ViewModels
         public EditClientViewModel(Client client)
         {
             Client = client;
+        }
+
+        public override bool CheckData()
+        {
+            return EditSecurityController.CanUpdateClient(this.Client);
         }
 
         public override void Trim()

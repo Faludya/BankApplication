@@ -161,14 +161,17 @@ namespace Interface.OperatorUI
 
         private void Check_Button_Click(object sender, RoutedEventArgs e)
         {
-            if(contentPresenter.Content is EditClientViewModel)
-            {
-                var viewModel = contentPresenter.Content as EditClientViewModel;
-                if (EditSecurityController.CanUpdateClient(viewModel.Client))
-                {
-                    
-                }
+            if (contentPresenter.Content as BaseViewModel == null)
+                return;
 
+            BaseViewModel viewModel = contentPresenter.Content as BaseViewModel;
+            if (viewModel.CheckData())
+            {
+                MessageBox.Show("Data format is valid.");
+            }
+            else
+            {
+                MessageBox.Show("Invalid data format!");
             }
         }
 
@@ -273,6 +276,13 @@ namespace Interface.OperatorUI
                 gridView.ItemsSource = GridController.GetAllAccountOffers();
                 contentPresenter.Content = gridView;
             }
+        }
+
+        private void Logout_Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            this.Close();
+            mainWindow.Show();
         }
     }
 }

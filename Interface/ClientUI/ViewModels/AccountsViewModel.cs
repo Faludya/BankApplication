@@ -17,9 +17,9 @@ namespace Interface.ClientUI.ViewModels
             get => _accounts;
             set => _accounts = value;
         }
-        public AccountsViewModel(int clientId)
+        public AccountsViewModel(ObservableCollection<Account> accounts)
         {
-            Accounts = AccountsController.GetClientAccounts(clientId);
+            Accounts = accounts;
         }
     }
 }

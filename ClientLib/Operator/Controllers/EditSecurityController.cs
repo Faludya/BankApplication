@@ -96,34 +96,44 @@ namespace ClientLib.Operator.Controllers
 
         public static bool CanUpdateAccount(Account account)
         {
-            //if (account.Currency != "RON" || account.Currency != "EURO")
-            //    return false;
+            if (account.IBAN.Length != 13)
+                return false;
 
+            if (account.Currency != "RON" && account.Currency != "EURO")
+                return false;
+
+            if (!int.TryParse(account.ID_Client.ToString(), out int resultClient))
+                return false;
+
+            if (!int.TryParse(account.ID_Offer.ToString(), out int resultOffer))
+                return false;
 
             decimal resultTotal;
             if (!(decimal.TryParse(account.Total.ToString(), out resultTotal)))
                 return false;
-            
+
+            if (account.Total < 0)
+                return false;
+
             return true;
         }
 
         public static bool CanUpdateAccountOffer(AccountOffer accountOffer)
         {
+            if (accountOffer.Name == null || accountOffer.Name == "")
+                return false;
+
             int countName = accountOffer.Name.Count(x => Char.IsDigit(x));
             if (countName != 0)
                 return false;
 
-            decimal resultDeposit;
-            decimal resultWithdraw;
-            decimal resultTax;
-
-            if (!decimal.TryParse(accountOffer.DepositCommission.ToString(), out resultDeposit))
+            if (!decimal.TryParse(accountOffer.DepositCommission.ToString(), out decimal resultDeposit))
                 return false;
 
-            if (!decimal.TryParse(accountOffer.WithdrawCommission.ToString(), out resultWithdraw))
+            if (!decimal.TryParse(accountOffer.WithdrawCommission.ToString(), out decimal resultWithdraw))
                 return false;
 
-            if (!decimal.TryParse(accountOffer.WithdrawFixTax.ToString(), out resultTax))
+            if (!decimal.TryParse(accountOffer.WithdrawFixTax.ToString(), out decimal resultTax))
                 return false;
 
             return true;

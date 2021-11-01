@@ -38,6 +38,15 @@
           <Property Name="Phone" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="PIN" Type="varchar" MaxLength="4" Nullable="false" />
         </EntityType>
+        <EntityType Name="ExchangeCurrency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Euro" Type="decimal" Precision="7" Scale="6" Nullable="false" />
+          <Property Name="Ron" Type="decimal" Precision="7" Scale="6" Nullable="false" />
+        </EntityType>
         <EntityType Name="Location">
           <Key>
             <PropertyRef Name="id" />
@@ -143,6 +152,7 @@
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountOffer" EntityType="Self.AccountOffer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExchangeCurrency" EntityType="Self.ExchangeCurrency" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Machine" EntityType="Self.Machine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScanProfile" EntityType="Self.ScanProfile" Schema="dbo" store:Type="Tables" />
@@ -207,6 +217,15 @@
           <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PIN" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Client_Id_Client" FromRole="Client" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="ExchangeCurrency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Euro" Type="Decimal" Precision="7" Scale="6" Nullable="false" />
+          <Property Name="Ron" Type="Decimal" Precision="7" Scale="6" Nullable="false" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -315,6 +334,7 @@
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="AccountOffers" EntityType="Self.AccountOffer" />
           <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="ExchangeCurrencies" EntityType="Self.ExchangeCurrency" />
           <EntitySet Name="Locations" EntityType="Self.Location" />
           <EntitySet Name="Machines" EntityType="Self.Machine" />
           <EntitySet Name="ScanProfiles" EntityType="Self.ScanProfile" />
@@ -375,6 +395,16 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="PIN" ColumnName="PIN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExchangeCurrencies">
+            <EntityTypeMapping TypeName="BankModel.ExchangeCurrency">
+              <MappingFragment StoreEntitySet="ExchangeCurrency">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Euro" ColumnName="Euro" />
+                <ScalarProperty Name="Ron" ColumnName="Ron" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

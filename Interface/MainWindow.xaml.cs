@@ -44,6 +44,9 @@ namespace Interface
                 Hide();
                 MainClient mainClientWindow = new MainClient(validationResult);
                 mainClientWindow.Show();
+
+                e.Handled = true;
+                return;
             }
             else
             {

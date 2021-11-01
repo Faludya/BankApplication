@@ -32,8 +32,12 @@
         <DataTemplate DataType="{x:Type clientViewModel:ChangePinViewModel}">
             <clientViews:ChangePinView/>
         </DataTemplate>
-        
-        
+
+        <DataTemplate DataType="{x:Type clientViewModel:ExchangeCurrencyViewModel}">
+            <clientViews:ExchangeCurrencyView />
+        </DataTemplate>
+
+
         <!--Edit Views-->
         <DataTemplate DataType="{x:Type operatorViewModel:EditClientViewModel}">
             <operatorViews:EditClientView DataContext="{Binding Client}"/>

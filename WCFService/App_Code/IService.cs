@@ -71,5 +71,16 @@ public interface IService
     [OperationContract]
     bool VerifyIBAN(string iban);
     #endregion
+
+    #region Api Service
+    [OperationContract]
+    ExchangeCurrency GetLastExchangeRate();
+    [OperationContract]
+    bool UpdateExchangeRate(ExchangeCurrency newRate);
+    [OperationContract]
+    ObservableCollection<ExchangeCurrency> GetYearExchangeRate();
+    [OperationContract]
+    ObservableCollection<ExchangeCurrency> GetMonthExchangeRate(int month);
+    #endregion
 }
 

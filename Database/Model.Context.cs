@@ -29,6 +29,7 @@ namespace Database
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AccountOffer> AccountOffers { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<ExchangeCurrency> ExchangeCurrencies { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Machine> Machines { get; set; }
         public virtual DbSet<ScanProfile> ScanProfiles { get; set; }

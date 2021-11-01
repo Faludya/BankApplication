@@ -77,4 +77,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfAccountOffer" nillable="true" type="tns:ArrayOfAccountOffer" />
+  <xs:complexType name="ExchangeCurrency">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Euro" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Ron" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ExchangeCurrency" nillable="true" type="tns:ExchangeCurrency" />
+  <xs:complexType name="ArrayOfExchangeCurrency">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ExchangeCurrency" nillable="true" type="tns:ExchangeCurrency" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfExchangeCurrency" nillable="true" type="tns:ArrayOfExchangeCurrency" />
 </xs:schema>

@@ -14,6 +14,7 @@ namespace Interface.ClientUI
         public MainClient(int id)
         {
             InitializeComponent();
+            StyleManager.ApplicationTheme = new Office_BlueTheme();
 
             clientId = id;
             DataContext = new MainViewModel();
@@ -38,10 +39,15 @@ namespace Interface.ClientUI
             changePIN.Header = "Change PIN";
             changePIN.Tag = "Change PIN";
 
+            RadTreeViewItem exchangeCurrency = new RadTreeViewItem();
+            changePIN.Header = "Currency";
+            changePIN.Tag = "Currency";
+
             tree.Items.Add(viewAccounts);
             tree.Items.Add(deposit);
             tree.Items.Add(withdraw);
             tree.Items.Add(changePIN);
+            tree.Items.Add(exchangeCurrency);
         }
 
 
@@ -70,6 +76,11 @@ namespace Interface.ClientUI
                 case "Change PIN":
                     ChangePinViewModel changePinViewModel = new ChangePinViewModel();
                     contentPresenter.Content = changePinViewModel;
+                    break;
+
+                case "Currency":
+                    ExchangeCurrencyViewModel currencyViewModel = new ExchangeCurrencyViewModel();
+                    contentPresenter.Content = currencyViewModel;
                     break;
 
                 default:
@@ -178,7 +189,7 @@ namespace Interface.ClientUI
         private void Logout_Button_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();
-            this.Close();
+            Close();
             mainWindow.Show();
         }
     }

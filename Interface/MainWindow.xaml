@@ -9,23 +9,6 @@
         Height="700" Width="1400"
         >
 
-    <Window.Resources>
-        <RoutedUICommand x:Key="LoginCommand" Text="Text" />
-        <RoutedUICommand x:Key="OperatorCommand" Text="Text" />
-    </Window.Resources>
-
-    <Window.CommandBindings>
-        <CommandBinding Command="{StaticResource LoginCommand}" 
-                    Executed="LoginButton_Click" />
-        <CommandBinding Command="{StaticResource OperatorCommand}" 
-                    Executed="Operator_button_Click" /> 
-    </Window.CommandBindings>
-
-    <Window.InputBindings>
-        <KeyBinding Key="Return"  Command="{StaticResource LoginCommand}" />
-        <KeyBinding Key="Return" Modifiers="Shift" Command="{StaticResource OperatorCommand}" />
-    </Window.InputBindings>
-
     <Grid >
         <Grid.Background >
             <ImageBrush  ImageSource="Resources/aliceblue.png" Stretch="Fill" />
@@ -68,7 +51,6 @@
                                 FontSize="38" Width="250"
                                 Margin="0 25 0 25" Background="WhiteSmoke"
                                 Click="LoginButton_Click"
-                                Command="{StaticResource LoginCommand}"
                                 >
                             <!--TODO: Call the function when pressing
                             Enter on the keyboard-->
@@ -84,8 +66,7 @@
 
                 <!--Operator-->
                 <Button Background="Transparent" BorderBrush="Transparent"
-                        Width="300" x:Name="operator_button" 
-                        Command="{StaticResource OperatorCommand}">
+                        Width="300" x:Name="operator_button">
 
                     <TextBlock Text="I am an operator" FontSize="30"
                                Foreground="AliceBlue"

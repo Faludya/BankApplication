@@ -379,4 +379,96 @@ public class Service : IService
             return false;
         }
     }
+
+    #region Api Service
+    public ExchangeCurrency GetLastExchangeRate()
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                ExchangeCurrency currency = database.ExchangeCurrencies.
+                                            OrderByDescending(d => d.Date).
+                                            FirstOrDefault();
+                return currency;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+    public bool UpdateExchangeRate(ExchangeCurrency newRate)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                database.ExchangeCurrencies.AddOrUpdate(newRate);
+                database.SaveChanges();
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
+    public ObservableCollection<ExchangeCurrency> GetYearExchangeRate()
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                ObservableCollection<ExchangeCurrency> yearList = new ObservableCollection<ExchangeCurrency>();
+
+                foreach (ExchangeCurrency rate in database.ExchangeCurrencies)
+                    if (rate.Date.Year == DateTime.Now.Year && rate.Date.Day == 1)
+                        yearList.Add(rate);
+
+                return yearList;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+    public ObservableCollection<ExchangeCurrency> GetMonthExchangeRate(int month)
+    {
+        if (month > DateTime.Now.Month)
+            return null;
+
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                ObservableCollection<ExchangeCurrency> monthList = new ObservableCollection<ExchangeCurrency>();
+
+                foreach (ExchangeCurrency rate in database.ExchangeCurrencies)
+                {
+                    if (DateTime.Now.Day <= 7 && month == DateTime.Now.Month)
+                    {
+                        if (rate.Date.Month == month - 1 && rate.Date.Day >= 21)
+                            monthList.Add(rate);
+                    }
+
+                    if (rate.Date.Month == month)
+                        monthList.Add(rate);
+                }
+                    
+
+                return monthList;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
+
+    #endregion
 }

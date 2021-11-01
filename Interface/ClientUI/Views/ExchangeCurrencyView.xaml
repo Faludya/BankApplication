@@ -1,0 +1,140 @@
+﻿<UserControl x:Class="Interface.ClientUI.Views.ExchangeCurrencyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Interface.ClientUI.Views" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             xmlns:viewmodels="clr-namespace:Interface.ClientUI.ViewModels" 
+             d:DataContext="{d:DesignInstance Type=viewmodels:ExchangeCurrencyViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" FontSize="24" >
+    <Grid>
+        <Grid.RowDefinitions >
+            <RowDefinition Height="*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+
+        <telerik:RadChart x:Name="radChart" FontSize="14"
+                          d:LayoutOverrides="Width, Height" 
+                          Grid.Row="1" Background="Transparent"
+                          ItemsSource="{Binding CurrencyYearList}">
+
+            <telerik:RadChart.SeriesMappings>
+                <telerik:SeriesMapping LegendLabel="Ron Value">
+                    <telerik:SeriesMapping.SeriesDefinition>
+                        <telerik:SplineSeriesDefinition ShowItemToolTips="True"/>
+                    </telerik:SeriesMapping.SeriesDefinition>
+                    <telerik:SeriesMapping.ItemMappings>
+                        <telerik:ItemMapping DataPointMember="XValue" FieldName="Date"  />
+                        <telerik:ItemMapping DataPointMember="YValue" FieldName="Ron" />
+                    </telerik:SeriesMapping.ItemMappings>
+                </telerik:SeriesMapping>
+            </telerik:RadChart.SeriesMappings>
+
+
+            <StackPanel Margin="0 100 5 0">
+                <!--Year Button-->
+                <TextBlock Text="Year View" VerticalAlignment="Top"
+                           HorizontalAlignment="Right" Margin="40 5"
+                           FontWeight="Bold" FontSize="12"/>
+
+                <telerik:RadButton x:Name="year_button" VerticalAlignment="Top"
+                                   HorizontalAlignment="Right" MinWidth="100"
+                                   Content="All year"
+                                   Click="Year_button_Click"/>
+
+                <!--Months View-->
+                <TextBlock Text="Months View" VerticalAlignment="Top"
+                           HorizontalAlignment="Right" Margin="20 5"
+                           FontWeight="Bold" FontSize="12"/>
+
+                <telerik:RadComboBox x:Name="months_combobox" VerticalAlignment="Top"
+                                     SelectionChanged="ChartView_combobox_SelectionChanged" 
+                                     HorizontalAlignment="Right" MinWidth="100" >
+                </telerik:RadComboBox>
+            </StackPanel>
+
+        </telerik:RadChart>
+
+        <StackPanel Orientation="Horizontal">
+
+            <!--Amount Stack-->
+            <StackPanel Orientation="Vertical" Margin="10 0"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Amount" Margin="0 5" HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="amount_box" VerticalAlignment="Center" HorizontalAlignment="Center"
+                         Text="{Binding Euro, Mode=TwoWay,
+                         UpdateSourceTrigger=PropertyChanged, StringFormat=N6}" 
+                         Background="WhiteSmoke" MinWidth="100" 
+                         TextChanged="Amount_box_TextChanged" />
+            </StackPanel>
+
+            <!--Euro Stack-->
+            <StackPanel Orientation="Vertical" Margin="10 0"
+                        VerticalAlignment="Center">
+
+                <TextBlock Text="From" Margin="0 5" HorizontalAlignment="Left"/>
+
+                <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Background="WhiteSmoke" MinWidth="200">
+                  <Image Source="/Resources/euro.png" Stretch="Uniform"
+                         MaxHeight="25" VerticalAlignment="Bottom"/>
+                    <Run Text="EUR - Euro"/>
+                </TextBlock>
+
+            </StackPanel>
+
+            <!--Conversion Button-->
+            <Button x:Name="convert_button" Margin = "0 30" BorderBrush="Transparent"
+                    Background="Transparent" VerticalAlignment="Bottom">
+                <Image Source="/Resources/convert.png" Stretch="Uniform"
+                       MaxHeight="25"/>
+            </Button>
+
+
+
+            <!--Result Stack-->
+            <StackPanel Orientation="Vertical" Margin="10 0"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Result" Margin="0 5" HorizontalAlignment="Left"/>
+
+                <TextBox x:Name="result_box" VerticalAlignment="Center" HorizontalAlignment="Center"
+                         Text="{Binding Ron, Mode=TwoWay,
+                         UpdateSourceTrigger=PropertyChanged, StringFormat=N6}" 
+                         Background="WhiteSmoke" MinWidth="100"/>
+            </StackPanel>
+
+            <!--Ron Stack-->
+            <StackPanel Orientation="Vertical" Margin="10 0"
+                        VerticalAlignment="Center">
+
+                <TextBlock Text="To" Margin="0 5" HorizontalAlignment="Left"/>
+
+                <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Background="WhiteSmoke" MinWidth="200">
+                  <Image Source="/Resources/ron.png" Stretch="Uniform"
+                         MaxHeight="25" VerticalAlignment="Bottom"/>
+                    <Run Text="RON - Ron"/>
+                </TextBlock>
+
+            </StackPanel>
+
+            <!--<StackPanel Orientation="Horizontal" Grid.Column="1"
+                        VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                <TextBox FontSize="30" MinWidth="30" 
+                         VerticalAlignment="Center" HorizontalAlignment="Center"
+                         Text="{Binding Ron, Mode=TwoWay,
+                            UpdateSourceTrigger=PropertyChanged}"
+                         IsReadOnly="True"/>
+
+                <TextBlock Text="Ron" FontSize="30"/>
+
+            </StackPanel>-->
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

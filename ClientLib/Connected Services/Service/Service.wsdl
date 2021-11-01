@@ -103,6 +103,30 @@
   <wsdl:message name="IService_VerifyIBAN_OutputMessage">
     <wsdl:part name="parameters" element="tns:VerifyIBANResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_GetLastExchangeRate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLastExchangeRate" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetLastExchangeRate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLastExchangeRateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_UpdateExchangeRate_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateExchangeRate" />
+  </wsdl:message>
+  <wsdl:message name="IService_UpdateExchangeRate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateExchangeRateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetYearExchangeRate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetYearExchangeRate" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetYearExchangeRate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetYearExchangeRateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetMonthExchangeRate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMonthExchangeRate" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetMonthExchangeRate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMonthExchangeRateResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService">
     <wsdl:operation name="IsClientLoginValid">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/IsClientLoginValid" message="tns:IService_IsClientLoginValid_InputMessage" />
@@ -167,6 +191,22 @@
     <wsdl:operation name="VerifyIBAN">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/VerifyIBAN" message="tns:IService_VerifyIBAN_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/VerifyIBANResponse" message="tns:IService_VerifyIBAN_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLastExchangeRate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetLastExchangeRate" message="tns:IService_GetLastExchangeRate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetLastExchangeRateResponse" message="tns:IService_GetLastExchangeRate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateExchangeRate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/UpdateExchangeRate" message="tns:IService_UpdateExchangeRate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/UpdateExchangeRateResponse" message="tns:IService_UpdateExchangeRate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetYearExchangeRate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetYearExchangeRate" message="tns:IService_GetYearExchangeRate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetYearExchangeRateResponse" message="tns:IService_GetYearExchangeRate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMonthExchangeRate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetMonthExchangeRate" message="tns:IService_GetMonthExchangeRate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetMonthExchangeRateResponse" message="tns:IService_GetMonthExchangeRate_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService" type="tns:IService">
@@ -308,6 +348,42 @@
     </wsdl:operation>
     <wsdl:operation name="VerifyIBAN">
       <soap:operation soapAction="http://tempuri.org/IService/VerifyIBAN" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLastExchangeRate">
+      <soap:operation soapAction="http://tempuri.org/IService/GetLastExchangeRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateExchangeRate">
+      <soap:operation soapAction="http://tempuri.org/IService/UpdateExchangeRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetYearExchangeRate">
+      <soap:operation soapAction="http://tempuri.org/IService/GetYearExchangeRate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMonthExchangeRate">
+      <soap:operation soapAction="http://tempuri.org/IService/GetMonthExchangeRate" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

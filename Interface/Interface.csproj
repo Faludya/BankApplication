@@ -107,6 +107,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ClientUI\Views\ExchangeCurrencyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ClientUI\Views\WithdrawView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -120,6 +124,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BaseViewModel.cs" />
+    <Compile Include="ClientUI\Commands\CommandHandler.cs" />
     <Compile Include="ClientUI\Commands\UpdateViewCommand.cs" />
     <Compile Include="ClientUI\MainClient.xaml.cs">
       <DependentUpon>MainClient.xaml</DependentUpon>
@@ -127,6 +132,7 @@
     <Compile Include="ClientUI\ViewModels\AccountsViewModel.cs" />
     <Compile Include="ClientUI\ViewModels\ChangePinViewModel.cs" />
     <Compile Include="ClientUI\ViewModels\DepositViewModel.cs" />
+    <Compile Include="ClientUI\ViewModels\ExchangeCurrencyViewModel.cs" />
     <Compile Include="ClientUI\ViewModels\WithdrawViewModel.cs" />
     <Compile Include="ClientUI\Views\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
@@ -136,6 +142,9 @@
     </Compile>
     <Compile Include="ClientUI\Views\DepositView.xaml.cs">
       <DependentUpon>DepositView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClientUI\Views\ExchangeCurrencyView.xaml.cs">
+      <DependentUpon>ExchangeCurrencyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ClientUI\Views\WithdrawView.xaml.cs">
       <DependentUpon>WithdrawView.xaml</DependentUpon>
@@ -291,6 +300,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\withdraw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\euro.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\ron.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\convert.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

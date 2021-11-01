@@ -110,6 +110,30 @@ namespace ClientLib.Service {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/VerifyIBAN", ReplyAction="http://tempuri.org/IService/VerifyIBANResponse")]
         System.Threading.Tasks.Task<bool> VerifyIBANAsync(string iban);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetLastExchangeRate", ReplyAction="http://tempuri.org/IService/GetLastExchangeRateResponse")]
+        Database.ExchangeCurrency GetLastExchangeRate();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetLastExchangeRate", ReplyAction="http://tempuri.org/IService/GetLastExchangeRateResponse")]
+        System.Threading.Tasks.Task<Database.ExchangeCurrency> GetLastExchangeRateAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateExchangeRate", ReplyAction="http://tempuri.org/IService/UpdateExchangeRateResponse")]
+        bool UpdateExchangeRate(Database.ExchangeCurrency newRate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateExchangeRate", ReplyAction="http://tempuri.org/IService/UpdateExchangeRateResponse")]
+        System.Threading.Tasks.Task<bool> UpdateExchangeRateAsync(Database.ExchangeCurrency newRate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetYearExchangeRate", ReplyAction="http://tempuri.org/IService/GetYearExchangeRateResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Database.ExchangeCurrency> GetYearExchangeRate();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetYearExchangeRate", ReplyAction="http://tempuri.org/IService/GetYearExchangeRateResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.ExchangeCurrency>> GetYearExchangeRateAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetMonthExchangeRate", ReplyAction="http://tempuri.org/IService/GetMonthExchangeRateResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Database.ExchangeCurrency> GetMonthExchangeRate(int month);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetMonthExchangeRate", ReplyAction="http://tempuri.org/IService/GetMonthExchangeRateResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.ExchangeCurrency>> GetMonthExchangeRateAsync(int month);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -265,6 +289,38 @@ namespace ClientLib.Service {
         
         public System.Threading.Tasks.Task<bool> VerifyIBANAsync(string iban) {
             return base.Channel.VerifyIBANAsync(iban);
+        }
+        
+        public Database.ExchangeCurrency GetLastExchangeRate() {
+            return base.Channel.GetLastExchangeRate();
+        }
+        
+        public System.Threading.Tasks.Task<Database.ExchangeCurrency> GetLastExchangeRateAsync() {
+            return base.Channel.GetLastExchangeRateAsync();
+        }
+        
+        public bool UpdateExchangeRate(Database.ExchangeCurrency newRate) {
+            return base.Channel.UpdateExchangeRate(newRate);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateExchangeRateAsync(Database.ExchangeCurrency newRate) {
+            return base.Channel.UpdateExchangeRateAsync(newRate);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Database.ExchangeCurrency> GetYearExchangeRate() {
+            return base.Channel.GetYearExchangeRate();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.ExchangeCurrency>> GetYearExchangeRateAsync() {
+            return base.Channel.GetYearExchangeRateAsync();
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Database.ExchangeCurrency> GetMonthExchangeRate(int month) {
+            return base.Channel.GetMonthExchangeRate(month);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.ExchangeCurrency>> GetMonthExchangeRateAsync(int month) {
+            return base.Channel.GetMonthExchangeRateAsync(month);
         }
     }
 }

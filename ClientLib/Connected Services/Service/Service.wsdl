@@ -37,6 +37,12 @@
   <wsdl:message name="IService_UpdateAccountTotal_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateAccountTotalResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_GetAccountOffer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountOffer" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetAccountOffer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountOfferResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_GetClients_InputMessage">
     <wsdl:part name="parameters" element="tns:GetClients" />
   </wsdl:message>
@@ -148,6 +154,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService/UpdateAccountTotal" message="tns:IService_UpdateAccountTotal_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/UpdateAccountTotalResponse" message="tns:IService_UpdateAccountTotal_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetAccountOffer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetAccountOffer" message="tns:IService_GetAccountOffer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetAccountOfferResponse" message="tns:IService_GetAccountOffer_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetClients">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetClients" message="tns:IService_GetClients_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetClientsResponse" message="tns:IService_GetClients_OutputMessage" />
@@ -249,6 +259,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateAccountTotal">
       <soap:operation soapAction="http://tempuri.org/IService/UpdateAccountTotal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccountOffer">
+      <soap:operation soapAction="http://tempuri.org/IService/GetAccountOffer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

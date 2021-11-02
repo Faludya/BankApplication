@@ -85,7 +85,8 @@
                     <TextBox x:Name="amount_box" Margin="5 10" 
                              Background="WhiteSmoke"
                              Text="{Binding WithdrawAmount, Mode=TwoWay,
-                             UpdateSourceTrigger=PropertyChanged}"/>
+                             UpdateSourceTrigger=PropertyChanged,
+                             StringFormat=N2}"/>
 
                 </StackPanel>
 
@@ -98,9 +99,8 @@
                     <!-- Withdraw Currency - Combobox -->
                     <ComboBox Name="currency_combobox" Margin="70 10" 
                               Background="WhiteSmoke" 
-                              SelectedIndex="{Binding SelectedCurrency}" >
-                        <ComboBoxItem Content="RON"  />
-                        <ComboBoxItem Content="EURO"/>
+                              ItemsSource="{Binding Currencies}"
+                              SelectedItem="{Binding SelectedCurrency}" >
                     </ComboBox>
                 </StackPanel>
 

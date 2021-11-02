@@ -1,10 +1,5 @@
 ﻿using Database;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClientLib.Controllers
 {
@@ -26,52 +21,70 @@ namespace ClientLib.Controllers
             }
         }
 
-        public static bool Withdraw(string iban, decimal withdrawAmount, string accountCurrency, string withdrawCurrency)
+        public static bool Withdraw(Account account, decimal withdrawAmount, string withdrawCurrency)
         {
-            if (accountCurrency != withdrawCurrency)
+            //Currency Conversion with latest rate
+            if (account.Currency != withdrawCurrency)
             {
-                decimal conversionResult = ConvertCurrency(withdrawAmount, accountCurrency, withdrawCurrency);
+                decimal conversionResult = ConvertCurrency(withdrawAmount, account.Currency, withdrawCurrency);
                 if (conversionResult == -1)
                     return false;
 
                 withdrawAmount = conversionResult;
             }
 
+            //Commission calculation
+            decimal withdrawCommission = (decimal)account.AccountOffer.WithdrawCommission / 100m * withdrawAmount + (decimal)account.AccountOffer.WithdrawFixTax;
+            withdrawAmount += withdrawCommission;
+
+            if (withdrawAmount > account.Total)
+                return false;
+
             using (Service.ServiceClient service = new Service.ServiceClient())
             {
-                return service.UpdateAccountTotal(iban, withdrawAmount, -1);
+                return service.UpdateAccountTotal(account.IBAN, withdrawAmount, withdrawCommission,  -1);
             }
         }
 
-        public static bool Deposit(string iban, decimal withdrawAmount, string accountCurrency, string withdrawCurrency)
+        public static bool Deposit(Account account, decimal depositAmount, string withdrawCurrency)
         {
-            if (accountCurrency != withdrawCurrency)
+            //Currency Conversion with latest rate
+            if (account.Currency != withdrawCurrency)
             {
-                decimal conversionResult = ConvertCurrency(withdrawAmount, accountCurrency, withdrawCurrency);
+                decimal conversionResult = ConvertCurrency(depositAmount, account.Currency, withdrawCurrency);
                 if (conversionResult == -1)
                     return false;
 
-                withdrawAmount = conversionResult;
+                depositAmount = conversionResult;
             }
 
+            //Commission calculation
+            decimal depositCommission = (decimal)account.AccountOffer.DepositCommission / 100m * depositAmount;
+            depositAmount -= depositCommission;
 
-
+            //Deposit the sum remained after commission
             using (Service.ServiceClient service = new Service.ServiceClient())
             {
-                return service.UpdateAccountTotal(iban, withdrawAmount, 1);
+
+                return service.UpdateAccountTotal(account.IBAN, depositAmount, depositCommission, 1);
             }
         }
 
         private static decimal ConvertCurrency(decimal initialAmount, string accountCurrency, string withdrawCurrency)
         {
-            if(accountCurrency == "RON" && withdrawCurrency == "EURO")
+            ExchangeCurrency rate;
+            using (Service.ServiceClient service = new Service.ServiceClient())
             {
-                return initialAmount * 4.5m;
+                rate = service.GetLastExchangeRate();
+            }
+            if (accountCurrency == "RON" && withdrawCurrency == "EURO")
+            {
+                return initialAmount * rate.Ron;
             }
             else
             if (accountCurrency == "EURO" && withdrawCurrency == "RON")
             {
-                return initialAmount / 4.5m;
+                return initialAmount / rate.Ron;
             }
   
             return -1;

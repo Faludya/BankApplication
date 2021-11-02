@@ -40,10 +40,16 @@ namespace ClientLib.Service {
         System.Threading.Tasks.Task<bool> ChangeClientPinAsync(int clientId, string oldPin, string newPin);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateAccountTotal", ReplyAction="http://tempuri.org/IService/UpdateAccountTotalResponse")]
-        bool UpdateAccountTotal(string iban, decimal newTotal, short factor);
+        bool UpdateAccountTotal(string iban, decimal newTotal, decimal commission, short factor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateAccountTotal", ReplyAction="http://tempuri.org/IService/UpdateAccountTotalResponse")]
-        System.Threading.Tasks.Task<bool> UpdateAccountTotalAsync(string iban, decimal newTotal, short factor);
+        System.Threading.Tasks.Task<bool> UpdateAccountTotalAsync(string iban, decimal newTotal, decimal commission, short factor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAccountOffer", ReplyAction="http://tempuri.org/IService/GetAccountOfferResponse")]
+        Database.AccountOffer GetAccountOffer(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAccountOffer", ReplyAction="http://tempuri.org/IService/GetAccountOfferResponse")]
+        System.Threading.Tasks.Task<Database.AccountOffer> GetAccountOfferAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetClients", ReplyAction="http://tempuri.org/IService/GetClientsResponse")]
         System.Collections.ObjectModel.ObservableCollection<Database.Client> GetClients();
@@ -195,12 +201,20 @@ namespace ClientLib.Service {
             return base.Channel.ChangeClientPinAsync(clientId, oldPin, newPin);
         }
         
-        public bool UpdateAccountTotal(string iban, decimal newTotal, short factor) {
-            return base.Channel.UpdateAccountTotal(iban, newTotal, factor);
+        public bool UpdateAccountTotal(string iban, decimal newTotal, decimal commission, short factor) {
+            return base.Channel.UpdateAccountTotal(iban, newTotal, commission, factor);
         }
         
-        public System.Threading.Tasks.Task<bool> UpdateAccountTotalAsync(string iban, decimal newTotal, short factor) {
-            return base.Channel.UpdateAccountTotalAsync(iban, newTotal, factor);
+        public System.Threading.Tasks.Task<bool> UpdateAccountTotalAsync(string iban, decimal newTotal, decimal commission, short factor) {
+            return base.Channel.UpdateAccountTotalAsync(iban, newTotal, commission, factor);
+        }
+        
+        public Database.AccountOffer GetAccountOffer(int id) {
+            return base.Channel.GetAccountOffer(id);
+        }
+        
+        public System.Threading.Tasks.Task<Database.AccountOffer> GetAccountOfferAsync(int id) {
+            return base.Channel.GetAccountOfferAsync(id);
         }
         
         public System.Collections.ObjectModel.ObservableCollection<Database.Client> GetClients() {

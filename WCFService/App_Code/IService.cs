@@ -29,7 +29,9 @@ public interface IService
     bool ChangeClientPin(int clientId,string oldPin, string newPin);
 
     [OperationContract]
-    bool UpdateAccountTotal(string iban, decimal newTotal, Int16 factor);
+    bool UpdateAccountTotal(string iban, decimal newTotal,decimal commission,  Int16 factor);
+    [OperationContract]
+    AccountOffer GetAccountOffer(int id);
     #endregion
 
     #region Operator - Getters

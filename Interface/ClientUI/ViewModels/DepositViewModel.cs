@@ -1,5 +1,6 @@
 ﻿using ClientLib.Controllers;
 using Database;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Interface.ClientUI.ViewModels
@@ -13,9 +14,10 @@ namespace Interface.ClientUI.ViewModels
             set => _accounts = value;
         }
 
-        public DepositViewModel(ObservableCollection<Account> accounts)
+        public DepositViewModel(ObservableCollection<Account> accounts, List<string> currencies)
         {
             Accounts = accounts;
+            Currencies = currencies;
         }
 
         public override bool CheckData()
@@ -45,19 +47,21 @@ namespace Interface.ClientUI.ViewModels
             }
         }
 
+        private List<string> _currencies;
+        public List<string> Currencies
+        {
+            get => _currencies;
+            set
+            {
+                _currencies = value;
+            }
+        }
+
         private string _selectedCurrency;
         public string SelectedCurrency
         {
             get => _selectedCurrency;
-            set
-            {
-                _selectedCurrency = value;
-                if (_selectedCurrency == "0")
-                    SelectedAccount.Currency = "RON";
-                else
-                if (_selectedCurrency == "1")
-                    SelectedAccount.Currency = "EURO";
-            }
+            set => _selectedCurrency = value;
         }
 
         private decimal _depositAmount;

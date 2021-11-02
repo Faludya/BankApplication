@@ -8,7 +8,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WCFService", "WCFService\", "{8CBCB386-85FA-42F8-9CAF-428AE6F5B997}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.7.2"
-		ProjectReferences = "{37d6d0c6-d1ed-4caf-a2fc-fb6e27da202b}|Database.dll;"
+		ProjectReferences = "{258f3725-63fe-4169-b009-18355d545ae1}|Database.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_54420"
 		Debug.AspNetCompiler.PhysicalPath = "WCFService\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_54420\"
@@ -28,12 +28,12 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WCFService", "WCFService\",
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{37D6D0C6-D1ED-4CAF-A2FC-FB6E27DA202B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientLib", "ClientLib\ClientLib.csproj", "{78DDBAC2-3FDD-4301-A431-F2AD557EFE73}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8CBCB386-85FA-42F8-9CAF-428AE6F5B997} = {8CBCB386-85FA-42F8-9CAF-428AE6F5B997}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{258F3725-63FE-4169-B009-18355D545AE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,14 +49,14 @@ Global
 		{8CBCB386-85FA-42F8-9CAF-428AE6F5B997}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CBCB386-85FA-42F8-9CAF-428AE6F5B997}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{8CBCB386-85FA-42F8-9CAF-428AE6F5B997}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{37D6D0C6-D1ED-4CAF-A2FC-FB6E27DA202B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37D6D0C6-D1ED-4CAF-A2FC-FB6E27DA202B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37D6D0C6-D1ED-4CAF-A2FC-FB6E27DA202B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37D6D0C6-D1ED-4CAF-A2FC-FB6E27DA202B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78DDBAC2-3FDD-4301-A431-F2AD557EFE73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78DDBAC2-3FDD-4301-A431-F2AD557EFE73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78DDBAC2-3FDD-4301-A431-F2AD557EFE73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78DDBAC2-3FDD-4301-A431-F2AD557EFE73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{258F3725-63FE-4169-B009-18355D545AE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{258F3725-63FE-4169-B009-18355D545AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{258F3725-63FE-4169-B009-18355D545AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{258F3725-63FE-4169-B009-18355D545AE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -29,16 +29,5 @@ namespace Interface.OperatorUI.ViewModels
         {
             return EditSecurityController.CanUpdateClient(this.Client);
         }
-
-        public override void Trim()
-        {
-
-            if(Client != new Client())
-            {
-                Client.FirstName = Client.FirstName.Trim();
-                Client.LastName = Client.LastName.Trim();
-                Client.Address = Client.Address.Trim();
-            }
-        }
     }
 }

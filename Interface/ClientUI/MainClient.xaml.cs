@@ -1,5 +1,6 @@
 ﻿using ClientLib.Controllers;
 using Interface.ClientUI.ViewModels;
+using System.Collections.Generic;
 using System.Windows;
 using Telerik.Windows.Controls;
 
@@ -63,13 +64,18 @@ namespace Interface.ClientUI
                     break;
 
                 case "Deposit":
-                    DepositViewModel depositViewModel = new DepositViewModel(AccountsController.GetClientAccounts(clientId));
+                    List<string> currenciesD = new List<string>();
+                    currenciesD.Add("RON"); currenciesD.Add("EURO");
+                    DepositViewModel depositViewModel = new DepositViewModel(AccountsController.GetClientAccounts(clientId), currenciesD);
                     contentPresenter.Content = depositViewModel;
 
                     break;
 
                 case "Withdraw":
-                    WithdrawViewModel withdrawViewModel = new WithdrawViewModel(AccountsController.GetClientAccounts(clientId));
+                    List<string> currencies = new List<string>();
+                    currencies.Add("RON"); currencies.Add("EURO");
+
+                    WithdrawViewModel withdrawViewModel = new WithdrawViewModel(AccountsController.GetClientAccounts(clientId), currencies);
                     contentPresenter.Content = withdrawViewModel;
                     break;
 
@@ -109,12 +115,8 @@ namespace Interface.ClientUI
             if (contentPresenter.Content is WithdrawViewModel)
             {
                 WithdrawViewModel viewModel = contentPresenter.Content as WithdrawViewModel;
-                if (viewModel.SelectedCurrency == "0")
-                    viewModel.SelectedCurrency = "RON";
-                else
-                if (viewModel.SelectedCurrency == "1")
-                    viewModel.SelectedCurrency = "EURO";
-                if (AccountsController.Withdraw(viewModel.SelectedAccount.IBAN, viewModel.WithdrawAmount, viewModel.SelectedAccount.Currency, viewModel.SelectedCurrency))
+
+                if (AccountsController.Withdraw(viewModel.SelectedAccount, viewModel.WithdrawAmount, viewModel.SelectedCurrency))
                 {
                     MessageBox.Show("Your withdraw was successfull!");
                     contentPresenter.Content = null;
@@ -129,12 +131,8 @@ namespace Interface.ClientUI
             if(contentPresenter.Content is DepositViewModel )
             {
                 DepositViewModel viewModel = contentPresenter.Content as DepositViewModel;
-                if (viewModel.SelectedCurrency == "0")
-                    viewModel.SelectedCurrency = "RON";
-                else
-                if (viewModel.SelectedCurrency == "1")
-                    viewModel.SelectedCurrency = "EURO";
-                if (AccountsController.Deposit(viewModel.SelectedAccount.IBAN, viewModel.DepositAmount, viewModel.SelectedAccount.Currency, viewModel.SelectedCurrency))
+                
+                if (AccountsController.Deposit(viewModel.SelectedAccount, viewModel.DepositAmount, viewModel.SelectedCurrency))
                 {
                     MessageBox.Show("Your deposit was successfull!");
                     contentPresenter.Content = null;
@@ -165,15 +163,24 @@ namespace Interface.ClientUI
             switch (viewModel)
             {
                 case DepositViewModel dv:
-                    contentPresenter.Content = new DepositViewModel(AccountsController.GetClientAccounts(clientId));
+                    List<string> currenciesD = new List<string>();
+                    currenciesD.Add("RON"); currenciesD.Add("EURO");
+                    contentPresenter.Content = new DepositViewModel(AccountsController.GetClientAccounts(clientId), currenciesD);
                     break;
 
                 case WithdrawViewModel wv:
-                    contentPresenter.Content = new WithdrawViewModel(AccountsController.GetClientAccounts(clientId));
+                    List<string> currencies = new List<string>();
+                    currencies.Add("RON"); currencies.Add("EURO");
+
+                    contentPresenter.Content = new WithdrawViewModel(AccountsController.GetClientAccounts(clientId), currencies);
                     break;
 
                 case ChangePinViewModel cp:
                     contentPresenter.Content = new ChangePinViewModel();
+                    break;
+
+                case ExchangeCurrencyViewModel ec:
+                    contentPresenter.Content = new ExchangeCurrencyViewModel();
                     break;
 
                 default:

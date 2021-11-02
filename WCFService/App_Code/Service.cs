@@ -67,10 +67,20 @@ public class Service : IService
             {
                 ObservableCollection<Account> accountsList = new ObservableCollection<Account>();
 
-                foreach (Account account in database.Accounts)
-                    if(account.ID_Client == clientId)
-                        accountsList.Add(account);
+                List<Account> accounts = database.Accounts.
+                                            Where(a => a.ID_Client == clientId).
+                                            ToList();
 
+                foreach (Account account in database.Accounts)
+                {
+                    if(account.ID_Client == clientId)
+                    {
+                        AccountOffer accountOffer = GetAccountOffer(account.ID_Offer);
+                        account.AccountOffer = accountOffer;
+                        accountsList.Add(account);
+                    }
+                }
+                
                 return accountsList;
             }
         }
@@ -105,7 +115,7 @@ public class Service : IService
         }
     }
 
-    public bool UpdateAccountTotal(string iban, decimal newTotal, Int16 factor)
+    public bool UpdateAccountTotal(string iban, decimal newTotal,decimal commission, Int16 factor)
     {
         try
         {
@@ -118,6 +128,14 @@ public class Service : IService
                     if(account.Total + factor * newTotal >= 0)
                     {
                         account.Total = account.Total + factor * newTotal;
+
+                        //Deposit commission to Bank account
+                        Account bankAccount = database.Accounts.
+                                                Where(b => b.Id == 1).
+                                                Single();
+
+                        bankAccount.Total = bankAccount.Total + commission;
+
                         database.SaveChanges();
 
                         return true;
@@ -133,6 +151,26 @@ public class Service : IService
         }
     }
 
+    
+    public AccountOffer GetAccountOffer(int id)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                AccountOffer accountOffer = database.AccountOffers.
+                                        Where(x => x.Id == id).
+                                        FirstOrDefault();
+
+                return accountOffer;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+    }
     #endregion
 
     #region Operator 
@@ -240,7 +278,16 @@ public class Service : IService
                 }
 
 
-                database.Clients.AddOrUpdate(newClient);
+                Client updatedClient = database.Clients.
+                                        Where(x => x.Id == newClient.Id).
+                                        Single();
+
+                updatedClient.FirstName = newClient.FirstName;
+                updatedClient.LastName = newClient.LastName;
+                updatedClient.Phone= newClient.Phone;
+                updatedClient.CNP= newClient.CNP;
+                updatedClient.Address = newClient.Address;
+               // database.Clients.AddOrUpdate(newClient);
                 database.SaveChanges();
 
                 return true;

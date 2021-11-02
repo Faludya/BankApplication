@@ -124,7 +124,7 @@ namespace Interface.OperatorUI
             if(contentPresenter.Content is EditClientViewModel)
             {
                 var viewModel = contentPresenter.DataContext as EditClientViewModel;
-                viewModel.Trim();
+ 
                 if (EditSecurityController.UpdateClient(viewModel.Client))
                 {
                     MessageBox.Show("Client Updated!");

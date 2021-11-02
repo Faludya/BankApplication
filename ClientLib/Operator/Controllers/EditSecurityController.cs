@@ -71,72 +71,98 @@ namespace ClientLib.Operator.Controllers
 
         public static bool CanUpdateClient(Client client)
         {
-            //TODO: Check First Name
-            int countFirstName= client.FirstName.Count(x => Char.IsDigit(x));
-            if (countFirstName != 0)
-                return false;
+            try
+            {
+                //TODO: Check First Name
+                int countFirstName = client.FirstName.Count(x => Char.IsDigit(x));
+                if (countFirstName != 0 || client.FirstName == "")
+                    return false;
 
-            //TODO: Check Last Name
-            int countLastName = client.LastName.Count(x => Char.IsDigit(x));
-            if (countLastName != 0)
-                return false;
+                //TODO: Check Last Name
+                int countLastName = client.LastName.Count(x => Char.IsDigit(x));
+                if (countLastName != 0 || client.LastName == "")
+                    return false;
 
-            //TODO: Check CNP
-            int countCnp = client.CNP.Count(x => Char.IsDigit(x));
-            if (countCnp != 13)
-                return false;
+                //TODO: Check CNP
+                int countCnp = client.CNP.Count(x => Char.IsDigit(x));
+                if (countCnp != 13)
+                    return false;
 
-            //TODO: Check Phone
-            int countPhone = client.Phone.Count(x => Char.IsDigit(x));
-            if (countPhone != 10)
-                return false;
+                //TODO: Check Phone
+                int countPhone = client.Phone.Count(x => Char.IsDigit(x));
+                if (countPhone != 10)
+                    return false;
 
-            return true;
+                //Check Address
+                if (client.Address == "")
+                    return false;
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public static bool CanUpdateAccount(Account account)
         {
-            if (account.IBAN.Length != 13)
-                return false;
+            try
+            {
+                if (account.IBAN.Length != 13)
+                    return false;
 
-            if (account.Currency != "RON" && account.Currency != "EURO")
-                return false;
+                if (account.Currency != "RON" && account.Currency != "EURO")
+                    return false;
 
-            if (!int.TryParse(account.ID_Client.ToString(), out int resultClient))
-                return false;
+                if (!int.TryParse(account.ID_Client.ToString(), out int resultClient))
+                    return false;
 
-            if (!int.TryParse(account.ID_Offer.ToString(), out int resultOffer))
-                return false;
+                if (!int.TryParse(account.ID_Offer.ToString(), out int resultOffer))
+                    return false;
 
-            decimal resultTotal;
-            if (!(decimal.TryParse(account.Total.ToString(), out resultTotal)))
-                return false;
+                decimal resultTotal;
+                if (!(decimal.TryParse(account.Total.ToString(), out resultTotal)))
+                    return false;
 
-            if (account.Total < 0)
-                return false;
+                if (account.Total < 0)
+                    return false;
 
-            return true;
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+          
         }
 
         public static bool CanUpdateAccountOffer(AccountOffer accountOffer)
         {
-            if (accountOffer.Name == null || accountOffer.Name == "")
-                return false;
+            try
+            {
+                if (accountOffer.Name == null || accountOffer.Name == "")
+                    return false;
 
-            int countName = accountOffer.Name.Count(x => Char.IsDigit(x));
-            if (countName != 0)
-                return false;
+                int countName = accountOffer.Name.Count(x => Char.IsDigit(x));
+                if (countName != 0)
+                    return false;
 
-            if (!decimal.TryParse(accountOffer.DepositCommission.ToString(), out decimal resultDeposit))
-                return false;
+                if (!decimal.TryParse(accountOffer.DepositCommission.ToString(), out decimal resultDeposit))
+                    return false;
 
-            if (!decimal.TryParse(accountOffer.WithdrawCommission.ToString(), out decimal resultWithdraw))
-                return false;
+                if (!decimal.TryParse(accountOffer.WithdrawCommission.ToString(), out decimal resultWithdraw))
+                    return false;
 
-            if (!decimal.TryParse(accountOffer.WithdrawFixTax.ToString(), out decimal resultTax))
-                return false;
+                if (!decimal.TryParse(accountOffer.WithdrawFixTax.ToString(), out decimal resultTax))
+                    return false;
 
-            return true;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public static string CreateIBAN()

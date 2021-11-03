@@ -7,6 +7,7 @@ using System.Windows.Media;
 using Interface.OperatorUI.ViewModels.Edit;
 using System.Windows.Controls.Ribbon;
 using Interface.OperatorUI.ViewModels.Create;
+using Interface.OperatorUI.ViewModels.Grids;
 //using System.Windows.Media;
 
 namespace Interface.OperatorUI
@@ -73,55 +74,51 @@ namespace Interface.OperatorUI
             switch (selectedItem)
             {
                 case "Clients":
-                    gridView.ItemsSource = GridController.GetAllClients();
-                    gridView.Columns["PIN"].IsVisible = false;
-                    gridView.Columns["Accounts"].IsVisible = false;
+                    contentPresenter.Content = new ClientsGridViewModel();
                     break;
 
                 case "Accounts":
-                    gridView.ItemsSource = GridController.GetAllAccounts();
-                    gridView.Columns["AccountOffer"].IsVisible = false;
-                    gridView.Columns["Client"].IsVisible = false;
-                    gridView.Columns["Tranzactions"].IsVisible = false;
-                    gridView.Columns["Tranzactions1"].IsVisible = false;
+                    contentPresenter.Content = new AccountsGridViewModel();
                     break;
 
                 case "Account Offers":
-                    gridView.ItemsSource = GridController.GetAllAccountOffers();
-                    gridView.Columns["Accounts"].IsVisible = false;
+                    contentPresenter.Content = new AccountOffersGridViewModel();
                     break;
 
                 case "Tranzactions":
-                    gridView.ItemsSource = GridController.GetAllTranzactions();
-                    gridView.Columns["Account"].IsVisible = false;
-                    gridView.Columns["Account1"].IsVisible = false;
+                    contentPresenter.Content = new TranzactionsGridViewModel();
                     break;
 
                 default:
                     break;
             }
-
-            contentPresenter.Content = gridView;
         }
 
         private void Edit_button_Click(object sender, RoutedEventArgs e)
         {
-            if (gridView.SelectedItem is Client)
-                contentPresenter.Content = new EditClientViewModel(gridView.SelectedItem as Client);
+            if (contentPresenter.Content is ClientsGridViewModel)
+                contentPresenter.Content = new EditClientViewModel((contentPresenter.Content as ClientsGridViewModel).SelectedClient);
             else
-            if (gridView.SelectedItem is AccountOffer)
-                contentPresenter.Content = new EditAccountOfferViewModel(gridView.SelectedItem as AccountOffer);
+            if (contentPresenter.Content is AccountOffersGridViewModel)
+                contentPresenter.Content = new EditAccountOfferViewModel((contentPresenter.Content as AccountOffersGridViewModel).SelectedAccountOffer);
             else
-            if (gridView.SelectedItem is Account)
-                contentPresenter.Content = new EditAccountViewModel(gridView.SelectedItem as Account);
-
-            gridView.SelectedItem = null;
+            if (contentPresenter.Content is AccountsGridViewModel)
+                contentPresenter.Content = new EditAccountViewModel((contentPresenter.Content as AccountsGridViewModel).SelectedAccount);
         }
 
         private void Save_button_Click(object sender, RoutedEventArgs e)
         {
+            if (contentPresenter.Content as BaseViewModel == null)
+                return;
 
-            if(contentPresenter.Content is EditClientViewModel)
+            BaseViewModel view = contentPresenter.Content as BaseViewModel;
+            if (!view.CheckData())
+            {
+                MessageBox.Show("Invalid Data!");
+                return;
+            }
+
+            if (contentPresenter.Content is EditClientViewModel)
             {
                 var viewModel = contentPresenter.DataContext as EditClientViewModel;
  
@@ -150,11 +147,22 @@ namespace Interface.OperatorUI
                 if (EditSecurityController.UpdateAccount(viewModel.Account))
                 {
                     MessageBox.Show("Account Created!");
-                    gridView.ItemsSource = GridController.GetAllAccounts();
-                    contentPresenter.Content = gridView;
+                    contentPresenter.Content = new AccountsGridViewModel();
                 }
                 else
                     MessageBox.Show("Failed to create the account!");
+            }
+            else
+                if(contentPresenter.Content is CreateTranzactionViewModel)
+            {
+                var viewModel = contentPresenter.Content as CreateTranzactionViewModel;
+                if(EditSecurityController.UpdateTranzaction(viewModel.Tranzaction))
+                {
+                    MessageBox.Show("Tranzaction Created!");
+                    contentPresenter.Content = new AccountsGridViewModel();
+                }
+                else
+                    MessageBox.Show("Failed to create the tranzaction!");
             }
 
         }
@@ -168,6 +176,7 @@ namespace Interface.OperatorUI
             if (viewModel.CheckData())
             {
                 MessageBox.Show("Data format is valid.");
+
             }
             else
             {
@@ -194,6 +203,7 @@ namespace Interface.OperatorUI
                     break;
 
                 case "Transaction":
+                    contentPresenter.Content = new CreateTranzactionViewModel();
                     break;
 
                 default:
@@ -229,6 +239,10 @@ namespace Interface.OperatorUI
 
                 case CreateAccountViewModel _:
                     contentPresenter.Content = new CreateAccountViewModel();
+                    break;
+
+                case CreateTranzactionViewModel _:
+                    contentPresenter.Content = new CreateTranzactionViewModel();
                     break;
 
                 default:

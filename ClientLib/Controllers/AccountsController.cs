@@ -70,7 +70,7 @@ namespace ClientLib.Controllers
             }
         }
 
-        private static decimal ConvertCurrency(decimal initialAmount, string accountCurrency, string withdrawCurrency)
+        public static decimal ConvertCurrency(decimal initialAmount, string accountCurrency, string withdrawCurrency)
         {
             ExchangeCurrency rate;
             using (Service.ServiceClient service = new Service.ServiceClient())
@@ -86,7 +86,16 @@ namespace ClientLib.Controllers
             {
                 return initialAmount / rate.Ron;
             }
-  
+            else
+               if (accountCurrency == "RON" && withdrawCurrency == "RON")
+            {
+                return initialAmount;
+            }
+            if (accountCurrency == "EURO" && withdrawCurrency == "EURO")
+            {
+                return initialAmount;
+            }
+
             return -1;
         }
 

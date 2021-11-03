@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Net;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -35,25 +36,54 @@ public class Service : IService
         }
     }
 
-    public int IsOperatorLoginValid(string cnp, string password)
+    public bool IsOperatorLoginValid()
     {
         try
         {
             using (BankEntities database = new BankEntities())
             {
-                Client client = database.Clients.
-                                Where(c => c.CNP == cnp && c.PIN == password).
-                                FirstOrDefault();
+                string machineName = Environment.MachineName;
+                string hostName = Dns.GetHostName(); 
+                string myIP = Dns.GetHostByName(hostName).AddressList[0].ToString();
 
-                if (client.Id == 1)
-                    return client.Id;
+                Machine machine = database.Machines.
+                                    Where(m => m.name == machineName && m.ip == myIP).
+                                    Single();
+
+                if (machine != null)
+                    return true;
             }
-
-            return -1;
+            return false;
         }
         catch (Exception ex)
         {
-            return -1;
+            return false;
+        }
+    }
+
+    public bool IsVerificationRequestValid(string password)
+    {
+        try
+        {
+            int result;
+            if(!int.TryParse(password, out result))
+                return false;
+            using (BankEntities database = new BankEntities())
+            {
+                string machineName = Environment.MachineName;
+                Machine machine = database.Machines.
+                                    Where(m => m.name == machineName && m.id == result).
+                                    Single();
+
+                if (machine != null)
+                    return true;
+            }
+            return false;
+
+        }
+        catch (Exception)
+        {
+            return false;
         }
     }
     #endregion
@@ -127,6 +157,7 @@ public class Service : IService
                 {
                     if(account.Total + factor * newTotal >= 0)
                     {
+                        //Update Account
                         account.Total = account.Total + factor * newTotal;
 
                         //Deposit commission to Bank account
@@ -135,6 +166,45 @@ public class Service : IService
                                                 Single();
 
                         bankAccount.Total = bankAccount.Total + commission;
+                        
+                        Tranzaction tranzaction;
+                        //Create Tramzaction
+                        //For Deposit: From Account To Bank
+                        if (factor > 0)
+                        {
+                            tranzaction = new Tranzaction
+                            {
+                                Id_SourceAccount = account.Id,
+                                ID_DestinationAccount = bankAccount.Id,
+                                Source_Currency = account.Currency,
+                                Destination_Currency = bankAccount.Currency,
+                                Date = DateTime.Now
+                            };
+                        }
+                        else
+                        // Withdraw: from Bank to Account
+                        {
+                            tranzaction = new Tranzaction
+                            {
+                                Id_SourceAccount = bankAccount.Id,
+                                ID_DestinationAccount = account.Id,
+                                Source_Currency = bankAccount.Currency,
+                                Destination_Currency = account.Currency,
+                                Date = DateTime.Now
+                            };
+                        }
+
+
+                        if (tranzaction.Source_Currency == tranzaction.Destination_Currency)
+                            tranzaction.Ammount = newTotal;
+                        else
+                            if (tranzaction.Source_Currency == "RON" && tranzaction.Destination_Currency == "EURO")
+                            tranzaction.Ammount = newTotal / GetLastExchangeRate().Ron;
+                        else
+                            if (tranzaction.Source_Currency == "EURO" && tranzaction.Destination_Currency == "RON")
+                            tranzaction.Ammount = newTotal * GetLastExchangeRate().Ron;
+
+                        database.Tranzactions.Add(tranzaction);
 
                         database.SaveChanges();
 
@@ -151,7 +221,10 @@ public class Service : IService
         }
     }
 
-    
+    #endregion
+
+    #region Operator Getters 
+
     public AccountOffer GetAccountOffer(int id)
     {
         try
@@ -171,9 +244,44 @@ public class Service : IService
         }
 
     }
-    #endregion
+    public Account GetAccount(int accountId)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                Account account= database.Accounts.
+                                        Where(x => x.Id == accountId).
+                                        FirstOrDefault();
 
-    #region Operator 
+                return account;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+
+    }
+
+    public Client GetClient(int clientId)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                Client client = database.Clients.
+                                    Where(x => x.Id == clientId).
+                                    Single();
+
+                return client;
+            }
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
 
     public ObservableCollection<Client> GetClients()
     {
@@ -205,7 +313,16 @@ public class Service : IService
                 ObservableCollection<Account> accountsList = new ObservableCollection<Account>();
 
                 foreach (Account account in database.Accounts)
+                {
+                    AccountOffer accountOffer = GetAccountOffer(account.ID_Offer);
+                    account.AccountOffer = accountOffer;
+
+                    Client client = GetClient(account.ID_Client);
+                    account.Client = client;
+
                     accountsList.Add(account);
+                }
+
 
                 return accountsList;
             }
@@ -245,7 +362,16 @@ public class Service : IService
                 ObservableCollection<Tranzaction> tranzactionsList = new ObservableCollection<Tranzaction>();
 
                 foreach (Tranzaction tranzaction in database.Tranzactions)
+                {
+                    Account account = GetAccount(tranzaction.Id_SourceAccount);
+                    tranzaction.Account = account;
+
+                    Account account1 = GetAccount(tranzaction.ID_DestinationAccount);
+                    tranzaction.Account1 = account1;
+
                     tranzactionsList.Add(tranzaction);
+                }
+
 
                 return tranzactionsList;
             }
@@ -338,6 +464,48 @@ public class Service : IService
         }
     }
 
+    public bool UpdateTranzaction(Tranzaction tranzaction)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                tranzaction.Account = null;
+                tranzaction.Account1 = null;
+                tranzaction.Date = DateTime.Now;
+
+                database.Tranzactions.AddOrUpdate(tranzaction);
+                database.SaveChanges();
+
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
+    public bool VerifyIBAN(string iban)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                Account account = database.Accounts.Where(i => i.IBAN == iban).FirstOrDefault();
+
+                if (account == null)
+                    return true;
+            }
+
+            return false;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+    }
+
     #endregion
 
     #region Operator Remove
@@ -406,26 +574,6 @@ public class Service : IService
     }
 
     #endregion
-
-    public bool VerifyIBAN(string iban)
-    {
-        try
-        {
-            using (BankEntities database = new BankEntities())
-            {
-                Account account = database.Accounts.Where(i => i.IBAN == iban).FirstOrDefault();
-                
-                if (account == null)
-                    return true;
-            }
-
-            return false;
-        }
-        catch (Exception ex)
-        {
-            return false;
-        }
-    }
 
     #region Api Service
     public ExchangeCurrency GetLastExchangeRate()

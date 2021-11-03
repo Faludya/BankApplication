@@ -41,8 +41,8 @@ namespace Interface.ClientUI
             changePIN.Tag = "Change PIN";
 
             RadTreeViewItem exchangeCurrency = new RadTreeViewItem();
-            changePIN.Header = "Currency";
-            changePIN.Tag = "Currency";
+            exchangeCurrency.Header = "Currency";
+            exchangeCurrency.Tag = "Currency";
 
             tree.Items.Add(viewAccounts);
             tree.Items.Add(deposit);
@@ -64,18 +64,13 @@ namespace Interface.ClientUI
                     break;
 
                 case "Deposit":
-                    List<string> currenciesD = new List<string>();
-                    currenciesD.Add("RON"); currenciesD.Add("EURO");
-                    DepositViewModel depositViewModel = new DepositViewModel(AccountsController.GetClientAccounts(clientId), currenciesD);
+                    DepositViewModel depositViewModel = new DepositViewModel(AccountsController.GetClientAccounts(clientId));
                     contentPresenter.Content = depositViewModel;
 
                     break;
 
                 case "Withdraw":
-                    List<string> currencies = new List<string>();
-                    currencies.Add("RON"); currencies.Add("EURO");
-
-                    WithdrawViewModel withdrawViewModel = new WithdrawViewModel(AccountsController.GetClientAccounts(clientId), currencies);
+                    WithdrawViewModel withdrawViewModel = new WithdrawViewModel(AccountsController.GetClientAccounts(clientId));
                     contentPresenter.Content = withdrawViewModel;
                     break;
 
@@ -100,7 +95,7 @@ namespace Interface.ClientUI
                 return;
 
             BaseViewModel viewModel = contentPresenter.Content as BaseViewModel;
-           if(viewModel.CheckData())
+            if (viewModel.CheckData())
             {
                 MessageBox.Show("Data format is valid.");
             }
@@ -163,16 +158,11 @@ namespace Interface.ClientUI
             switch (viewModel)
             {
                 case DepositViewModel dv:
-                    List<string> currenciesD = new List<string>();
-                    currenciesD.Add("RON"); currenciesD.Add("EURO");
-                    contentPresenter.Content = new DepositViewModel(AccountsController.GetClientAccounts(clientId), currenciesD);
+                    contentPresenter.Content = new DepositViewModel(AccountsController.GetClientAccounts(clientId));
                     break;
 
                 case WithdrawViewModel wv:
-                    List<string> currencies = new List<string>();
-                    currencies.Add("RON"); currencies.Add("EURO");
-
-                    contentPresenter.Content = new WithdrawViewModel(AccountsController.GetClientAccounts(clientId), currencies);
+                    contentPresenter.Content = new WithdrawViewModel(AccountsController.GetClientAccounts(clientId));
                     break;
 
                 case ChangePinViewModel cp:

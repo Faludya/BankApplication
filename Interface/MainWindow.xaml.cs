@@ -44,9 +44,6 @@ namespace Interface
                 Hide();
                 MainClient mainClientWindow = new MainClient(validationResult);
                 mainClientWindow.Show();
-
-                e.Handled = true;
-                return;
             }
             else
             {
@@ -56,10 +53,12 @@ namespace Interface
 
         private void Operator_button_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: finish implementing the proper login check
-            Hide();
-            MainOperator mainOperator = new MainOperator();
-            mainOperator.Show();
+            if (LoginController.IsOperatorDataValid())
+            {
+                OperatorValidation operatorValidation = new OperatorValidation(this);
+                operatorValidation.Show();
+            }
+
         }
     }
 }

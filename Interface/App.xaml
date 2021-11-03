@@ -8,15 +8,18 @@
              
               xmlns:operatorViewModel ="clr-namespace:Interface.OperatorUI.ViewModels"
               xmlns:operatorViewModelEdit ="clr-namespace:Interface.OperatorUI.ViewModels.Edit"
-              xmlns:operatorViewModelcreate ="clr-namespace:Interface.OperatorUI.ViewModels.Create"
+              xmlns:operatorViewModelCreate ="clr-namespace:Interface.OperatorUI.ViewModels.Create"
+              xmlns:operatorViewModelGrid ="clr-namespace:Interface.OperatorUI.ViewModels.Grids"
+             
               xmlns:operatorViews ="clr-namespace:Interface.OperatorUI.Views"
               xmlns:operatorViewsEdit ="clr-namespace:Interface.OperatorUI.Views.Edit"
               xmlns:operatorViewsCreate="clr-namespace:Interface.OperatorUI.Views.Create"
+              xmlns:operatorViewsGrid="clr-namespace:Interface.OperatorUI.Views.Grids"
              
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         
-        <!--Grid Views-->
+        <!--Client Views-->
         <DataTemplate DataType="{x:Type clientViewModel:AccountsViewModel}">
             <clientViews:AccountsView/>
         </DataTemplate>
@@ -38,7 +41,7 @@
         </DataTemplate>
 
 
-        <!--Edit Views-->
+        <!--Operator Edit Views-->
         <DataTemplate DataType="{x:Type operatorViewModel:EditClientViewModel}">
             <operatorViews:EditClientView DataContext="{Binding Client}"/>
         </DataTemplate>
@@ -51,10 +54,38 @@
             <operatorViewsEdit:EditAccountView DataContext="{Binding Account}"/>
         </DataTemplate>
 
-        <!--Create Views-->
-        <DataTemplate DataType="{x:Type operatorViewModelcreate:CreateAccountViewModel}">
+        <!--Operator Create Views-->
+        <DataTemplate DataType="{x:Type operatorViewModelCreate:CreateAccountViewModel}">
             <operatorViewsCreate:CreateAccountView />
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type operatorViewModelCreate:CreateTranzactionViewModel}">
+            <operatorViewsCreate:CreateTranzactionView />
+        </DataTemplate>
+
+
+        <!--Operator Grid Views-->
+        <DataTemplate DataType="{x:Type operatorViewModelGrid:AccountOffersGridViewModel}">
+            <operatorViewsGrid:AccountOffersGridView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type operatorViewModelGrid:AccountsGridViewModel}">
+            <operatorViewsGrid:AccountsGridView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type operatorViewModelGrid:ClientsGridViewModel}">
+            <operatorViewsGrid:ClientsGridView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type operatorViewModelGrid:TranzactionsGridViewModel}">
+            <operatorViewsGrid:TranzactionsGridView/>
+        </DataTemplate>
+
+        <!--Custom Fonts-->
+        <Style x:Key="PasswordFont" >
+            <Setter Property="TextElement.FontFamily"
+                    Value="/Resources/#Password" />
+        </Style>
         
     </Application.Resources>
 </Application>

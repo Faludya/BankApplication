@@ -35,7 +35,7 @@
             <Rectangle Stroke="#FF0089D6" Fill="Transparent"/>
         </Border>
 
-        <Border BorderThickness="1"  Grid.Row="1" Grid.Column="1">
+        <Border BorderThickness="0 1 0 0"  Grid.Row="1" Grid.Column="1">
             <Rectangle Stroke="#FF0089D6" Fill="Transparent"/>
         </Border>
         
@@ -110,7 +110,7 @@
                 <RibbonGroup Name="Transaction" Header="Transaction">
                     <RibbonMenuButton LargeImageSource="../Resources/transaction.png"  Label="Transaction">
                         <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png"
-                                        Click="Check_Button_Click" Tag="Transaction"/>
+                                        Click="Create_Button_Click" Tag="Transaction"/>
                         <RibbonMenuItem Header="Delete" ImageSource="../Resources/delete.png" />
                     </RibbonMenuButton>
                 </RibbonGroup>

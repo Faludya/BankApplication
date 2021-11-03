@@ -1,12 +1,7 @@
 ﻿using ClientLib.Operator.Controllers;
 using Database;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace Interface.OperatorUI.ViewModels.Create
 {
@@ -17,6 +12,7 @@ namespace Interface.OperatorUI.ViewModels.Create
             Account = new Account();
             AccountOffers = GridController.GetAllAccountOffers();
             Clients = GridController.GetAllClients();
+            Currencies = GridController.GetAllCurrencies();
         }
 
         public override void Trim()
@@ -25,6 +21,30 @@ namespace Interface.OperatorUI.ViewModels.Create
             Account.Currency.Trim();
         }
 
+        public override bool CheckData()
+        {
+            if (Account == null || SelectedAccountOffer == null || 
+                SelectedClient == null || SelectedCurrency == null)
+                return false;
+
+            //Selected Account Offer
+            if (SelectedAccountOffer.Name == "")
+                return false;
+
+            //Valid Total
+            if(!decimal.TryParse(Account.Total.ToString(), out decimal result))
+                return false;
+
+            //If IBAN generated
+            if (Account.IBAN == "" || Account.IBAN == null)
+                return false;
+
+            //Selected Client
+            if (SelectedClient.FullName == "")
+                return false;
+            
+            return true;
+        }
 
         private Account _account;
         public Account Account
@@ -72,6 +92,16 @@ namespace Interface.OperatorUI.ViewModels.Create
             }
         }
 
+        private List<string> _currencies;
+        public List<string> Currencies
+        {
+            get => _currencies;
+            set
+            {
+                _currencies = value;
+            }
+        }
+
         private string _selectedCurrency;
         public string SelectedCurrency
         {
@@ -79,14 +109,8 @@ namespace Interface.OperatorUI.ViewModels.Create
             set
             {
                 _selectedCurrency = value;
-                if (_selectedCurrency == "0")
-                    Account.Currency = "RON";
-                else
-                if (_selectedCurrency == "1")
-                    Account.Currency = "EURO";
+                Account.Currency = _selectedCurrency;
             }
         }
-
-
     }
 }

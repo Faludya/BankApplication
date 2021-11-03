@@ -22,10 +22,16 @@ namespace ClientLib.Service {
         System.Threading.Tasks.Task<int> IsClientLoginValidAsync(string cnp, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsOperatorLoginValid", ReplyAction="http://tempuri.org/IService/IsOperatorLoginValidResponse")]
-        int IsOperatorLoginValid(string cnp, string password);
+        bool IsOperatorLoginValid();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsOperatorLoginValid", ReplyAction="http://tempuri.org/IService/IsOperatorLoginValidResponse")]
-        System.Threading.Tasks.Task<int> IsOperatorLoginValidAsync(string cnp, string password);
+        System.Threading.Tasks.Task<bool> IsOperatorLoginValidAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsVerificationRequestValid", ReplyAction="http://tempuri.org/IService/IsVerificationRequestValidResponse")]
+        bool IsVerificationRequestValid(string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/IsVerificationRequestValid", ReplyAction="http://tempuri.org/IService/IsVerificationRequestValidResponse")]
+        System.Threading.Tasks.Task<bool> IsVerificationRequestValidAsync(string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetClientAccounts", ReplyAction="http://tempuri.org/IService/GetClientAccountsResponse")]
         System.Collections.ObjectModel.ObservableCollection<Database.Account> GetClientAccounts(int clientId);
@@ -56,6 +62,18 @@ namespace ClientLib.Service {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetClients", ReplyAction="http://tempuri.org/IService/GetClientsResponse")]
         System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.Client>> GetClientsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetClient", ReplyAction="http://tempuri.org/IService/GetClientResponse")]
+        Database.Client GetClient(int clientId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetClient", ReplyAction="http://tempuri.org/IService/GetClientResponse")]
+        System.Threading.Tasks.Task<Database.Client> GetClientAsync(int clientId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAccount", ReplyAction="http://tempuri.org/IService/GetAccountResponse")]
+        Database.Account GetAccount(int accountId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAccount", ReplyAction="http://tempuri.org/IService/GetAccountResponse")]
+        System.Threading.Tasks.Task<Database.Account> GetAccountAsync(int accountId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAccounts", ReplyAction="http://tempuri.org/IService/GetAccountsResponse")]
         System.Collections.ObjectModel.ObservableCollection<Database.Account> GetAccounts();
@@ -92,6 +110,12 @@ namespace ClientLib.Service {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateAccountOffer", ReplyAction="http://tempuri.org/IService/UpdateAccountOfferResponse")]
         System.Threading.Tasks.Task<bool> UpdateAccountOfferAsync(Database.AccountOffer accountOffer);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateTranzaction", ReplyAction="http://tempuri.org/IService/UpdateTranzactionResponse")]
+        bool UpdateTranzaction(Database.Tranzaction tranzaction);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/UpdateTranzaction", ReplyAction="http://tempuri.org/IService/UpdateTranzactionResponse")]
+        System.Threading.Tasks.Task<bool> UpdateTranzactionAsync(Database.Tranzaction tranzaction);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/RemoveClient", ReplyAction="http://tempuri.org/IService/RemoveClientResponse")]
         bool RemoveClient(Database.Client client);
@@ -177,12 +201,20 @@ namespace ClientLib.Service {
             return base.Channel.IsClientLoginValidAsync(cnp, password);
         }
         
-        public int IsOperatorLoginValid(string cnp, string password) {
-            return base.Channel.IsOperatorLoginValid(cnp, password);
+        public bool IsOperatorLoginValid() {
+            return base.Channel.IsOperatorLoginValid();
         }
         
-        public System.Threading.Tasks.Task<int> IsOperatorLoginValidAsync(string cnp, string password) {
-            return base.Channel.IsOperatorLoginValidAsync(cnp, password);
+        public System.Threading.Tasks.Task<bool> IsOperatorLoginValidAsync() {
+            return base.Channel.IsOperatorLoginValidAsync();
+        }
+        
+        public bool IsVerificationRequestValid(string password) {
+            return base.Channel.IsVerificationRequestValid(password);
+        }
+        
+        public System.Threading.Tasks.Task<bool> IsVerificationRequestValidAsync(string password) {
+            return base.Channel.IsVerificationRequestValidAsync(password);
         }
         
         public System.Collections.ObjectModel.ObservableCollection<Database.Account> GetClientAccounts(int clientId) {
@@ -223,6 +255,22 @@ namespace ClientLib.Service {
         
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.Client>> GetClientsAsync() {
             return base.Channel.GetClientsAsync();
+        }
+        
+        public Database.Client GetClient(int clientId) {
+            return base.Channel.GetClient(clientId);
+        }
+        
+        public System.Threading.Tasks.Task<Database.Client> GetClientAsync(int clientId) {
+            return base.Channel.GetClientAsync(clientId);
+        }
+        
+        public Database.Account GetAccount(int accountId) {
+            return base.Channel.GetAccount(accountId);
+        }
+        
+        public System.Threading.Tasks.Task<Database.Account> GetAccountAsync(int accountId) {
+            return base.Channel.GetAccountAsync(accountId);
         }
         
         public System.Collections.ObjectModel.ObservableCollection<Database.Account> GetAccounts() {
@@ -271,6 +319,14 @@ namespace ClientLib.Service {
         
         public System.Threading.Tasks.Task<bool> UpdateAccountOfferAsync(Database.AccountOffer accountOffer) {
             return base.Channel.UpdateAccountOfferAsync(accountOffer);
+        }
+        
+        public bool UpdateTranzaction(Database.Tranzaction tranzaction) {
+            return base.Channel.UpdateTranzaction(tranzaction);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateTranzactionAsync(Database.Tranzaction tranzaction) {
+            return base.Channel.UpdateTranzactionAsync(tranzaction);
         }
         
         public bool RemoveClient(Database.Client client) {

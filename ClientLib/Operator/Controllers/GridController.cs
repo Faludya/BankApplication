@@ -41,5 +41,14 @@ namespace ClientLib.Operator.Controllers
                 return service.GetTranzactions();
             }
         }
+
+        public static List<string> GetAllCurrencies()
+        {
+            List<string> currencies = new List<string>();
+            currencies.Add("RON");
+            currencies.Add("EURO");
+
+            return currencies;
+        }
     }
 }

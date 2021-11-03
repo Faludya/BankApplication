@@ -18,7 +18,9 @@ public interface IService
     int IsClientLoginValid(string cnp, string password);
 
     [OperationContract]
-    int IsOperatorLoginValid(string cnp, string password);
+    bool IsOperatorLoginValid();
+    [OperationContract]
+    bool IsVerificationRequestValid(string password);
     #endregion
 
     #region Client
@@ -37,6 +39,12 @@ public interface IService
     #region Operator - Getters
     [OperationContract]
     ObservableCollection<Client> GetClients();
+    
+    [OperationContract]
+    Client GetClient(int clientId);
+
+    [OperationContract]
+    Account GetAccount(int accountId);
 
     [OperationContract]
     ObservableCollection<Account> GetAccounts();
@@ -56,6 +64,9 @@ public interface IService
 
     [OperationContract]
     bool UpdateAccountOffer(AccountOffer accountOffer);
+
+    [OperationContract]
+    bool UpdateTranzaction(Tranzaction tranzaction);
     #endregion
 
     #region Operator - Removes 

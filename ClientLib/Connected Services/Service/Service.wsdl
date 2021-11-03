@@ -19,6 +19,12 @@
   <wsdl:message name="IService_IsOperatorLoginValid_OutputMessage">
     <wsdl:part name="parameters" element="tns:IsOperatorLoginValidResponse" />
   </wsdl:message>
+  <wsdl:message name="IService_IsVerificationRequestValid_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsVerificationRequestValid" />
+  </wsdl:message>
+  <wsdl:message name="IService_IsVerificationRequestValid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsVerificationRequestValidResponse" />
+  </wsdl:message>
   <wsdl:message name="IService_GetClientAccounts_InputMessage">
     <wsdl:part name="parameters" element="tns:GetClientAccounts" />
   </wsdl:message>
@@ -48,6 +54,18 @@
   </wsdl:message>
   <wsdl:message name="IService_GetClients_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetClientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetClient_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClient" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetClient_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccount" />
+  </wsdl:message>
+  <wsdl:message name="IService_GetAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAccountResponse" />
   </wsdl:message>
   <wsdl:message name="IService_GetAccounts_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAccounts" />
@@ -84,6 +102,12 @@
   </wsdl:message>
   <wsdl:message name="IService_UpdateAccountOffer_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateAccountOfferResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService_UpdateTranzaction_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTranzaction" />
+  </wsdl:message>
+  <wsdl:message name="IService_UpdateTranzaction_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTranzactionResponse" />
   </wsdl:message>
   <wsdl:message name="IService_RemoveClient_InputMessage">
     <wsdl:part name="parameters" element="tns:RemoveClient" />
@@ -142,6 +166,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService/IsOperatorLoginValid" message="tns:IService_IsOperatorLoginValid_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/IsOperatorLoginValidResponse" message="tns:IService_IsOperatorLoginValid_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="IsVerificationRequestValid">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/IsVerificationRequestValid" message="tns:IService_IsVerificationRequestValid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/IsVerificationRequestValidResponse" message="tns:IService_IsVerificationRequestValid_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetClientAccounts">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetClientAccounts" message="tns:IService_GetClientAccounts_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetClientAccountsResponse" message="tns:IService_GetClientAccounts_OutputMessage" />
@@ -161,6 +189,14 @@
     <wsdl:operation name="GetClients">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetClients" message="tns:IService_GetClients_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/GetClientsResponse" message="tns:IService_GetClients_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClient">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetClient" message="tns:IService_GetClient_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetClientResponse" message="tns:IService_GetClient_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/GetAccount" message="tns:IService_GetAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/GetAccountResponse" message="tns:IService_GetAccount_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAccounts">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/GetAccounts" message="tns:IService_GetAccounts_InputMessage" />
@@ -185,6 +221,10 @@
     <wsdl:operation name="UpdateAccountOffer">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/UpdateAccountOffer" message="tns:IService_UpdateAccountOffer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService/UpdateAccountOfferResponse" message="tns:IService_UpdateAccountOffer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTranzaction">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService/UpdateTranzaction" message="tns:IService_UpdateTranzaction_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService/UpdateTranzactionResponse" message="tns:IService_UpdateTranzaction_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="RemoveClient">
       <wsdl:input wsaw:Action="http://tempuri.org/IService/RemoveClient" message="tns:IService_RemoveClient_InputMessage" />
@@ -239,6 +279,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="IsVerificationRequestValid">
+      <soap:operation soapAction="http://tempuri.org/IService/IsVerificationRequestValid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetClientAccounts">
       <soap:operation soapAction="http://tempuri.org/IService/GetClientAccounts" style="document" />
       <wsdl:input>
@@ -277,6 +326,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetClients">
       <soap:operation soapAction="http://tempuri.org/IService/GetClients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClient">
+      <soap:operation soapAction="http://tempuri.org/IService/GetClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAccount">
+      <soap:operation soapAction="http://tempuri.org/IService/GetAccount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -331,6 +398,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateAccountOffer">
       <soap:operation soapAction="http://tempuri.org/IService/UpdateAccountOffer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTranzaction">
+      <soap:operation soapAction="http://tempuri.org/IService/UpdateTranzaction" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

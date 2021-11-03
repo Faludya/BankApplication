@@ -38,7 +38,10 @@ namespace Interface.ClientUI.ViewModels
         public string OldPin
         {
             get => _oldPin;
-            set => _oldPin = value;
+            set  
+            {
+                _oldPin = value;
+            }
         }
 
         private string _newPin;

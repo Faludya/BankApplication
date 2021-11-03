@@ -111,7 +111,8 @@
                  Background="WhiteSmoke"
                  DataContext="{Binding Account}"
                  Text="{Binding Total,
-                 UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                 UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,
+                 StringFormat=N2}" 
                  Grid.Column="1" Grid.Row="4" />
 
         <Button x:Name="generate_iban_button" Grid.Column="2" Grid.Row="1"
@@ -166,10 +167,8 @@
             <ComboBox Name="currency_combobox" Grid.Column="3"
                       MinWidth="80" Margin="10 10"
                       Background="WhiteSmoke"
-                      SelectedIndex="{Binding SelectedCurrency}" >
-              
-                <ComboBoxItem Content="RON" />
-                <ComboBoxItem Content="EURO" />
+                      ItemsSource="{Binding Currencies}"
+                      SelectedItem="{Binding SelectedCurrency}" >
             </ComboBox>
 
 

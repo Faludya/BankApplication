@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="Interface.OperatorUI.Views.Grids.TranzactionsGridView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Interface.OperatorUI.Views.Grids" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" xmlns:grids="clr-namespace:Interface.OperatorUI.ViewModels.Grids" d:DataContext="{d:DesignInstance Type=grids:TranzactionsGridViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <telerik:RadGridView AutoGenerateColumns="False" Background="Transparent"
+                             ShowGroupPanel="False"
+                             IsReadOnly="True"
+                             ItemsSource="{Binding Tranzactions}">
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding Id}" Header="Id" />
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding Date}" Header="Date" />
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding Account.IBAN}" Header="Source Account" />
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding Account1.IBAN}" Header="Destination Account" />
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding Source_Currency}" Header="Source Currency" />
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding Destination_Currency}" Header="Destination Currency" />
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding Ammount}" Header="Amount" />
+
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+    </Grid>
+    
+</UserControl>

@@ -1,9 +1,8 @@
-﻿using Database;
+﻿using ClientLib.Controllers;
+using Database;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ClientLib.Operator.Controllers
 {
@@ -44,6 +43,19 @@ namespace ClientLib.Operator.Controllers
             }
             return false;
         }
+
+        public static bool UpdateTranzaction(Tranzaction tranzaction)
+        {
+            using (Service.ServiceClient service = new Service.ServiceClient())
+            {
+                if (CanUpdateTranzaction(ref tranzaction))
+                {
+                    return service.UpdateTranzaction(tranzaction);
+                }
+            }
+            return false;
+        }
+
 
         public static bool RemoveClient(Client client)
         {
@@ -109,7 +121,7 @@ namespace ClientLib.Operator.Controllers
         {
             try
             {
-                if (account.IBAN.Length != 13)
+                if (account.IBAN.Length != 24)
                     return false;
 
                 if (account.Currency != "RON" && account.Currency != "EURO")
@@ -165,6 +177,23 @@ namespace ClientLib.Operator.Controllers
             }
         }
 
+        public static bool CanUpdateTranzaction(ref Tranzaction tranzaction)
+        {
+            if (tranzaction.Account.IBAN == tranzaction.Account1.IBAN)
+                return false;
+
+            if (tranzaction.Account.Total < tranzaction.Ammount)
+                return false;
+
+            decimal convertedTotal = AccountsController.ConvertCurrency(tranzaction.Ammount, tranzaction.Account.Currency, tranzaction.Account1.Currency);
+            
+            tranzaction.Account.Total -= tranzaction.Ammount;
+            tranzaction.Account1.Total += convertedTotal;
+
+
+            return true;
+        }
+        
         public static string CreateIBAN()
         {
             using (Service.ServiceClient service = new Service.ServiceClient())

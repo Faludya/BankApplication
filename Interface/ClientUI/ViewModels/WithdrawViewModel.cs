@@ -1,5 +1,6 @@
 ﻿using ClientLib.API;
 using ClientLib.Controllers;
+using ClientLib.Operator.Controllers;
 using Database;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,10 +16,10 @@ namespace Interface.ClientUI.ViewModels
             set => _accounts = value;
         }
 
-        public WithdrawViewModel(ObservableCollection<Account> accounts, List<string> currencies)
+        public WithdrawViewModel(ObservableCollection<Account> accounts)
         {
             Accounts = accounts;
-            Currencies = currencies;
+            Currencies = GridController.GetAllCurrencies();
         }
 
         public override bool CheckData()

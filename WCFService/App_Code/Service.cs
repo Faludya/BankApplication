@@ -204,8 +204,9 @@ public class Service : IService
                             if (tranzaction.Source_Currency == "EURO" && tranzaction.Destination_Currency == "RON")
                             tranzaction.Ammount = newTotal * GetLastExchangeRate().Ron;
 
-                        database.Tranzactions.Add(tranzaction);
+                        tranzaction.Ammount = Math.Round(tranzaction.Ammount, 2);
 
+                        database.Tranzactions.AddOrUpdate(tranzaction);
                         database.SaveChanges();
 
                         return true;
@@ -283,6 +284,34 @@ public class Service : IService
         }
     }
 
+    public ObservableCollection<Tranzaction> GetAccountTranzactions(int accountId)
+    {
+        try
+        {
+            using (BankEntities database = new BankEntities())
+            {
+                ObservableCollection<Tranzaction> tranzactions = new ObservableCollection<Tranzaction>();
+
+                foreach (Tranzaction tranzaction in database.Tranzactions)
+                    if (tranzaction.Id_SourceAccount == accountId || tranzaction.ID_DestinationAccount == accountId)
+                    {
+                        Account account = GetAccount(tranzaction.Id_SourceAccount);
+                        tranzaction.Account = account;
+
+                        Account account1 = GetAccount(tranzaction.ID_DestinationAccount);
+                        tranzaction.Account1 = account1;
+
+                        tranzactions.Add(tranzaction);
+                    }
+
+                return tranzactions;
+            }
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
+    }
     public ObservableCollection<Client> GetClients()
     {
         try

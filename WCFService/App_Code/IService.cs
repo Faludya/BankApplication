@@ -47,6 +47,9 @@ public interface IService
     Account GetAccount(int accountId);
 
     [OperationContract]
+    ObservableCollection<Tranzaction> GetAccountTranzactions(int accountId);
+
+    [OperationContract]
     ObservableCollection<Account> GetAccounts();
 
     [OperationContract]

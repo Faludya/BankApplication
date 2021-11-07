@@ -1,7 +1,9 @@
 ﻿using ClientLib.Controllers;
 using Interface.ClientUI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using Telerik.Windows.Controls;
 
 namespace Interface.ClientUI
@@ -11,6 +13,7 @@ namespace Interface.ClientUI
     /// </summary>
     public partial class MainClient : Window
     {
+
         private int clientId;
         public MainClient(int id)
         {
@@ -44,11 +47,16 @@ namespace Interface.ClientUI
             exchangeCurrency.Header = "Currency";
             exchangeCurrency.Tag = "Currency";
 
+            RadTreeViewItem tranzactions = new RadTreeViewItem();
+            tranzactions.Header = "Transactions";
+            tranzactions.Tag = "Transactions";
+
             tree.Items.Add(viewAccounts);
             tree.Items.Add(deposit);
             tree.Items.Add(withdraw);
             tree.Items.Add(changePIN);
             tree.Items.Add(exchangeCurrency);
+            tree.Items.Add(tranzactions);
         }
 
 
@@ -82,6 +90,11 @@ namespace Interface.ClientUI
                 case "Currency":
                     ExchangeCurrencyViewModel currencyViewModel = new ExchangeCurrencyViewModel();
                     contentPresenter.Content = currencyViewModel;
+                    break;
+
+                case "Transactions":
+                    TranzactionsViewModel tranzactionsViewModel = new TranzactionsViewModel(AccountsController.GetClientAccounts(clientId));
+                    contentPresenter.Content = tranzactionsViewModel;
                     break;
 
                 default:
@@ -188,6 +201,18 @@ namespace Interface.ClientUI
             MainWindow mainWindow = new MainWindow();
             Close();
             mainWindow.Show();
+        }
+
+        private void Export_Pdf_Button_click(object sender, RoutedEventArgs e)
+        {
+            if (contentPresenter.Content is TranzactionsViewModel)
+            {
+                //TODO: Finish export
+                if (PdfController.CreatePdf((contentPresenter.Content as TranzactionsViewModel).TranzactionsList))
+                    MessageBox.Show("Pdf was saved!");
+                else
+                    MessageBox.Show("Failed to save the pdf!");
+            }
         }
     }
 }

@@ -87,6 +87,12 @@
                                    Click="Change_PIN_Button_Click"/>
                 </RibbonGroup>
 
+                <!--Export PDF Button-->
+                <RibbonGroup Name="ExportPdf" >
+                    <RibbonButton  Label="ExportPdf" LargeImageSource="../Resources/pdfexport.png"
+                                   Click="Export_Pdf_Button_click"/>
+                </RibbonGroup>
+
             </RibbonTab>
 
             <!-- Application Menu, located at the left-hand side (down arrow) -->

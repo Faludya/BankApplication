@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="Id" />
@@ -98,7 +98,7 @@
           <Property Name="Source_Currency" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Destination_Currency" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="Ammount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Account_AccountOffer_Id_Offer">
           <End Role="AccountOffer" Type="Self.AccountOffer" Multiplicity="1" />
@@ -124,30 +124,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Tranzaction_Account_Id_DestinationAccount">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="Tranzaction" Type="Self.Tranzaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tranzaction">
-              <PropertyRef Name="ID_DestinationAccount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tranzaction_Account_Id_SourceAccount">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="Tranzaction" Type="Self.Tranzaction" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tranzaction">
-              <PropertyRef Name="Id_SourceAccount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="BankModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountOffer" EntityType="Self.AccountOffer" Schema="dbo" store:Type="Tables" />
@@ -165,17 +141,8 @@
             <End Role="Client" EntitySet="Client" />
             <End Role="Account" EntitySet="Account" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tranzaction_Account_Id_DestinationAccount" Association="Self.FK_Tranzaction_Account_Id_DestinationAccount">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="Tranzaction" EntitySet="Tranzaction" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tranzaction_Account_Id_SourceAccount" Association="Self.FK_Tranzaction_Account_Id_SourceAccount">
-            <End Role="Account" EntitySet="Account" />
-            <End Role="Tranzaction" EntitySet="Tranzaction" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BankModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -278,7 +245,7 @@
           <Property Name="Source_Currency" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Destination_Currency" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Ammount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Account" Relationship="Self.FK_Tranzaction_Account_Id_DestinationAccount" FromRole="Tranzaction" ToRole="Account" />
           <NavigationProperty Name="Account1" Relationship="Self.FK_Tranzaction_Account_Id_SourceAccount" FromRole="Tranzaction" ToRole="Account" />
         </EntityType>

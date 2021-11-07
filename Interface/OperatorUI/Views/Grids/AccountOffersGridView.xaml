@@ -10,7 +10,8 @@
         <telerik:RadGridView AutoGenerateColumns="False" Background="Transparent"
                              ShowGroupPanel="False"
                              ItemsSource="{Binding AccountOffers}"
-                             SelectedItem="{Binding SelectedAccountOffer}" >
+                             SelectedItem="{Binding SelectedAccountOffer}" 
+                             IsReadOnly="True">
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn DataMemberBinding="{Binding Name}" Header="Name" />
                 <telerik:GridViewDataColumn DataMemberBinding="{Binding DepositCommission}" Header="Deposit Commission" />

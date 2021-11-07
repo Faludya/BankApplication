@@ -75,6 +75,12 @@ namespace ClientLib.Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAccount", ReplyAction="http://tempuri.org/IService/GetAccountResponse")]
         System.Threading.Tasks.Task<Database.Account> GetAccountAsync(int accountId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAccountTranzactions", ReplyAction="http://tempuri.org/IService/GetAccountTranzactionsResponse")]
+        System.Collections.ObjectModel.ObservableCollection<Database.Tranzaction> GetAccountTranzactions(int accountId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAccountTranzactions", ReplyAction="http://tempuri.org/IService/GetAccountTranzactionsResponse")]
+        System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.Tranzaction>> GetAccountTranzactionsAsync(int accountId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetAccounts", ReplyAction="http://tempuri.org/IService/GetAccountsResponse")]
         System.Collections.ObjectModel.ObservableCollection<Database.Account> GetAccounts();
         
@@ -271,6 +277,14 @@ namespace ClientLib.Service {
         
         public System.Threading.Tasks.Task<Database.Account> GetAccountAsync(int accountId) {
             return base.Channel.GetAccountAsync(accountId);
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<Database.Tranzaction> GetAccountTranzactions(int accountId) {
+            return base.Channel.GetAccountTranzactions(accountId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<Database.Tranzaction>> GetAccountTranzactionsAsync(int accountId) {
+            return base.Channel.GetAccountTranzactionsAsync(accountId);
         }
         
         public System.Collections.ObjectModel.ObservableCollection<Database.Account> GetAccounts() {

@@ -114,6 +114,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ClientUI\Views\TranzactionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ClientUI\Views\WithdrawView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,6 +140,7 @@
     <Compile Include="ClientUI\ViewModels\ChangePinViewModel.cs" />
     <Compile Include="ClientUI\ViewModels\DepositViewModel.cs" />
     <Compile Include="ClientUI\ViewModels\ExchangeCurrencyViewModel.cs" />
+    <Compile Include="ClientUI\ViewModels\TranzactionsViewModel.cs" />
     <Compile Include="ClientUI\ViewModels\WithdrawViewModel.cs" />
     <Compile Include="ClientUI\Views\AccountsView.xaml.cs">
       <DependentUpon>AccountsView.xaml</DependentUpon>
@@ -148,6 +153,9 @@
     </Compile>
     <Compile Include="ClientUI\Views\ExchangeCurrencyView.xaml.cs">
       <DependentUpon>ExchangeCurrencyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ClientUI\Views\TranzactionsView.xaml.cs">
+      <DependentUpon>TranzactionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ClientUI\Views\WithdrawView.xaml.cs">
       <DependentUpon>WithdrawView.xaml</DependentUpon>
@@ -361,7 +369,12 @@
   <ItemGroup>
     <Resource Include="Resources\convert.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\pdfexport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

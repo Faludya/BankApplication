@@ -143,6 +143,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetAccountTranzactions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="accountId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAccountTranzactionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetAccountTranzactionsResult" nillable="true" type="q6:ArrayOfTranzaction" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetAccounts">
     <xs:complexType>
       <xs:sequence />
@@ -151,7 +165,7 @@
   <xs:element name="GetAccountsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetAccountsResult" nillable="true" type="q6:ArrayOfAccount" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetAccountsResult" nillable="true" type="q7:ArrayOfAccount" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -163,7 +177,7 @@
   <xs:element name="GetAccountOffersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetAccountOffersResult" nillable="true" type="q7:ArrayOfAccountOffer" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetAccountOffersResult" nillable="true" type="q8:ArrayOfAccountOffer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -175,14 +189,14 @@
   <xs:element name="GetTranzactionsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetTranzactionsResult" nillable="true" type="q8:ArrayOfTranzaction" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetTranzactionsResult" nillable="true" type="q9:ArrayOfTranzaction" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateClient">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="client" nillable="true" type="q9:Client" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="client" nillable="true" type="q10:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -196,7 +210,7 @@
   <xs:element name="UpdateAccount">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="account" nillable="true" type="q10:Account" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="account" nillable="true" type="q11:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -210,7 +224,7 @@
   <xs:element name="UpdateAccountOffer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="accountOffer" nillable="true" type="q11:AccountOffer" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="accountOffer" nillable="true" type="q12:AccountOffer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -224,7 +238,7 @@
   <xs:element name="UpdateTranzaction">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="tranzaction" nillable="true" type="q12:Tranzaction" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="tranzaction" nillable="true" type="q13:Tranzaction" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -238,7 +252,7 @@
   <xs:element name="RemoveClient">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="client" nillable="true" type="q13:Client" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="client" nillable="true" type="q14:Client" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -252,7 +266,7 @@
   <xs:element name="RemoveAccount">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="account" nillable="true" type="q14:Account" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="account" nillable="true" type="q15:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -266,7 +280,7 @@
   <xs:element name="RemoveAccountOffer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="accountOffer" nillable="true" type="q15:AccountOffer" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="accountOffer" nillable="true" type="q16:AccountOffer" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -299,14 +313,14 @@
   <xs:element name="GetLastExchangeRateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetLastExchangeRateResult" nillable="true" type="q16:ExchangeCurrency" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetLastExchangeRateResult" nillable="true" type="q17:ExchangeCurrency" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateExchangeRate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="newRate" nillable="true" type="q17:ExchangeCurrency" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="newRate" nillable="true" type="q18:ExchangeCurrency" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -325,7 +339,7 @@
   <xs:element name="GetYearExchangeRateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetYearExchangeRateResult" nillable="true" type="q18:ArrayOfExchangeCurrency" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetYearExchangeRateResult" nillable="true" type="q19:ArrayOfExchangeCurrency" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -339,7 +353,7 @@
   <xs:element name="GetMonthExchangeRateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetMonthExchangeRateResult" nillable="true" type="q19:ArrayOfExchangeCurrency" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Database" minOccurs="0" name="GetMonthExchangeRateResult" nillable="true" type="q20:ArrayOfExchangeCurrency" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -11,7 +11,8 @@
         <telerik:RadGridView AutoGenerateColumns="False" Background="Transparent"
                              ShowGroupPanel="False"
                              ItemsSource="{Binding Clients}"
-                             SelectedItem="{Binding SelectedClient}" >
+                             SelectedItem="{Binding SelectedClient}" 
+                             IsReadOnly="True">
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn DataMemberBinding="{Binding Id}" Header="Id" />
                 <telerik:GridViewDataColumn DataMemberBinding="{Binding FirstName}" Header="First Name" />

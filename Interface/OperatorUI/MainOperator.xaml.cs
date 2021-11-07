@@ -159,7 +159,7 @@ namespace Interface.OperatorUI
                 if(EditSecurityController.UpdateTranzaction(viewModel.Tranzaction))
                 {
                     MessageBox.Show("Tranzaction Created!");
-                    contentPresenter.Content = new AccountsGridViewModel();
+                    contentPresenter.Content = new TranzactionsGridViewModel();
                 }
                 else
                     MessageBox.Show("Failed to create the tranzaction!");

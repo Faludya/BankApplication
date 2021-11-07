@@ -40,6 +40,10 @@
             <clientViews:ExchangeCurrencyView />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type clientViewModel:TranzactionsViewModel}">
+            <clientViews:TranzactionsView/>
+        </DataTemplate>
+
 
         <!--Operator Edit Views-->
         <DataTemplate DataType="{x:Type operatorViewModel:EditClientViewModel}">

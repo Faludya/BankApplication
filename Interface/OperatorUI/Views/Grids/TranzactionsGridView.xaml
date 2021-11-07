@@ -11,7 +11,7 @@
         <telerik:RadGridView AutoGenerateColumns="False" Background="Transparent"
                              ShowGroupPanel="False"
                              IsReadOnly="True"
-                             ItemsSource="{Binding Tranzactions}">
+                             ItemsSource="{Binding Tranzactions}" >
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn DataMemberBinding="{Binding Id}" Header="Id" />
                 <telerik:GridViewDataColumn DataMemberBinding="{Binding Date}" Header="Date" />

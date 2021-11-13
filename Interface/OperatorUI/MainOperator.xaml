@@ -84,7 +84,6 @@
                     <RibbonMenuButton LargeImageSource="../Resources/client.png"  Label="Client">
                         <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png"
                                         Click="Create_Button_Click" Tag="Client"/>
-                        <RibbonMenuItem Header="Delete" ImageSource="../Resources/delete.png"/>
                     </RibbonMenuButton>
                 </RibbonGroup>
 
@@ -93,7 +92,6 @@
                     <RibbonMenuButton LargeImageSource="../Resources/account.png"  Label="Account" >
                         <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png"
                                         Click="Create_Button_Click" Tag="Account"/>
-                        <RibbonMenuItem Header="Delete" ImageSource="../Resources/delete.png"/>
                     </RibbonMenuButton>
                 </RibbonGroup>
 
@@ -102,7 +100,6 @@
                     <RibbonMenuButton LargeImageSource="../Resources/accountoffer.png"  Label="Account Offer">
                         <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png" 
                                         Click="Create_Button_Click" Tag="AccountOffer"/>
-                        <RibbonMenuItem Header="Delete" ImageSource="../Resources/delete.png" />
                     </RibbonMenuButton>
                 </RibbonGroup>
 
@@ -111,7 +108,6 @@
                     <RibbonMenuButton LargeImageSource="../Resources/transaction.png"  Label="Transaction">
                         <RibbonMenuItem Header="Create" ImageSource="../Resources/create.png"
                                         Click="Create_Button_Click" Tag="Transaction"/>
-                        <RibbonMenuItem Header="Delete" ImageSource="../Resources/delete.png" />
                     </RibbonMenuButton>
                 </RibbonGroup>
 

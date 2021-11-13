@@ -17,7 +17,6 @@ namespace Interface.OperatorUI
     /// </summary>
     public partial class MainOperator : Window
     {
-        private RadGridView gridView;
         public MainOperator()
         {
             InitializeComponent();
@@ -27,13 +26,6 @@ namespace Interface.OperatorUI
 
             StyleManager.ApplicationTheme = new Office_BlueTheme();
             System.Windows.Media.Brush myBrush = new SolidColorBrush(Colors.Transparent);
-
-            gridView = new RadGridView
-            {
-                ShowGroupPanel = false,
-                FontSize = 24,
-                Background = myBrush
-            };
         }
 
         private void InitializeTree()
@@ -125,8 +117,8 @@ namespace Interface.OperatorUI
                 if (EditSecurityController.UpdateClient(viewModel.Client))
                 {
                     MessageBox.Show("Client Updated!");
-                    gridView.ItemsSource = GridController.GetAllClients();
-                    contentPresenter.Content = gridView;
+                    contentPresenter.Content = new ClientsGridViewModel();
+                    contentPresenter.Tag = "ClientsGridViewModel";
                 }
             }
             else
@@ -136,8 +128,8 @@ namespace Interface.OperatorUI
                 if (EditSecurityController.UpdateAccountOffer(viewModel.AccountOffer))
                 {
                     MessageBox.Show("Account Offer Updated!");
-                    gridView.ItemsSource = GridController.GetAllAccountOffers();
-                    contentPresenter.Content = gridView;
+                    contentPresenter.Content = new AccountOffersGridViewModel();
+                    contentPresenter.Tag = "AccountsGridViewModel";
                 }
             }
             else
@@ -213,10 +205,7 @@ namespace Interface.OperatorUI
 
         private void Go_Back_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (contentPresenter.Content is BaseViewModel)
-                contentPresenter.Content = gridView;
-            else
-            if (contentPresenter.Content == gridView)
+
                 contentPresenter.Content = null;
         }
 
@@ -257,38 +246,35 @@ namespace Interface.OperatorUI
             if (result == MessageBoxResult.No)
                 return;
 
-            if (gridView.SelectedItem is Client)
+            var selected = contentPresenter.Content as BaseViewModel;
+            switch (selected)
             {
-                if (EditSecurityController.RemoveClient(gridView.SelectedItem as Client))
-                    MessageBox.Show("Client Removed.");
-                else
-                    MessageBox.Show("Failed to remove the client.");
+                case ClientsGridViewModel cg:
+                    if(EditSecurityController.RemoveClient(cg.SelectedClient))
+                        MessageBox.Show("Client Removed.");
+                    else
+                        MessageBox.Show("Failed to remove the client.");
+                    contentPresenter.Content = new ClientsGridViewModel();
+                    break;
 
-                gridView.ItemsSource = GridController.GetAllClients();
-                contentPresenter.Content = gridView;
-            }
-            else
-            if (gridView.SelectedItem is Account)
-            {
-                if(EditSecurityController.RemoveAccount(gridView.SelectedItem as Account))
-                    MessageBox.Show("Account Removed.");
-                else
-                    MessageBox.Show("Failed to remove the account.");
+                case AccountsGridViewModel ag:
+                    if (EditSecurityController.RemoveAccount(ag.SelectedAccount))
+                        MessageBox.Show("Account Removed.");
+                    else
+                        MessageBox.Show("Failed to remove the account.");
+                    contentPresenter.Content = new AccountsGridViewModel();
+                    break;
 
-                gridView.ItemsSource = GridController.GetAllAccounts();
-                contentPresenter.Content = gridView;
-            }
-                
-            else
-            if (gridView.SelectedItem is AccountOffer)
-            {
-                if (EditSecurityController.RemoveAccountOffer(gridView.SelectedItem as AccountOffer))
-                    MessageBox.Show("Account Offer Removed.");
-                else
-                    MessageBox.Show("Failed to remove the account offer.");
+                case AccountOffersGridViewModel aog:
+                    if (EditSecurityController.RemoveAccountOffer(aog.SelectedAccountOffer))
+                        MessageBox.Show("Account Offer Removed.");
+                    else
+                        MessageBox.Show("Failed to remove the account offer.");
+                    contentPresenter.Content = new AccountOffersGridViewModel();
+                    break;
 
-                gridView.ItemsSource = GridController.GetAllAccountOffers();
-                contentPresenter.Content = gridView;
+                default:
+                    break;
             }
         }
 

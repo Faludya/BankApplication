@@ -570,6 +570,10 @@ public class Service : IService
                 if (account.ID_Client == 1)
                     return false;
 
+                account.AccountOffer = null;
+                account.Client = null;
+                account.Tranzactions = null;
+                account.Tranzactions1 = null;
                 //database.Accounts.Remove(account);
                 database.Entry(account).State = EntityState.Deleted;
                 database.SaveChanges();

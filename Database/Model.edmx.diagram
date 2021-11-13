@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="BankModel.ExchangeCurrency" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BankModel.Location" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BankModel.Machine" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BankModel.ScanProfile" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BankModel.ScanProfile" Width="1.5" PointX="2.75" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="BankModel.Tranzaction" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="BankModel.FK_Account_AccountOffer_Id_Offer" ManuallyRouted="false" />
         <AssociationConnector Association="BankModel.FK_Account_Client_Id_Client" ManuallyRouted="false" />
